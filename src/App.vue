@@ -1,30 +1,86 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+
+  <div v-if="loaded === false" class="loader">
+    <div></div>
   </div>
-  <router-view/>
+
+  <div v-else class="hgt">
+    <router-view v-slot="{ Component }">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
+  </div>
+  <footer-t />
 </template>
+
+<script>
+import { ref } from '@vue/reactivity';
+
+import FooterT from './components/FooterT.vue';
+import useAuth from './modules/auth/composables/useAuth';
+
+export default {
+  components: { FooterT },
+  setup() {
+
+    const { checkToken } = useAuth();
+
+    const loaded = ref(false);
+
+    checkToken();
+
+    window.onload = () => {
+
+      loaded.value = true
+
+    }
+
+    return {
+      checkToken,
+      loaded,
+
+    };
+  },
+};
+</script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  font-size: 16px;
+  height: 100%;
+  min-height: 100vh;
+  background: url("./assets/backgroundft.png");
 }
 
-#nav {
-  padding: 30px;
+.hgt {
+  min-height: calc(100vh - 55px);
+}
+.loader {
+  min-height: calc(100vh - 55px);
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.loader>div {
+  height: 100px;
+  width: 100px;
+  border: 15px solid #45474b;
+  border-top-color: yellow;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  animation: spin 1.5s infinite linear;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
