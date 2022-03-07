@@ -8,12 +8,10 @@ const shortingText = (array) => {
     
     if ( text.length > 20 ) {
         shorterText.value = text.substring(0,20) + '...'
-        // console.log(shorterText.value);
-    } else {
+    } else { 
         shorterText.value = text
     }
     
-    console.log('pepe');
     return {
 
         text,

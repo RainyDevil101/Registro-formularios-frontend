@@ -39,8 +39,8 @@
             <p class="hdr">DATOS SUPERVISOR</p>
             <div class="lines"></div>
             <p>Usuario:</p>
-            <p>Fecha ingresada:</p>
             <p>Fecha en sistema:</p>
+            <p>Fecha ingresada:</p>
             <p>Rut:</p>
             <p>Cargo:</p>
             <p class="activity">Actividad:</p>
@@ -352,7 +352,7 @@ p {
   margin-left: 5%;
   overflow: scroll;
   overflow-x: hidden;
-  overflow-y: hidden;
+  // overflow-y: hidden;
 }
 
 .header-forum {

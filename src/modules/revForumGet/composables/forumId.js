@@ -52,6 +52,9 @@ const useIdForum = (forumId = '') => {
             userTask.value = data.task.name
             userAn.value = data.imgAn
             userRe.value = data.imgRe
+            manDay.value = data.dayList
+            manMonth.value = data.monthList
+            manYearDay.value = data.yearList
 
             const { shorterText } = shortingText(data.obligation);
 
@@ -67,11 +70,7 @@ const useIdForum = (forumId = '') => {
             acMin.value = acDate.getMinutes();
             acHour.value = acDate.getHours();
             
-            const { day, month, yearDay, dayAc, monthAc, yearDayAc } = getDayMonthYear(data.date, data.dateAc)
-            
-            manDay.value = day
-            manMonth.value = month
-            manYearDay.value = yearDay
+            const { dayAc, monthAc, yearDayAc } = getDayMonthYear(data.date, data.dateAc)
 
             acDay.value = dayAc
             acMonth.value = monthAc
