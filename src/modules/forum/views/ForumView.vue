@@ -10,7 +10,7 @@
         <h3>
           <b>FECHA</b>
         </h3>
-        <input v-model="userForm.dateAc" type="date" :max="today" />
+        <input v-model="userForm.dateAc" type="date" />
       </div>
 
       <div class="question">
@@ -254,7 +254,7 @@ export default {
       statusForum: "PENDIENTE",
     });
 
-    const today = new Date().toISOString().split('T')[0];
+    // const today = new Date().toISOString().split('T')[0];
 
     const localImageOne = ref();
     const localImageTwo = ref();
@@ -311,7 +311,7 @@ export default {
       imgOneName,
       imgTwoName,
       options,
-      today,
+      // today,
 
       onSubmit: async () => {
         new Swal({
