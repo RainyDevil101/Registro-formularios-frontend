@@ -10,7 +10,7 @@
         <h3>
           <b>FECHA</b>
         </h3>
-        <input v-model="userForm.dateAc" type="date" />
+        <input v-model="userForm.dateAc" type="datetime-local" />
       </div>
 
       <div class="question">
