@@ -16,6 +16,8 @@ const getPosit = () => {
             positionsArray.push(position)
             positions.value = positionsArray
         }
+
+
         return {positions, ok: true}
     }
 
