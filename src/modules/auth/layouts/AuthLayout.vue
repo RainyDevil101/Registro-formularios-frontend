@@ -22,7 +22,7 @@ export default {
 
 .intro-box {
   background-color: rgba($color: white, $alpha: 1);
-  height: 35rem;
+  height: 80%;
   left: 50%;
   position: absolute;
   top: 43%;
