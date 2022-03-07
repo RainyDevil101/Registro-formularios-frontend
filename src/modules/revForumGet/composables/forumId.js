@@ -52,6 +52,7 @@ const useIdForum = (forumId = '') => {
             userTask.value = data.task.name
             userAn.value = data.imgAn
             userRe.value = data.imgRe
+            
             manDay.value = data.dayList
             manMonth.value = data.monthList
             manYearDay.value = data.yearList
@@ -70,7 +71,7 @@ const useIdForum = (forumId = '') => {
             acMin.value = acDate.getMinutes();
             acHour.value = acDate.getHours();
             
-            const { dayAc, monthAc, yearDayAc } = getDayMonthYear(data.date, data.dateAc)
+            const { dayAc, monthAc, yearDayAc } = getDayMonthYear(data.dateAc)
 
             acDay.value = dayAc
             acMonth.value = monthAc
