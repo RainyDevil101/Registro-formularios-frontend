@@ -17,6 +17,12 @@
       </div>
       <div class="pairs">
         <div class="title">
+          <p class="text">RUT:</p>
+          <input v-model="userForm.rut" type="password" />
+        </div>
+      </div>
+      <div class="pairs">
+        <div class="title">
           <p class="text">Contraseña</p>
           <input v-model="userForm.password" type="password" />
         </div>
@@ -85,7 +91,8 @@ export default {
       password: "",
       vaPassword: "",
       role: "",
-      storage: "awebo q si",
+      rut: "",
+      storage: "",
     });
 
     const { createUserDb } = createUser(userForm.value);
