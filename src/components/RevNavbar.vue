@@ -8,13 +8,10 @@
         <a @click="lista" class="pointer nav-btn navbar-brand">
           <b>Pendientes</b>
         </a>
-        <a @click="lista" class="pointer nav-btn navbar-brand">
+        <a @click="usuario" class="pointer nav-btn navbar-brand">
           <b>Usuarios</b>
         </a>
       </div>
-      <!-- <a @click="lista" class="pointer navbar-brand">
-        <b>Lista de pendientes</b>
-      </a>-->
       <button class="logout" @click="onLogOut">
         <i class="fas fa-sign-out-alt"></i>
       </button>
@@ -41,7 +38,10 @@ export default {
       },
       lista: () => {
         router.push({ name: 'rev-list-forum' })
-      }
+      },
+      usuario: () => {
+        router.push({ name: 'user-view-create' })
+      },
     }
 
   }

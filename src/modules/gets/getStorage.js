@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import supplierApi from "../../api/supplierApi";
+import backendConnect from '../../api/backend';
 
 const getStorages = () => {
     
@@ -7,7 +7,7 @@ const getStorages = () => {
     
     const searchStorages = async () => {
 
-        const {data} = await supplierApi.get('/api/storages', {
+        const {data} = await backendConnect.get('/api/storages', {
             headers: { 'x-token': localStorage.getItem('token') }
         })
         const storagesArray = []

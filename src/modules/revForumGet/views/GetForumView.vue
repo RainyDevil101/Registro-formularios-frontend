@@ -89,64 +89,6 @@
             <p v-if="userControl === 'Si'">{{ forum.postControl }}</p>
           </div>
         </div>
-        <div class="checkbox">
-          <div class="in-forum">
-            <form @submit.prevent="onSubmit">
-              <p class="hdr">REVISIÓN</p>
-              <div class="lines"></div>
-              <div>
-                <div class="options">
-                  <input v-model="userForm.name" :value="true" type="checkbox" />
-                </div>
-                <div class="options">
-                  <input v-model="userForm.revDate" :value="true" type="checkbox" />
-                </div>
-                <div class="options"></div>
-                <div class="options">
-                  <input v-model="userForm.revRun" :value="true" type="checkbox" />
-                </div>
-                <div class="options">
-                  <input v-model="userForm.revPosition" :value="true" type="checkbox" />
-                </div>
-                <div class="options activity">
-                  <input v-model="userForm.revObligation" :value="true" type="checkbox" />
-                </div>
-                <div class="options">
-                  <input v-model="userForm.revTask" :value="true" type="checkbox" />
-                </div>
-              </div>
-              <div class="lines"></div>
-              <div class="separator">
-                <div class="options"></div>
-                <div class="options">
-                  <input v-model="userForm.revQuestion1" :value="true" type="checkbox" />
-                </div>
-                <div class="options">
-                  <input v-model="userForm.revQuestion2" :value="true" type="checkbox" />
-                </div>
-                <div class="options">
-                  <input v-model="userForm.revQuestion3" :value="true" type="checkbox" />
-                </div>
-                <div class="options">
-                  <input v-model="userForm.revQuestion4" :value="true" type="checkbox" />
-                </div>
-                <div class="options">
-                  <input v-model="userForm.revQuestion5" :value="true" type="checkbox" />
-                </div>
-              </div>
-              <div class="lines"></div>
-              <div class="separator">
-                <div class="options controls">
-                  <input v-model="userForm.revControls" :value="true" type="checkbox" />
-                </div>
-                <div class="lines"></div>
-                <div v-if="userControl === 'Si'" class="options">
-                  <input v-model="userForm.revPostControl" :value="true" type="checkbox" />
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -372,9 +314,9 @@ p {
   widows: 100%;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: 1fr 1fr 90px;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(1, auto);
-  grid-template-areas: "questions answers checkbox";
+  grid-template-areas: "questions answers";
 }
 
 .forum-container .questions {

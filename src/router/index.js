@@ -29,7 +29,7 @@ const routes = [
   {
     path: '/user',
     beforeEnter: [authGuard],
-    beforeEnter: [supervisor],
+    beforeEnter: [revisor],
     ...user
   },
   {

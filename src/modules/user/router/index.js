@@ -5,8 +5,16 @@ export default {
     children: [
         {
             path: '',
-            name: 'user-test',
-            component: () => import(/* webpackChunkName: "user test" */ '@/modules/user/views/UserTest.vue'),
+            name: 'user-view-create',
+            component: () => import(/* webpackChunkName: "create user" */ '@/modules/user/views/UserViewCreate.vue'),
+        },
+        {
+            path: ':id',
+            name: 'user-view',
+            component: () => import(/* webpackChunkName: "create user" */ '@/modules/user/views/UserView.vue'),
+            props: (route) => {
+                id: route.params.id
+            }
         },
     ]
 }

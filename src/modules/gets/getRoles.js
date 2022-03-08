@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import supplierApi from "../../api/supplierApi";
+import backendConnect from '../../api/backend';
 
 const getRoles = () => {
     
@@ -7,7 +7,7 @@ const getRoles = () => {
     
     const searchRoles = async () => {
 
-        const {data} = await supplierApi.get('/api/roles', {
+        const {data} = await backendConnect.get('/api/roles', {
             headers: { 'x-token': localStorage.getItem('token') }
         })
         const rolesArray = []
