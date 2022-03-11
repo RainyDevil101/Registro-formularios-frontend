@@ -18,8 +18,8 @@ const saveUser = () => {
             try {
                 const storage = stor
                 const role = selected
-                const {name, mail, password } = save
-                const resp = await backendConnect.put(`/api/users/${id}`, { name, mail, role, password, storage }, { headers: { 'x-token': localStorage.getItem('token') } }).catch(function(errors){
+                const {name, mail, password, rut } = save
+                const resp = await backendConnect.put(`/api/users/${id}`, { name, mail, role, password, storage, rut }, { headers: { 'x-token': localStorage.getItem('token') } }).catch(function(errors){
                     
                     
                     if (errors.response.data.msg) {

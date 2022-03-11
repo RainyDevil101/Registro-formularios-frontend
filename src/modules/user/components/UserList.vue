@@ -1,68 +1,51 @@
 <template>
+
   <div class="user-list-container">
     <div class="px-4 my-1">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Buscar usuario"
-        v-model="term"
-      />
+      <input type="text" class="form-control" placeholder="Buscar usuario" v-model="term" />
     </div>
 
     <div class="user-scrollarea">
-      <user
-        v-for="user of userRef"
-        :key="user.uid"
-        :user="user"
-      />
+      <user v-for="user of usersRef" :key="user" :user="user" />
     </div>
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { watch } from "@vue/runtime-core";
+import { watch } from "vue";
 
 import getTerm from "../composables/userTerm";
 import User from './User.vue';
+import Loader from '../../../components/Loader.vue';
 
 export default {
-  components: { User },
+  components: { User, Loader },
 
   setup() {
-    const route = useRoute();
-    const router = useRouter();
 
-    const idUS = ref("");
-    const term = ref("");
+    const term = ref('');
 
-    const { searchTerm, userRef } = getTerm(term.value);
+    console.log(term.value);
+
+    const { usersTerm, usersRef } = getTerm(term.value);
 
     watch(
       () => term.value,
-      () => searchTerm(term.value)
-    );
-    watch(
-      () => route.params.id,
-      () => (idUS.value = route.params.id)
-    );
-    watch(
-      () => idUS.value,
-      () => searchTerm(term.value)
+      () => usersTerm(term.value)
     );
 
     return {
-      searchTerm,
+
       term,
-      userRef,
+      usersRef,
+
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
 .user-list-container {
   height: calc(100vh - 200px);
 }
@@ -75,7 +58,5 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
-
 }
-
 </style>

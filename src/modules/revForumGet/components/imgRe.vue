@@ -37,7 +37,6 @@ export default {
 
 <style lang="scss" scoped>
 img {
-    max-height: 600px;
     border: 4px solid white;
 }
 .modal-background {

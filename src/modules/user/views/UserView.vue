@@ -28,6 +28,12 @@
         </div>
         <div class="pairs">
           <div class="title">
+            <p class="card-text">Rut</p>
+            <input v-model="user.rut" type="text" />
+          </div>
+        </div>
+        <div class="pairs">
+          <div class="title">
             <p class="card-text">Contraseña</p>
             <input v-model="user.password" type="password" />
           </div>
@@ -63,7 +69,7 @@
             <option
               v-for="storage of storages"
               :key="storage._id"
-              :value="storage._id"
+              :value="storage.storage"
             >
               {{ storage.name }}
             </option>
@@ -226,6 +232,13 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.body {
+  margin-top: 2rem;
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 26rem;
 }
 
 .title {

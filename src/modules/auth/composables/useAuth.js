@@ -17,6 +17,11 @@ const useAuth = () => {
         return resp
     }
 
+    const getUsers = async() => {
+        const resp = await store.dispatch('users/loadUsers')
+        return resp
+    }
+
     const logOut = () => {
         store.commit('auth/logOut')
     }
@@ -25,6 +30,7 @@ const useAuth = () => {
         checkToken,
         loginUser,
         logOut,
+        getUsers,
 
         authStatus: computed(() => store.getters['auth/currentState']),
         userName: computed(() => store.getters['auth/userName'])

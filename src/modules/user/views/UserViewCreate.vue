@@ -17,8 +17,8 @@
       </div>
       <div class="pairs">
         <div class="title">
-          <p class="text">RUT:</p>
-          <input v-model="userForm.rut" type="password" />
+          <p class="text">RUT</p>
+          <input v-model="userForm.rut" type="text" />
         </div>
       </div>
       <div class="pairs">
@@ -40,6 +40,18 @@
         >
           <option v-for="role of roles" :key="role._id" :value="role.role">
             {{ role.role }}
+          </option>
+        </select>
+      </div>
+      <div class="select">
+        <div class="card-title change-role">Cargo</div>
+        <select
+          v-model="userForm.position"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option v-for="position of positions" :key="position._id" :value="position._id">
+            {{ position.name }}
           </option>
         </select>
       </div>
@@ -78,6 +90,7 @@ import { ref } from "@vue/reactivity";
 import createUser from "../composables/createUser";
 import getRoles from "../../gets/getRoles";
 import getStorages from "../../gets/getStorage";
+import getPositions from "../../gets/getPosition";
 
 import Swal from "sweetalert2";
 
@@ -98,6 +111,7 @@ export default {
     const { createUserDb } = createUser(userForm.value);
     const { searchRoles, roles } = getRoles();
     const { searchStorages, storages } = getStorages();
+    const { searchPosit, positions } = getPositions();
 
     return {
       userForm,
@@ -105,6 +119,8 @@ export default {
       roles,
       searchStorages,
       storages,
+      searchPosit,
+      positions,
 
       onRecharge: () => {
         searchStorages();
@@ -152,6 +168,13 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+.body {
+  margin-top: 2rem;
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 26rem;
+}
+
 .pairs {
   display: flex;
   justify-content: space-between;
@@ -197,9 +220,9 @@ input[type="number"]::-webkit-outer-spin-button {
     text-align: center;
   }
 
-  .register {
-    margin-top: 9rem;
-  }
+  // .register {
+  //   margin-top: 9rem;
+  // }
 }
 
 @media screen and (max-width: 1200px) {
@@ -208,9 +231,9 @@ input[type="number"]::-webkit-outer-spin-button {
     margin-left: 0rem;
   }
 
-  .register {
-    margin-top: 6rem;
-  }
+  // .register {
+  //   margin-top: 6rem;
+  // }
 
   .header {
     text-align: center;

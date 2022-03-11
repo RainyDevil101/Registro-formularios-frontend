@@ -19,7 +19,7 @@ export default {
     },
     setup(props) {
         const userProps = ref([])
-        userProps.value = props.user.name
+        // userProps.value = props.user.name
 
         return {
             userProps

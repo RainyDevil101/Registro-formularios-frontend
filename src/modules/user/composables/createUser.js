@@ -21,12 +21,12 @@ const createUser = () =>{
                 return {errorsUS, ok: false}
             }
 
-            const {name, mail, password, role, storage} = userForm
+            const {name, mail, password, role, storage, rut, position} = userForm
 
 
             try {
 
-                const resp = await backendConnect.post('/api/users', {name, mail, password, role, storage}, {headers: { 'x-token': localStorage.getItem('token') }}).catch(function (errors){
+                const resp = await backendConnect.post('/api/users', {name, mail, password, role, storage, rut, position}, {headers: { 'x-token': localStorage.getItem('token') }}).catch(function (errors){
                     
                     if(errors.response.data.msg) { 
                         errorsUS.value = errors.response.data.msg

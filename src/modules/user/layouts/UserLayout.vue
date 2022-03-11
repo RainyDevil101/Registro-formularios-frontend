@@ -1,7 +1,11 @@
 <template>
 <rev-navbar />
 
-  <div
+  <div v-if="authStatus === 'CARGANDO' ">
+    <loader />
+  </div>
+
+  <div v-else
   class="contain">
     <div class="list">
       <user-list/>
@@ -18,13 +22,26 @@ import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import RevNavbar from '../../../components/RevNavbar.vue';
 import UserList from '../components/UserList.vue';
+import useAuth from '../../auth/composables/useAuth';
+import getTerm from '../composables/userTerm';
+import Loader from '../../../components/Loader.vue';
+
 export default {
-  components: { UserList, RevNavbar },
+  components: { UserList, RevNavbar, Loader },
 
     setup() {
-        const route = useRoute();
-        const router = useRouter();
-        const store = useStore();
+
+
+        const { getUsers } = useAuth();
+        const { authStatus } = getTerm();
+
+        getUsers();
+
+
+        return {
+          authStatus,
+        }
+
     }
 
 }

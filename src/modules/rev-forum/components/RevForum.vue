@@ -27,8 +27,6 @@ export default {
         const forumDate = ref();
         forumDate.value = props.forum.date
 
-        console.log(forumDate.value);
-
         return {
             forumDate
         }

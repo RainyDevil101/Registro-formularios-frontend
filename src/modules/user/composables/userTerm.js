@@ -1,35 +1,31 @@
-import { ref } from "vue";
-import backendConnect from '../../../api/backend';
+import { computed, ref } from "vue";
+import { useStore } from "vuex";
 
-const getTerm = (term = "") => {
+const getTerm = (term) => {
+    
+    const store = useStore();
+    const usersRef = ref('');
 
-    const userRef = ref([]);
+    const usersTerm = (term = '') => {
 
-    const searchTerm = async (term) => {
+        const resp = computed(() => store.getters['users/usersState'](term) )
+        
+        console.log(resp.value);
 
-        if(term.length === 0) {
-            const {data} = await backendConnect.get('/api/users', {
-                headers: { 'x-token': localStorage.getItem('token') }
-            })
-            const {users} = data
-            return userRef.value = users
-
-        } else {
-            const {data} = await backendConnect.get(`/api/search/users/${term}`, {
-                headers: { 'x-token': localStorage.getItem('token') }
-            })
-            const {results} = data
-            return userRef.value = results
-        }
-
+        return usersRef.value = resp.value
     }
 
-    searchTerm(term)
+    usersTerm(term)
+    
 
-    return{
-        searchTerm,
-        userRef,
+    return {
+        usersTerm,
+        usersRef,
+
+        authStatus: computed(() => store.getters['users/statusState']),
     }
+
+
 }
 
 export default getTerm
