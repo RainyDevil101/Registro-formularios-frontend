@@ -18,6 +18,7 @@ import { watch } from "vue";
 import getTerm from "../composables/userTerm";
 import User from './User.vue';
 import Loader from '../../../components/Loader.vue';
+import { useStore } from 'vuex';
 
 export default {
   components: { User, Loader },
@@ -25,13 +26,17 @@ export default {
   setup() {
 
     const term = ref('');
-
-    console.log(term.value);
+    const store = useStore();
 
     const { usersTerm, usersRef } = getTerm(term.value);
 
     watch(
       () => term.value,
+      () => usersTerm(term.value)
+    );
+
+    watch(
+      () => store.state.users.users,
       () => usersTerm(term.value)
     );
 

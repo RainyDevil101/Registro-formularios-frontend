@@ -1,18 +1,34 @@
 <template>
   <rev-navbar />
-  <div class="forum-view">
+
+  <div v-if="statusState === 'CARGANDO'">
+    <loader />
+  </div>
+
+  <div v-else class="forum-view">
     <rev-forum-list/>
   </div>
 </template>
 
 <script>
 import RevNavbar from "../../../components/RevNavbar.vue";
+import useAuth from '../../auth/composables/useAuth';
+import getTerm from "../composables/forumTerm";
 import RevForumList from '../views/RevForumList.vue';
+import Loader from "../../../components/Loader.vue";
 export default {
-  components: { RevNavbar, RevForumList },
+  components: { RevNavbar, RevForumList, Loader },
 
   setup() {
-    return {};
+
+    const { getForums } = useAuth();
+    const { statusState } = getTerm();
+
+    getForums();
+
+    return {
+      statusState,
+    };
   },
 };
 </script>

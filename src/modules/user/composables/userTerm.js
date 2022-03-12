@@ -10,8 +10,6 @@ const getTerm = (term) => {
 
         const resp = computed(() => store.getters['users/usersState'](term) )
         
-        console.log(resp.value);
-
         return usersRef.value = resp.value
     }
 
@@ -22,7 +20,7 @@ const getTerm = (term) => {
         usersTerm,
         usersRef,
 
-        authStatus: computed(() => store.getters['users/statusState']),
+        statusState: computed(() => store.getters['users/statusState']),
     }
 
 

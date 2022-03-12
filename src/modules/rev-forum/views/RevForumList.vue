@@ -1,6 +1,6 @@
 <template>
 
-<div v-if="onLoad === true">
+<div v-if="authStatus === 'RECIBIDOS'">
     <loader />
 </div>
 
@@ -16,7 +16,7 @@
 
     <div class="forum-scrollarea">
         <forum
-        v-for="forum of forumRef"
+        v-for="forum of forumsRef"
         :key="forum._id"
         :forum="forum"
         />
@@ -30,9 +30,10 @@ import { ref } from '@vue/reactivity';
 import { useRoute } from 'vue-router';
 import { watch } from '@vue/runtime-core';
 
-import getForum from '../../gets/getForums';
+import getTerm from '../composables/forumTerm';
 import Forum from '../components/RevForum.vue';
 import Loader from '../../../components/Loader.vue';
+import { useStore } from 'vuex';
 
 export default {
 
@@ -41,23 +42,26 @@ export default {
     setup() {
 
         const route = useRoute();
+        const store = useStore();
 
-        const idCT = ref('');
         const term = ref('');
 
-        const { searchForum, forumRef, onLoad } = getForum(term.value);
+        const { forumsRef, forumsTerm, authStatus } = getTerm(term.value);
 
         watch(
             () => term.value,
-            () => searchForum(term.value)
+            () => forumsTerm(term.value)
+        );
+
+        watch(
+            () => store.state.forums.forums,
+            () => forumsTerm(term.value)
         );
 
         return {
-            searchForum,
             term,
-            forumRef,
-            idCT,
-            onLoad,
+            forumsRef,
+            authStatus,
         }
     }
 

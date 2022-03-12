@@ -1,7 +1,7 @@
 <template>
 <rev-navbar />
 
-  <div v-if="authStatus === 'CARGANDO' ">
+  <div v-if="statusState === 'CARGANDO' ">
     <loader />
   </div>
 
@@ -18,8 +18,7 @@
 </template>
 
 <script>
-import { useRoute, useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+
 import RevNavbar from '../../../components/RevNavbar.vue';
 import UserList from '../components/UserList.vue';
 import useAuth from '../../auth/composables/useAuth';
@@ -33,13 +32,13 @@ export default {
 
 
         const { getUsers } = useAuth();
-        const { authStatus } = getTerm();
+        const { statusState } = getTerm();
 
         getUsers();
 
 
         return {
-          authStatus,
+          statusState,
         }
 
     }

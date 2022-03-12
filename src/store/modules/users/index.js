@@ -9,7 +9,6 @@ const getters = {
 
     usersState: (state, getters, rootState) => (term = '') => {
 
-        console.log(term, 'index');
         
         if (term.length === 0) return state.users
 
@@ -17,7 +16,9 @@ const getters = {
 
     },
     statusState(state, getters, rootState) {
+
         return state.status
+        
     },
 
 }
@@ -29,7 +30,14 @@ const mutations = {
         state.users = users
         state.status = 'RECIBIDOS'
 
-    }
+    },
+    deleteUserM(state, {id}) {
+
+        console.log(id);
+
+        state.users = state.users.filter( u => u.uid !== id )
+
+    },
 
 }
 
@@ -40,6 +48,13 @@ const actions = {
 
         try {
             const { data } = await backendConnect.get('/api/users/', {headers: { 'x-token': localStorage.getItem('token') }} )
+
+            if ( !data ) {
+
+                commit('saveUsers', [] )
+                return
+
+            }
 
             const { users } = data
 
@@ -54,6 +69,14 @@ const actions = {
         }
         
     },
+    async deleteUser({ commit }, id) {
+
+        commit('deleteUserM', { id })
+
+
+        return { ok: true }
+
+    }
 
 }
 

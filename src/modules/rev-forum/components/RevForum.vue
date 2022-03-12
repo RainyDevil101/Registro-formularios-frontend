@@ -4,7 +4,7 @@
         @click="$router.push({ name: 'get-forum', params: { id: forum._id } })"
     >
         <div class="forum-title d-flex justify-content-between">
-            <span>{{ forum.code }}</span>
+            <span>{{ forum.name }}</span>
             <span class="mx-1">{{ forum.dayList }} {{ forum.monthList }} {{ forum.yearList }}</span>
         </div>
     </div>

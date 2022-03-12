@@ -12,7 +12,9 @@
   <template v-else>
     <form @submit.prevent="onSubmit">
       <div class="header">
-        <h4><b>USUARIO</b></h4>
+        <h4>
+          <b>USUARIO</b>
+        </h4>
       </div>
       <hr />
       <div class="body">
@@ -44,21 +46,13 @@
         </div>
         <div class="select">
           <div class="card-title change-role">Cambiar rol de usuario</div>
-          <select
-            v-model="selected"
-            class="form-select"
-            aria-label="multiple select example"
-          >
-            <option v-for="role of roles" :key="role._id" :value="role.role">
-              {{ role.role }}
-            </option>
+          <select v-model="selected" class="form-select" aria-label="multiple select example">
+            <option v-for="role of roles" :key="role._id" :value="role.role">{{ role.role }}</option>
           </select>
         </div>
         <div class="select">
           <div class="card-title change-storage">
-            <p v-on:click="creStorage" class="pointer">
-              Cambiar división de usuario
-            </p>
+            <p v-on:click="creStorage" class="pointer">Cambiar división de usuario</p>
           </div>
           <select
             v-on:click="onRecharge"
@@ -70,13 +64,12 @@
               v-for="storage of storages"
               :key="storage._id"
               :value="storage.storage"
-            >
-              {{ storage.name }}
-            </option>
+            >{{ storage.name }}</option>
           </select>
         </div>
         <p class="text">
-          Fecha de creación: <b>{{ user.createdAt }}</b>
+          Fecha de creación:
+          <b>{{ user.createdAt }}</b>
         </p>
         <hr />
       </div>
@@ -85,9 +78,7 @@
       </div>
     </form>
     <div class="other-buttons">
-      <router-link :to="{ name: 'user-view-create' }" class="btn btn-primary"
-        >Crear nuevo usuario</router-link
-      >
+      <router-link :to="{ name: 'user-view-create' }" class="btn btn-primary">Crear nuevo usuario</router-link>
       <div class="delete">
         <button class="btn btn-danger" @click="onDelete">Eliminar</button>
       </div>
@@ -98,7 +89,7 @@
 <script>
 import { ref } from "@vue/reactivity";
 import { useRouter } from "vue-router";
-import { watch } from "@vue/runtime-core";
+import { computed, watch } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import Swal from "sweetalert2";
 
@@ -107,11 +98,13 @@ import saveUser from "../composables/saveUser";
 import deleteUser from "../composables/deleteUser";
 import getRoles from "../../gets/getRoles";
 import getStorages from "../../gets/getStorage";
+import { useStore } from 'vuex';
 
 export default {
   setup() {
     const route = useRoute();
     const router = useRouter();
+    const store = useStore();
 
     const idPT = ref("");
     const selected = ref();
@@ -159,17 +152,28 @@ export default {
         Swal.showLoading();
         const { ok, message } = await deleteUserDb(route.params.id);
 
-        Swal.fire("Eliminado", "", "success").then(function (result) {
-          if (true) {
-            router.push({ name: "user-view-create" });
-          } else {
-            window.alert("Error", "intente nuevamente");
-          }
-        });
+        if (ok === true) {
+
+          const resp = await store.dispatch('users/deleteUser', route.params.id)
+
+          console.log(resp);
+
+          Swal.fire("Eliminado", "", "success").then(function (result) {
+            if (true) {
+              router.push({ name: "user-view-create" })
+            } else {
+              window.alert("Error", "intente nuevamente");
+            }
+          });
+
+        } else {
+          window.alert("Error", "intente nuevamente");
+        }
+
       }
     };
 
-    return {
+    return {  
       errorMessage,
       isLoading,
       onDelete,
@@ -274,6 +278,5 @@ input[type="number"]::-webkit-outer-spin-button {
     text-align: center;
     display: block;
   }
-
 }
 </style>
