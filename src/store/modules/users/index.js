@@ -15,6 +15,7 @@ const getters = {
         return state.users.filter( user => user.name.toLowerCase().includes( term.toLocaleLowerCase() ) )
 
     },
+
     statusState(state, getters, rootState) {
 
         return state.status

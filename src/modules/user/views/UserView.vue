@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-content-md-center" v-if="!user && !errorMessage">
-    <div class="col-3 alert-info text-center mt-5">
+    <div class="col-3 alert-info text-center mt-5 loading">
       Cargando...
       <h3 class="mt-2">
         <i class="fa fa-spin fa-sync"></i>
@@ -156,8 +156,6 @@ export default {
 
           const resp = await store.dispatch('users/deleteUser', route.params.id)
 
-          console.log(resp);
-
           Swal.fire("Eliminado", "", "success").then(function (result) {
             if (true) {
               router.push({ name: "user-view-create" })
@@ -236,6 +234,10 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.loading {
+  min-width: 8rem;
 }
 
 .body {

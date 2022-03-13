@@ -37,7 +37,7 @@ export default {
   width: 90%;
   margin-left: 5%;
   margin-right: 5%;
-  background-color: rgb(255, 242, 204);
+  background-color: white;
 }
 
 .bltn {

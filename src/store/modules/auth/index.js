@@ -4,7 +4,8 @@ const state = {
     status: 'AUTHENTICATING',
     user: null,
     token: null,
-    userId: null
+    userId: null,
+    position: null,
 }
 
 const getters = {
@@ -14,6 +15,15 @@ const getters = {
     userName(state) {
         return state.user?.name || ''
     },
+    getUser(state) {
+
+        return state.user
+
+    },
+    getPosition(state) {
+        console.log(state.position);
+        return state.position
+    }
 }
 
 const mutations = {
@@ -27,7 +37,6 @@ const mutations = {
         state.user      = user
         state.status    = 'authenticated'
         state.userId    = userId
-
     },
     logOut(state) {
 
@@ -35,10 +44,14 @@ const mutations = {
         state.token     = null,
         state.status    = null,
         state.userId    = null,
+        state.position  = null,
 
         localStorage.removeItem('token')
 
     },
+    userPosition(state, {positionUser}) {
+        state.position = positionUser
+    }
 }
 
 const actions = {
@@ -49,8 +62,9 @@ const actions = {
             const { data } = await backendConnect.post('/api/auth/login', { mail, password })
             const { user, token } = data
 
+            const positionUser = data.userPosition.name
 
-
+            commit('userPosition', {positionUser})
 
             delete user.password
             commit('loginUser', { user, token })
@@ -77,6 +91,10 @@ const actions = {
             })
             const { user, token } = data
             const userId = data.user.uid
+
+            const positionUser = data.userPosition.name
+
+            commit('userPosition', {positionUser})
 
             commit('loginUser', { user, token, userId })
             return { ok: true, user }

@@ -17,27 +17,28 @@
         <h3>
           <b>SUPERVISOR</b>
         </h3>
-        <input v-model="userForm.name" type="text" />
+        <p> {{userIdState.name}} </p>
       </div>
 
       <div class="question">
         <h3>
           <b>RUT</b>
         </h3>
-        <input v-model="userForm.run" type="text" />
+        <p> {{userIdState.rut}} </p>
       </div>
 
       <div class="question">
         <h3>
           <b>CARGO</b>
         </h3>
-        <select v-model="userForm.position" class="form-select" aria-label="Default select example">
+        <p> {{position}} </p>
+        <!-- <select v-model="userForm.position" class="form-select" aria-label="Default select example">
           <option
             v-for="position of positions"
             :key="position._id"
             :value="position._id"
           >{{ position.name }}</option>
-        </select>
+        </select> -->
       </div>
 
       <div class="question">
@@ -193,7 +194,9 @@
         />
         <label for="fileAn">Seleccione la imagen</label>
 
-      <div v-if="localImageOne" class="confirmation">{{imgOneName}}</div>
+      <div v-if="localImageOne" class="confirmation">
+        <p>{{imgOneName}}</p>
+      </div>
 
       </div>
 
@@ -210,7 +213,9 @@
         />
         <label for="fileRe">Seleccione la imagen</label>
 
-        <div v-if="localImageTwo" class="confirmation">{{imgTwoName}}</div>
+        <div v-if="localImageTwo" class="confirmation">
+          <p>{{imgTwoName}}</p>
+        </div>
 
       </div>
 
@@ -231,11 +236,14 @@ import getOptions from "../../gets/getOptions";
 import newForum from "../composables/sendForum";
 import uploadImageOne from "../helpers/uploadImage";
 import uploadImageTwo from "../helpers/uploadImageT";
+import getUser from "../composables/getUser";
+import { useStore } from 'vuex';
 
 export default {
   setup() {
     const route = useRoute();
     const router = useRouter();
+    const store = useStore();
 
     const userForm = ref({
       name: "",
@@ -274,10 +282,7 @@ export default {
     const { errors, createForum } = newForum();
     const { uploadImageAn } = uploadImageOne();
     const { uploadImageRe } = uploadImageTwo();
-
-    
-      
-
+    const { userIdState, position } = getUser();
 
     watch(
       () => localImageOne.value,
@@ -311,7 +316,8 @@ export default {
       imgOneName,
       imgTwoName,
       options,
-      // today,
+      userIdState,
+      position,
 
       onSubmit: async () => {
         new Swal({
@@ -428,13 +434,13 @@ p {
   border-radius: 4px;
   width: 60%;
   text-align: center;
-  background-color: rgb(255, 242, 204);
+  background-color: white;
 }
 
 .h3-header {
   text-align: center;
   border-radius: 4px;
-  background-color: rgb(255, 242, 204);
+  background-color: white;
 }
 
 .question {
@@ -442,7 +448,7 @@ p {
   margin-bottom: 2rem;
   text-align: center;
   border-radius: 4px;
-  background-color: rgb(255, 242, 204);
+  background-color: white;
 }
 
 .question-2 {
@@ -451,7 +457,7 @@ p {
   margin-bottom: 2rem;
   text-align: center;
   border-radius: 4px;
-  background-color: rgb(255, 242, 204);
+  background-color: white;
   overflow-x: scroll;
   padding-bottom: 16px;
 }
@@ -460,7 +466,7 @@ p {
   margin-bottom: 2rem;
   text-align: center;
   border-radius: 4px;
-  background-color: rgb(255, 242, 204);
+  background-color: white;
 }
 
 .form-one {
@@ -590,7 +596,7 @@ h3 {
 
 .diag {
   width: 100%;
-  background-color: rgb(255, 229, 151);
+  background-color: white;
   border-radius: 4px;
 
   &:hover {
@@ -601,14 +607,26 @@ h3 {
 }
 
 .confirmation {
-  margin-top: 8px;
+  display: table;
   padding: 5px 8px 5px 8px;
-  background-color: burlywood;
-  width: 80%;
-  margin-left: 10%;
+  background-color: gray;
+  color: white;
+  width: 40%;
+  min-width: 200px;
+  max-width: 370px;
+  margin: auto;
+  margin-top: 8px;
   border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;;
-  overflow: scroll;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  
+}
+
+.confirmation p {
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+  overflow: hidden;
+  max-width: 200px;
 }
 
 img {
