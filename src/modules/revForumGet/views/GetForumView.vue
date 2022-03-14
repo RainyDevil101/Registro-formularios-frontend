@@ -7,7 +7,7 @@
 
   <div v-if="showRe === true">
     <div>
-      <img-re :userRe="userRe" @on:closeRe="onShowRe"  />
+      <img-re :userRe="userRe" @on:closeRe="onShowRe" />
     </div>
   </div>
 
@@ -25,13 +25,6 @@
           N° DE FOLIO:
           <b>{{ forum.code }}</b>
         </h4>
-
-        <div class="img-forum">
-          <h4 @click="onShowAn" class="img-hov pointer">Fotografía anverso de ART</h4>
-        </div>
-        <div class="img-forum">
-          <h4 @click="onShowRe" class="img-hov pointer">Fotografía reverso de ART</h4>
-        </div>
       </div>
       <div class="forum-container">
         <div class="questions">
@@ -89,6 +82,14 @@
             <p v-if="userControl === 'Si'">{{ forum.postControl }}</p>
           </div>
         </div>
+        <div class="images-ref">
+          <div class="img-forum">
+            <p @click="onShowAn" class="img-hov pointer">Fotografía anverso de ART</p>
+          </div>
+          <div class="img-forum">
+            <p @click="onShowRe" class="img-hov pointer">Fotografía reverso de ART</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -135,7 +136,7 @@ export default {
       revImgRe: false,
     });
 
-    
+
 
     const { saveForumDb, errorsFor } = saveForum();
 
@@ -226,6 +227,7 @@ export default {
 
         if (showAn.value === false) {
           showAn.value = true
+          showRe.value = false
           return
         }
 
@@ -239,6 +241,7 @@ export default {
 
         if (showRe.value === false) {
           showRe.value = true
+          showAn.value = false
           return
         }
 
@@ -248,8 +251,6 @@ export default {
         }
 
       },
-      // controlY: () => onShow.value = true,
-      // controlN: () => onShow.value = false,
     };
   },
 };
@@ -264,8 +265,23 @@ p {
   margin: 0;
 }
 
-.activity {
+.images-ref {
+  left: 15%;
+  right: 15%;
+  bottom: 15%;
+  width: 70%;
+  position: absolute;
+  text-align: center;
+  display: block;
+}
 
+.images-ref p {
+  margin: 4px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.activity {
   // background-color: blue;
   height: 21px;
   // overflow: hidden;
@@ -341,7 +357,6 @@ p {
   grid-area: checkbox;
 }
 
-
 .options {
   height: 21px;
   display: flex;
@@ -390,13 +405,13 @@ img {
     width: 90%;
   }
 
-  .imgs-forum {
-    display: flex;
-    text-align: center;
+  .images-ref {
+  left: 35%;
+  right: 35%;
+  bottom: 15%;
+  width: 30%;
   }
-  .imgs-forum div {
-    width: 50%;
-  }
+
 }
 
 // Extra large devices (large desktops, 1200px and up)

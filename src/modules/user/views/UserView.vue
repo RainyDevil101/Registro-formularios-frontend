@@ -237,7 +237,9 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .loading {
-  min-width: 8rem;
+  width: 9rem;
+  margin: auto;
+
 }
 
 .body {

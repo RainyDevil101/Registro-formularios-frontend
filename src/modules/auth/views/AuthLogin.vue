@@ -19,15 +19,14 @@
 
     <div class="in-forum">
       <button class="login-boton">Ingresar</button>
+      <button @click="onBack" class="login-boton">Volver</button>
     </div>
 
     <div class="change-forum mt-5">
       <p>Si no tienes cuenta, ponte en contacto con el administrador.</p>
     </div>
   </form>
-  <div>
-    <button @click="onBack" class="btn btn-danger">Volver</button>
-  </div>
+  
 </template>
 
 <script>
@@ -123,20 +122,17 @@ select:focus {
   margin-top: 3rem;
 }
 
-.in-forum {
-  margin-top: 5rem;
-  margin-bottom: 1rem;
-}
-
 .login-boton {
+  margin: auto;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  display: block;
   font-size: 1.5rem;
   color: white;
   background-color: rgba($color: red, $alpha: 0.7);
   border: none;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  min-width: 217px;
+  max-width: 280px;
   transition: 0.5s;
   border-radius: 0.3rem;
 
@@ -164,13 +160,11 @@ select:focus {
   .forum-password {
     font-size: 1.3rem;
   }
-  .login-boton {
-    font-size: 1.3rem;
-    padding-top: 0.3rem;
-    padding-bottom: 0.3rem;
-    padding-left: 0.8rem;
-    padding-right: 0.8rem;
-  }
+  // .login-boton {
+  //   text-align: center;
+  //   display: block;
+
+  // }
 }
 
 // Small devices (landscape phones, 576px and up)
@@ -187,10 +181,7 @@ select:focus {
   }
   .login-boton {
     font-size: 1.4rem;
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
-    padding-left: 0.9rem;
-    padding-right: 0.9rem;
+
   }
 }
 
@@ -215,10 +206,7 @@ select:focus {
   }
   .login-boton {
     font-size: 1.5rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+
   }
 }
 
