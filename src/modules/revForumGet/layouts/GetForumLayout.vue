@@ -1,14 +1,15 @@
 <template>
-  <rev-navbar />
+  <user-navbar />
   <div class="forum-view">
     <router-view />
   </div>
 </template>
 
 <script>
-import RevNavbar from "../../../components/RevNavbar.vue";
+import UserNavbar from '../../../components/UserNavbar.vue';
+
 export default {
-  components: { RevNavbar },
+  components: {UserNavbar  },
 
   setup() {
     return {};

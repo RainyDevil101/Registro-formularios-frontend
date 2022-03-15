@@ -82,14 +82,6 @@
             <p v-if="userControl === 'Si'">{{ forum.postControl }}</p>
           </div>
         </div>
-        <div class="images-ref">
-          <div class="img-forum">
-            <p @click="onShowAn" class="img-hov pointer">Fotografía anverso de ART</p>
-          </div>
-          <div class="img-forum">
-            <p @click="onShowRe" class="img-hov pointer">Fotografía reverso de ART</p>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -105,15 +97,26 @@ import saveForum from '../composables/saveForum';
 import Loader from '../../../components/Loader.vue';
 import ImgAn from "../components/imgAn.vue";
 import ImgRe from "../components/imgRe.vue";
+import { useStore } from 'vuex';
 
 export default {
   components: { Loader, ImgAn, ImgRe },
   setup() {
     const route = useRoute();
     const router = useRouter();
+    const store = useStore();
 
-    const showAn = ref(false);
-    const showRe = ref(false);
+    const showAn = ref(store.state.forums.imgAn);
+    watch(
+      () => store.state.forums.imgAn,
+      () => showAn.value = store.state.forums.imgAn
+    );
+
+    const showRe = ref(store.state.forums.imgRe);
+        watch(
+      () => store.state.forums.imgRe,
+      () => showRe.value = store.state.forums.imgRe
+    );
 
     const { forum, userName, userPosition, userTask, userControl, userControlRe, userAn, userRe, onLoad, userObligation, manDay, manMonth, manYearDay, acDay, acMonth, acYearDay, acMin, acHour, errorMessage, searchForum, isLoading } = useIdForum(route.params.id);
 
@@ -172,6 +175,17 @@ export default {
       acHour,
       userObligation,
 
+      onShowAn: () => {
+
+        return store.dispatch('forums/changeImgAn', false)
+
+      },
+      onShowRe: () => {
+
+        return store.dispatch('forums/changeImgRe', false)
+
+      },
+
       onSubmit: async () => {
         new Swal({
           title: "Espere por favor",
@@ -223,34 +237,6 @@ export default {
           )
         }
       },
-      onShowAn: async () => {
-
-        if (showAn.value === false) {
-          showAn.value = true
-          showRe.value = false
-          return
-        }
-
-        if (showAn.value === true) {
-          showAn.value = false
-          return
-        }
-
-      },
-      onShowRe: async () => {
-
-        if (showRe.value === false) {
-          showRe.value = true
-          showAn.value = false
-          return
-        }
-
-        if (showRe.value === true) {
-          showRe.value = false
-          return
-        }
-
-      },
     };
   },
 };
@@ -270,7 +256,6 @@ p {
   right: 15%;
   bottom: 15%;
   width: 70%;
-  position: absolute;
   text-align: center;
   display: block;
 }
@@ -406,12 +391,11 @@ img {
   }
 
   .images-ref {
-  left: 35%;
-  right: 35%;
-  bottom: 15%;
-  width: 30%;
+    left: 35%;
+    right: 35%;
+    bottom: 15%;
+    width: 30%;
   }
-
 }
 
 // Extra large devices (large desktops, 1200px and up)

@@ -3,6 +3,8 @@ import backendConnect from '../../../api/backend';
 const state = {
     status: 'CARGANDO',
     forums: '',
+    imgAn: false,
+    imgRe: false,
 }
 
 const getters = {
@@ -33,9 +35,17 @@ const mutations = {
     },
     deleteForumM(state, {id}) {
 
-        console.log(id);
-
         state.forums = state.forums.filter( u => u.uid !== id )
+
+    },
+    changeImgAn(state, {onImgAn}) {
+
+        state.imgAn = onImgAn
+
+    },
+    changeImgRe(state, {onImgRe}) {
+
+        state.imgRe = onImgRe
 
     },
 
@@ -63,8 +73,6 @@ const actions = {
             return { ok: true }
 
         } catch (error) {
-            console.log(error)
-
             return { ok: false, message: error.response.data.errors }
         }
         
@@ -73,10 +81,17 @@ const actions = {
 
         commit('deleteForumM', { id })
 
-
         return { ok: true }
 
-    }
+    },
+    async changeImgAn({ commit }, onImgAn ) {
+        commit('changeImgAn', {onImgAn})
+        return { ok: true }        
+    },
+    async changeImgRe({ commit }, onImgRe ) {
+        commit('changeImgRe', {onImgRe})
+        return { ok: true }        
+    },
 
 }
 
