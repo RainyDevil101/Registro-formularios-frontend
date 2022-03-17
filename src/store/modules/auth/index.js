@@ -6,6 +6,7 @@ const state = {
     token: null,
     userId: null,
     position: null,
+    task: null,
 }
 
 const getters = {
@@ -21,9 +22,11 @@ const getters = {
 
     },
     getPosition(state) {
-        console.log(state.position);
         return state.position
-    }
+    },
+    getTask(state) {
+        return state.task
+    },
 }
 
 const mutations = {
@@ -51,6 +54,9 @@ const mutations = {
     },
     userPosition(state, {positionUser}) {
         state.position = positionUser
+    },
+    userTask(state, {taskUser}) {
+        state.task = taskUser
     }
 }
 
@@ -61,12 +67,18 @@ const actions = {
         try {
             const { data } = await backendConnect.post('/api/auth/login', { mail, password })
             const { user, token } = data
+            delete user.password
+
+            console.log(data);
 
             const positionUser = data.userPosition.name
-
+            
             commit('userPosition', {positionUser})
+            
+            const taskUser = data.userTask.name
 
-            delete user.password
+            commit('userTask', {taskUser})
+
             commit('loginUser', { user, token })
 
             return { ok: true }

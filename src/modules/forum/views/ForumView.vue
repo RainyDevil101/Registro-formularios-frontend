@@ -32,22 +32,13 @@
           <b>CARGO</b>
         </h3>
         <p> {{position}} </p>
-        <!-- <select v-model="userForm.position" class="form-select" aria-label="Default select example">
-          <option
-            v-for="position of positions"
-            :key="position._id"
-            :value="position._id"
-          >{{ position.name }}</option>
-        </select> -->
       </div>
 
       <div class="question">
         <h3>
           <b>FAENA</b>
         </h3>
-        <select v-model="userForm.task" class="form-select" aria-label="Default select example">
-          <option v-for="task of tasks" :key="task._id" :value="task._id">{{ task.name }}</option>
-        </select>
+        <p> {{task}} </p>
       </div>
 
       <div class="question">
@@ -246,11 +237,7 @@ export default {
     const store = useStore();
 
     const userForm = ref({
-      name: "",
       dateAc: "",
-      run: "",
-      position: "",
-      task: "",
       obligation: "",
       question1: "",
       question2: "",
@@ -282,7 +269,7 @@ export default {
     const { errors, createForum } = newForum();
     const { uploadImageAn } = uploadImageOne();
     const { uploadImageRe } = uploadImageTwo();
-    const { userIdState, position } = getUser();
+    const { userIdState, position, task } = getUser();
 
     watch(
       () => localImageOne.value,
@@ -318,6 +305,7 @@ export default {
       options,
       userIdState,
       position,
+      task,
 
       onSubmit: async () => {
         new Swal({

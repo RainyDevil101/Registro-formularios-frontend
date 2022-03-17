@@ -1,26 +1,61 @@
 <template>
-    <nav class="navbar navbar-dark bcc">
+    <nav class="navbar navbar-expand-lg navbar-dark bcc">
         <div class="container-fluid">
-            <div class>
-                <a @click="menu" class="pointer nav-btn navbar-brand">
-                    <b>Revisor</b>
-                </a>
-                <a @click="lista" class="pointer nav-btn navbar-brand">
-                    <b>Pendientes</b>
-                </a>
-                <a @click="usuario" class="pointer nav-btn navbar-brand">
-                    <b>Usuarios</b>
-                </a>
-                <a @click="onShowAn" class="nav-btn navbar-brand pointer">
-                    <b>Anverso ART</b>
-                </a>
-                <a @click="onShowRe" class="nav-btn navbar-brand pointer">
-                    <b>Reverso ART</b>
-                </a>
-            </div>
-            <button class="logout" @click="onLogOut">
-                <i class="fas fa-sign-out-alt"></i>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 txt-c">
+                    <li class="nav-item box-a">
+                        <a @click="menu" class="nav-link active pointer">
+                            <b>Todas</b>
+                        </a>
+                    </li>
+                    <li class="nav-item box-a">
+                        <a @click="lista" class="nav-link active pointer">
+                            <b>Pendientes</b>
+                        </a>
+                    </li>
+                    <li class="nav-item box-a">
+                        <a @click="usuario" class="nav-link active pointer">
+                            <b>Usuarios</b>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link active dropdown-toggle box-a"
+                            href="#"
+                            id="navbarDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        ><b>Imagenes</b></a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a @click="onShowAn" class="dropdown-item pointer">
+                                    <b>Anverso ART</b>
+                                </a>
+                            </li>
+                            <li>
+                                <a @click="onShowRe" class="dropdown-item pointer">
+                                    <b>Reverso ART</b>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                    <button class="logout" @click="onLogOut">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+            </div>
         </div>
     </nav>
 </template>
@@ -95,6 +130,12 @@ export default {
     background-color: rgba($color: red, $alpha: 0.3);
 }
 
+
+
+.txt-c {
+    text-align: center;
+}
+
 .logout {
     height: 40px;
     width: 40px;
@@ -116,5 +157,19 @@ export default {
     .nav-btn {
         font-size: 13px;
     }
+}
+
+@media (min-width: 991px) {
+    .box-a {
+    background-color: black;
+    margin: 0px 4px 0px 4px;
+    width: 150px;
+    border: 1px solid black;
+    border-radius: 4px;
+
+    &:hover {
+        background-color: rgba($color: #1a1a1a, $alpha: 1.0);
+    }
+}
 }
 </style>

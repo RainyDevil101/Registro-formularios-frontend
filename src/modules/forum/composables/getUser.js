@@ -8,7 +8,8 @@ const getUserState = () => {
 
     return {
         userIdState: computed(() => store.getters['auth/getUser']),
-        position: computed(() => store.getters['auth/getPosition'])
+        position: computed(() => store.getters['auth/getPosition']),
+        task: computed(() => store.getters['auth/getTask']),
     }
 }
     export default getUserState

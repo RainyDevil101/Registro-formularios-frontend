@@ -1,9 +1,6 @@
 <template>
   <div class="front-page">
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quod eligendi adipisci quam vero tempore impedit tempora debitis suscipit assumenda velit blanditiis, alias corporis aliquam eaque. Pariatur asperiores magnam temporibus eos et. Incidunt praesentium totam tempore accusamus dolor, sapiente iste!</p>
-    <div class="bltn">
-      <p @click="onForm" class="btn btn-primary">Revisar formularios</p>
-    </div>
+    <img src="../../../assets/gt1.jpg" alt="loading xD">
   </div>
 </template>
 
@@ -28,13 +25,13 @@ export default {
 
 <style lang="scss" scoped>
 .front-page {
-  text-align: justify;
-  min-height: calc(100vh - 160px);
-  height: 100%;
-  width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
-  background-color: white;
+  display: flex;
+  width:  100%;
+}
+img {
+  border: 1px solid white;
+  width: 67%;
+  margin: auto;
 }
 
 .bltn {

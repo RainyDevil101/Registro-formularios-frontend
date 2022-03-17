@@ -45,26 +45,27 @@
           </div>
         </div>
         <div class="select">
-          <div class="card-title change-role">Cambiar rol de usuario</div>
+          <div class="card-title change-role">
+            <p>Cambiar rol de usuario</p>
+          </div>
           <select v-model="selected" class="form-select" aria-label="multiple select example">
             <option v-for="role of roles" :key="role._id" :value="role.role">{{ role.role }}</option>
           </select>
         </div>
         <div class="select">
           <div class="card-title change-storage">
-            <p v-on:click="creStorage" class="pointer">Cambiar división de usuario</p>
+            <p>Cambiar división de usuario</p>
           </div>
-          <select
-            v-on:click="onRecharge"
-            v-model="stor"
-            class="form-select"
-            aria-label="multiple select example"
-          >
-            <option
-              v-for="storage of storages"
-              :key="storage._id"
-              :value="storage.storage"
-            >{{ storage.name }}</option>
+          <select v-model="stor" class="form-select" aria-label="multiple select example">
+            <option v-for="storage of storages" :key="storage._id" :value="storage.name">{{ storage.name }}</option>
+          </select>
+        </div>
+        <div class="select">
+          <div class="card-title change-task">
+            <p>Cambiar faena</p>
+          </div>
+          <select v-model="taskU" class="form-select" aria-label="multiple select example">
+            <option v-for="task of tasks" :key="task._id" :value="task.name">{{ task.name }}</option>
           </select>
         </div>
         <p class="text">
@@ -98,6 +99,7 @@ import saveUser from "../composables/saveUser";
 import deleteUser from "../composables/deleteUser";
 import getRoles from "../../gets/getRoles";
 import getStorages from "../../gets/getStorage";
+import getTasks from "../../gets/getTask";
 import { useStore } from 'vuex';
 
 export default {
@@ -108,10 +110,11 @@ export default {
 
     const idPT = ref("");
     const selected = ref();
-    const stor = ref([]);
+    const stor = ref();
+    const taskU = ref();
     const selectRole = ref(false);
 
-    const { user, errorMessage, searchUser, isLoading, userRole, userStorage } =
+    const { user, errorMessage, searchUser, isLoading, userRole, userStorage, userTask } =
       useIdUser(route.params.id);
 
     watch(
@@ -130,11 +133,16 @@ export default {
       () => userStorage.value,
       () => (stor.value = userStorage.value)
     );
+    watch(
+      () => userTask.value,
+      () => (taskU.value = userTask.value)
+    );
 
     const { saveUserDb, errorsUS } = saveUser();
     const { deleteUserDb } = deleteUser();
     const { searchRoles, roles } = getRoles();
     const { searchStorages, storages } = getStorages();
+    const { searchTask, tasks } = getTasks();
 
     const onDelete = async () => {
       const { isConfirmed } = await Swal.fire({
@@ -171,7 +179,7 @@ export default {
       }
     };
 
-    return {  
+    return {
       errorMessage,
       isLoading,
       onDelete,
@@ -185,14 +193,9 @@ export default {
       searchStorages,
       storages,
       stor,
-
-      onRecharge: () => {
-        searchStorages()
-      },
-
-      creStorage: () => {
-        window.open("#/storage", "_blank")
-      },
+      taskU,
+      searchTask,
+      tasks,
 
       onSubmit: async () => {
         new Swal({
@@ -205,6 +208,7 @@ export default {
           user.value,
           selected.value,
           stor.value,
+          taskU.value,
           route.params.id
         );
 
@@ -239,7 +243,6 @@ input[type="number"]::-webkit-outer-spin-button {
 .loading {
   width: 9rem;
   margin: auto;
-
 }
 
 .body {
