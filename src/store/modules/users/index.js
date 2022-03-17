@@ -34,8 +34,6 @@ const mutations = {
     },
     deleteUserM(state, {id}) {
 
-        console.log(id);
-
         state.users = state.users.filter( u => u.uid !== id )
 
     },

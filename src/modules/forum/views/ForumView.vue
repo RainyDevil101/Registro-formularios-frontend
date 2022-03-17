@@ -31,14 +31,14 @@
         <h3>
           <b>CARGO</b>
         </h3>
-        <p> {{position}} </p>
+        <p> {{position.name}} </p>
       </div>
 
       <div class="question">
         <h3>
           <b>FAENA</b>
         </h3>
-        <p> {{task}} </p>
+        <p> {{task.name}} </p>
       </div>
 
       <div class="question">
@@ -317,11 +317,7 @@ export default {
         const check = userForm.value
 
         if (
-          check.name === '' ||
           check.dateAc === '' ||
-          check.run === '' ||
-          check.position === '' ||
-          check.task === '' ||
           check.obligation === '' ||
           check.question1 === '' ||
           check.question2 === '' ||
@@ -349,7 +345,7 @@ export default {
         const pictureTwo = await uploadImageTwo(imgRe.value)
 
         const { ok, errors } = await createForum(
-          userForm.value, pictureOne, pictureTwo
+          userForm.value, pictureOne, pictureTwo, userIdState.value, position.value, task.value
         );
         if (ok === false) {
           Swal.fire({

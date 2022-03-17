@@ -48,6 +48,7 @@ const mutations = {
         state.status    = null,
         state.userId    = null,
         state.position  = null,
+        state.task      = null,
 
         localStorage.removeItem('token')
 
@@ -69,13 +70,11 @@ const actions = {
             const { user, token } = data
             delete user.password
 
-            console.log(data);
-
-            const positionUser = data.userPosition.name
+            const positionUser = data.userPosition
             
             commit('userPosition', {positionUser})
             
-            const taskUser = data.userTask.name
+            const taskUser = data.userTask
 
             commit('userTask', {taskUser})
 
@@ -104,7 +103,11 @@ const actions = {
             const { user, token } = data
             const userId = data.user.uid
 
-            const positionUser = data.userPosition.name
+            const positionUser = data.userPosition
+
+            const taskUser = data.userTask
+
+            commit('userTask', {taskUser})
 
             commit('userPosition', {positionUser})
 

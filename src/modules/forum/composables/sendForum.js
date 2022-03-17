@@ -5,19 +5,20 @@ const sendFor = () => {
 
     const errors = ref([]);
 
-    const createForum = async (userForm, imgAn, imgRe) => {
-
-        console.log(imgAn);
+    const createForum = async (userForm, imgAn, imgRe, userId, positionUser, taskUser) => {
 
         if( userForm.dateAc === '' || userForm.name === '' || userForm.run === '' || userForm.position === '' || userForm.task === '' || userForm.obligation === '' || userForm.question1 === '' || userForm.question2 === '' || userForm.question3 === '' || userForm.question4 === '' || userForm.question5 === '' || userForm.controls === '' || imgAn === undefined || imgRe === undefined ) {
             errors.value = 'Debe llenar los campos'
             return { errors, ok: false }
         } else {
 
-            const {  dateAc, name, run, position, task, obligation, question1, question2, question3, question4, question5, controls, postControl} = userForm
+            const {  dateAc, obligation, question1, question2, question3, question4, question5, controls, postControl} = userForm
 
+            const name = userId.name
+            const run = userId.rut
+            const position = positionUser._id
+            const task = taskUser._id
             imgAn
-
             imgRe
 
             try {
