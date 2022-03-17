@@ -58,7 +58,7 @@ const actions = {
 
         try {
             const { data } = await backendConnect.get('/api/forums/', {headers: { 'x-token': localStorage.getItem('token') }} )
-
+            console.log(data);
             if ( !data ) {
 
                 commit('saveForums', [] )

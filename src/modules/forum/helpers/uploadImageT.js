@@ -17,9 +17,6 @@ const uploadImageRe = async ( imgRe ) => {
 
         const {data} = await axios.post('https://api.cloudinary.com/v1_1/dcyoqnzg8/image/upload', formData)
 
-
-        console.log(data);
-
         return data.secure_url
 
 

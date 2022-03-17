@@ -1,6 +1,6 @@
 <template>
   <div class="front-page">
-    <img src="../../../assets/gt1.jpg" alt="loading xD">
+    <img src="../../../assets/gt1.jpg" alt="No disponible">
   </div>
 </template>
 
@@ -25,18 +25,16 @@ export default {
 
 <style lang="scss" scoped>
 .front-page {
+  max-width: 1200px;
   display: flex;
-  width:  100%;
-}
-img {
-  border: 1px solid white;
-  width: 67%;
   margin: auto;
 }
 
-.bltn {
-  text-align: center;
-  margin-top: 17.5rem;
+img {
+  display: block;
+  max-width: 1050px;
+  border: 1px solid white;
+  margin: auto;
 }
 
 .front-page p {

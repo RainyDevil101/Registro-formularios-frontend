@@ -344,9 +344,10 @@ export default {
         const pictureOne = await uploadImageOne(imgAn.value)
         const pictureTwo = await uploadImageTwo(imgRe.value)
 
-        const { ok, errors } = await createForum(
+        const { ok, errors, forumCode } = await createForum(
           userForm.value, pictureOne, pictureTwo, userIdState.value, position.value, task.value
         );
+        console.log(forumCode.value);
         if (ok === false) {
           Swal.fire({
             title: "Error",
@@ -354,7 +355,7 @@ export default {
             icon: "error",
           });
         } else {
-          Swal.fire("Guardado", "Formulario registrado con éxito", "success").then(
+          Swal.fire("Guardado", `Formulario ${forumCode.value} guardado con éxito`, "success").then(
             function (result) {
               if (true) {
                 location.reload();

@@ -4,6 +4,7 @@ import backendConnect from '../../../api/backend';
 const sendFor = () => {
 
     const errors = ref([]);
+    const forumCode = ref();
 
     const createForum = async (userForm, imgAn, imgRe, userId, positionUser, taskUser) => {
 
@@ -37,12 +38,15 @@ const sendFor = () => {
                             msgErr.push(' ' + error.msg)
                             errors.value = msgErr
                         }
+                        forumCode.value = null
                         return {errors, ok: false}
                     } else {
+
                         return {ok: true}
                     }
                 })
-                return resp
+                forumCode.value = resp.data.code
+                return { ok: true, forumCode }
             } catch (error) {
 
                 console.log(error);
@@ -55,7 +59,8 @@ const sendFor = () => {
 
     return {
         errors,
-        createForum
+        createForum,
+        forumCode
     }
 }
 
