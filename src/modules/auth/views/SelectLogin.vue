@@ -37,11 +37,12 @@ body {
 }
 .selector {
     text-align: center;
+    display: block;
     color: #fff;
     background-color: black;
     border-radius: 4px;
-    width: 80%;
-    margin-left: 10%;
+    margin: auto;
+    width: 200px;
     margin-top: 2rem;
     padding: 2px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

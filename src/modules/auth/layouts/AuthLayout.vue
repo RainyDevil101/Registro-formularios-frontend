@@ -22,12 +22,12 @@ export default {
 
 .intro-box {
   background-color: rgba($color: white, $alpha: 1);
-  height: 80%;
+  height: 600px;
   left: 50%;
   position: absolute;
   top: 43%;
   transform: translate(-50%, -50%);
-  width: 30%;
+  width: 300px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
@@ -40,33 +40,33 @@ export default {
     font-size: 6px;
   }
 
-  .intro-box {
-  width: 80%;
-}
+//   .intro-box {
+//   width: 80%;
+// }
  }
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) { 
 
-  .intro-box {
-  width: 60%;
-}
+//   .intro-box {
+//   width: 60%;
+// }
  }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) { 
 
-  .intro-box {
-    font-size: 1rem;
-  width: 50%;
-}
+//   .intro-box {
+//     font-size: 1rem;
+//   width: 50%;
+// }
  }
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) { 
 
   .intro-box {
-  width: 30%;
+  width: 400px;
 }
 
  }

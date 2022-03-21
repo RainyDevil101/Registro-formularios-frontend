@@ -37,7 +37,9 @@
                             role="button"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
-                        ><b>Imagenes</b></a>
+                        >
+                            <b>Imagenes</b>
+                        </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
                                 <a @click="onShowAn" class="dropdown-item pointer">
@@ -52,9 +54,9 @@
                         </ul>
                     </li>
                 </ul>
-                    <button class="logout" @click="onLogOut">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
+                <button class="logout" @click="onLogOut">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
             </div>
         </div>
     </nav>
@@ -72,8 +74,8 @@ export default {
         const store = useStore();
         const { logOut } = useAuth();
 
-        const onImgAn = ref(false);
-        const onImgRe = ref(false);
+        const onImgAn = ref(store.state.forums.imgAn);
+        const onImgRe = ref(store.state.forums.imgRe);
 
         return {
             onImgAn,
@@ -82,26 +84,26 @@ export default {
             onShowAn: () => {
 
                 if (onImgAn.value === false) {
-                    onImgAn.value = true
-                    onImgRe.value = false
-                    return store.dispatch('forums/changeImgAn', onImgAn.value)
+
+                    return store.dispatch('forums/changeImgAn', true)
                 }
                 if (onImgAn.value === true) {
-                    console.log('b');
-                    onImgAn.value = false
-                    return store.dispatch('forums/changeImgAn', onImgAn.value)
+
+                    return store.dispatch('forums/changeImgAn', false)
+
                 }
             },
 
             onShowRe: () => {
                 if (onImgRe.value === false) {
-                    onImgRe.value = true
-                    onImgAn.value = false
-                    return store.dispatch('forums/changeImgRe', onImgRe.value)
+
+                    return store.dispatch('forums/changeImgRe', true)
+                    
                 }
                 if (onImgRe.value === true) {
-                    onImgRe.value = false
-                    return store.dispatch('forums/changeImgRe', onImgRe.value)
+                    
+                    return store.dispatch('forums/changeImgRe', false)
+
                 }
             },
 
@@ -129,8 +131,6 @@ export default {
 .bcc {
     background-color: rgba($color: red, $alpha: 0.3);
 }
-
-
 
 .txt-c {
     text-align: center;
@@ -161,15 +161,15 @@ export default {
 
 @media (min-width: 991px) {
     .box-a {
-    background-color: black;
-    margin: 0px 4px 0px 4px;
-    width: 150px;
-    border: 1px solid black;
-    border-radius: 4px;
+        background-color: black;
+        margin: 0px 4px 0px 4px;
+        width: 150px;
+        border: 1px solid black;
+        border-radius: 4px;
 
-    &:hover {
-        background-color: rgba($color: #1a1a1a, $alpha: 1.0);
+        &:hover {
+            background-color: rgba($color: #1a1a1a, $alpha: 1);
+        }
     }
-}
 }
 </style>

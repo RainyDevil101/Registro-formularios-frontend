@@ -2,7 +2,8 @@ import backendConnect from '../../../api/backend';
 
 const state = {
     status: 'CARGANDO',
-    forums: '',
+    forumsCompleted: '',
+    forumsPending: '',
     imgAn: false,
     imgRe: false,
 }
@@ -12,9 +13,17 @@ const getters = {
     forumsState: (state, getters, rootState) => (term = '') => {
 
         
-        if (term.length === 0) return state.forums
+        if (term.length === 0) return state.forumsPending
 
-        return state.forums.filter( forum => forum.name.toLowerCase().includes( term.toLocaleLowerCase() ) )
+        return state.forumsPending.filter( forum => forum.name.toLowerCase().includes( term.toLocaleLowerCase() ) )
+
+    },
+    forumsStateCompleted: (state, getters, rootState) => (term = '') => {
+
+        
+        if (term.length === 0) return state.forumsCompleted
+
+        return state.forumsCompleted.filter( forum => forum.name.toLowerCase().includes( term.toLocaleLowerCase() ) )
 
     },
     statusState(state, getters, rootState) {
@@ -27,9 +36,15 @@ const getters = {
 
 const mutations = {
 
-    saveForums(state, { forums }) {
+    saveForums(state, { forumsPending }) {
 
-        state.forums = forums
+        state.forumsPending = forumsPending
+        state.status = 'RECIBIDOS'
+
+    },
+    saveForumsCompleted(state, { forumsCompleted }) {
+
+        state.forumsCompleted = forumsCompleted
         state.status = 'RECIBIDOS'
 
     },
@@ -58,17 +73,21 @@ const actions = {
 
         try {
             const { data } = await backendConnect.get('/api/forums/', {headers: { 'x-token': localStorage.getItem('token') }} )
-            console.log(data);
             if ( !data ) {
 
                 commit('saveForums', [] )
+                commit('saveForumsCompleted', [] )
                 return
 
             }
-
+            
             const { forums } = data
 
-            commit('saveForums', { forums })
+            const forumsPending = forums.filter( pending => pending.statusForum == 'PENDIENTE' )
+            const forumsCompleted = forums.filter( completed => completed.statusForum == 'REVISADO' )
+
+            commit('saveForums', { forumsPending })
+            commit('saveForumsCompleted', { forumsCompleted })
 
             return { ok: true }
 

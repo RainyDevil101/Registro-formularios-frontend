@@ -83,17 +83,18 @@
           </div>
         </div>
       </div>
+      <div class="next">
+        <button v-show="showRe === false && showAn === false" @click="onNext" class="btn btn-primary next-btn">Siguiente</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { onMounted, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import Swal from "sweetalert2";
 
 import useIdForum from '../composables/forumId';
-import saveForum from '../composables/saveForum';
 import Loader from '../../../components/Loader.vue';
 import ImgAn from "../components/imgAn.vue";
 import ImgRe from "../components/imgRe.vue";
@@ -113,48 +114,18 @@ export default {
     );
 
     const showRe = ref(store.state.forums.imgRe);
-        watch(
+    watch(
       () => store.state.forums.imgRe,
       () => showRe.value = store.state.forums.imgRe
     );
 
     const { forum, userName, userPosition, userTask, userControl, userControlRe, userAn, userRe, onLoad, userObligation, manDay, manMonth, manYearDay, acDay, acMonth, acYearDay, acMin, acHour, errorMessage, searchForum, isLoading } = useIdForum(route.params.id);
 
-    const userForm = ref({
-      name: false,
-      revDate: false,
-      revRun: false,
-      revPosition: false,
-      revTask: false,
-      revObligation: false,
-      revQuestion1: false,
-      revQuestion2: false,
-      revQuestion3: false,
-      revQuestion4: false,
-      revQuestion5: false,
-      revControls: false,
-      revPostControl: false,
-      revStatusForum: "REVISADO",
-      revImgAn: false,
-      revImgRe: false,
-    });
-
-
-
-    const { saveForumDb, errorsFor } = saveForum();
-
-    //         setTimeout(function() {
-    //     console.log(day);
-    // }, 3000);
-
     return {
-      userForm,
       forum,
       errorMessage,
       searchForum,
       isLoading,
-      saveForumDb,
-      errorsFor,
       userName,
       userPosition,
       userTask,
@@ -186,56 +157,8 @@ export default {
 
       },
 
-      onSubmit: async () => {
-        new Swal({
-          title: "Espere por favor",
-          allowOutsideClick: false,
-        });
-        Swal.showLoading();
-
-        const check = userForm.value
-
-        if (
-          check.name === '' ||
-          check.dateAc === '' ||
-          check.run === '' ||
-          check.revPosition === '' ||
-          check.revTask === '' ||
-          check.revObligation === '' ||
-          check.revQuestion1 === '' ||
-          check.revQuestion2 === '' ||
-          check.revQuestion3 === '' ||
-          check.revQuestion4 === '' ||
-          check.revQuestion5 === '') {
-
-          return Swal.fire({
-            title: "Error",
-            text: `Debe completar los campos`,
-            icon: "error",
-          });
-
-        }
-
-        const { ok, errors } = await createForum(
-          userForm.value
-        );
-        if (ok === false) {
-          Swal.fire({
-            title: "Error",
-            text: `${errors.value}`,
-            icon: "error",
-          });
-        } else {
-          Swal.fire("Guardado", "Formulario registrado con éxito", "success").then(
-            function (result) {
-              if (true) {
-                location.reload();
-              } else {
-                window.alert("Error, intente nuevamente")
-              }
-            }
-          )
-        }
+      onNext: async () => {
+        router.push({ name: 'get-forum-next' })
       },
     };
   },
@@ -251,30 +174,24 @@ p {
   margin: 0;
 }
 
-.images-ref {
-  left: 15%;
-  right: 15%;
-  bottom: 15%;
-  width: 70%;
+.next {
+  bottom: 18%;
   text-align: center;
-  display: block;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
 }
 
-.images-ref p {
-  margin: 4px;
-  border: 1px solid black;
-  border-radius: 4px;
+.next-btn {
+  font-size: 12px;
+  text-align: center;
+  margin: auto;
 }
 
 .activity {
-  // background-color: blue;
   height: 21px;
-  // overflow: hidden;
-}
-.img-icon {
-  position: fixed;
-  width: 100px;
-  height: 100px;
 }
 
 .lines {
@@ -291,8 +208,6 @@ p {
   min-width: 693px;
   background-color: white;
   height: calc(100vh - 135px);
-  width: 90%;
-  margin-left: 5%;
   overflow: scroll;
   overflow-x: hidden;
   // overflow-y: hidden;
@@ -312,7 +227,6 @@ p {
 
 .forum-container {
   margin: 0px 5px 0px 10px;
-  widows: 100%;
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 1fr 1fr;
@@ -336,29 +250,15 @@ p {
   grid-area: answers;
 }
 
-.forum-container .checkbox {
+.forum-container {
   border: 1px solid black;
   background-color: white;
   grid-area: checkbox;
 }
 
-.options {
-  height: 21px;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-}
-
 .header-forum h4 {
   border: 1px solid black;
   padding: 2px 4px 2px 4px;
-}
-
-.img-hov:hover {
-  background-color: rgba($color: black, $alpha: 1);
-  color: white;
-  transition: 0.2s all ease-in;
 }
 
 img {
@@ -373,29 +273,17 @@ img {
 
 // Small devices (landscape phones, 576px and up)
 @media (max-width: 774px) {
-  .full-forum {
-    width: 100%;
-    margin-left: 0%;
-  }
+
 }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
+
 }
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
-  .full-forum {
-    margin-left: 5%;
-    width: 90%;
-  }
 
-  .images-ref {
-    left: 35%;
-    right: 35%;
-    bottom: 15%;
-    width: 30%;
-  }
 }
 
 // Extra large devices (large desktops, 1200px and up)
