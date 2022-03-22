@@ -179,13 +179,10 @@ p {
 }
 
 .next {
-  bottom: 18%;
+  margin-top: 50px;
   text-align: center;
-  position: absolute;
   margin-left: auto;
   margin-right: auto;
-  left: 0;
-  right: 0;
 }
 
 .next-btn {

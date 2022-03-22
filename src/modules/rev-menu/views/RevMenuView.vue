@@ -30,7 +30,7 @@ export default {
 }
 
 img {
-  width: 350px;
+  max-width: 330px;
   display: block;
   border: 1px solid white;
   margin: auto;
