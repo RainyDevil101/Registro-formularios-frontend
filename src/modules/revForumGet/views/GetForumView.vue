@@ -107,6 +107,8 @@ export default {
     const router = useRouter();
     const store = useStore();
 
+    console.log(route.params.id);
+
     const showAn = ref(store.state.forums.imgAn);
     watch(
       () => store.state.forums.imgAn,
@@ -158,6 +160,8 @@ export default {
       },
 
       onNext: async () => {
+        const revForum = route.params.id
+        const resp = await store.dispatch('forumNext/saveForum', revForum)
         router.push({ name: 'get-forum-next' })
       },
     };
@@ -235,7 +239,6 @@ p {
 }
 
 .forum-container .questions {
-  border: 1px solid black;
   background-color: white;
   grid-area: questions;
 }
@@ -245,13 +248,11 @@ p {
 }
 
 .forum-container .answers {
-  border: 1px solid black;
   background-color: white;
   grid-area: answers;
 }
 
 .forum-container {
-  border: 1px solid black;
   background-color: white;
   grid-area: checkbox;
 }

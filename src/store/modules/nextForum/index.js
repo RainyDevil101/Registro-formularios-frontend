@@ -4,6 +4,7 @@ const state = {
     status: 'CARGANDO',
     answers: [],
     answersBox: [],
+    forum: '',
 
 }
 
@@ -17,6 +18,9 @@ const getters = {
     },
     nextBox(state, getters, rootState) {
         return state.answersBox
+    },
+    getForum(state, getters, rootState) {
+        return state.forum
     },
 }
 
@@ -34,12 +38,23 @@ const mutations = {
         state.status = 'RECIBIDO'
 
     },
+    saveForum(state, { revForum }) {
+
+        state.forum = revForum
+
+    },
 
 }
 
 const actions = {
    
+    async saveForum({ commit }, revForum) {
 
+        commit('saveForum', {revForum})
+
+        return {  ok: true }
+
+    }
 
 }
 

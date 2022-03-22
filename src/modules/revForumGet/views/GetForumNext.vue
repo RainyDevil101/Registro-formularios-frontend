@@ -14,6 +14,7 @@
         <div class="text">
           <text-answer v-for="answer of answers" :key="answer.number" :answer="answer"/>
           <answer-box v-for="answerText of answersText" :key="answerText.number" :answerText="answerText" />
+        <button class="btn btn-warning">ENVIAR</button>
         </div>
       </div>
     </div>
