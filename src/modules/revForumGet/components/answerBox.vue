@@ -61,5 +61,49 @@ textarea {
     border: 0.2px solid black;
     width: 200px;
     resize: none;
+    border-radius: 4px;
+}
+
+// Extra small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 600px) {
+    .text-q {
+        width: 400px;
+    }
+    textarea {
+
+    width: 300px;
+
+}
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+    .text-q {
+        width: 600px;
+    }
+        textarea {
+
+    width: 500px;
+
+}
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+    .text-q {
+        width: 800px;
+    }
+        textarea {
+
+    width: 700px;
+
+}
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
 }
 </style>

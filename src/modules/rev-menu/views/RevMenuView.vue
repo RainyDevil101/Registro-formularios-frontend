@@ -30,7 +30,7 @@ export default {
 }
 
 img {
-  max-width: 330px;
+  width: 350px;
   display: block;
   border: 1px solid white;
   margin: auto;
@@ -43,7 +43,7 @@ img {
 @media (min-width: 768px) {
 
 img {
-  width: 450px;
+  width: 550px;
 }
 
 }
