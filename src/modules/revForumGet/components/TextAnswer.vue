@@ -70,7 +70,7 @@ export default {
 }
 
 label {
-    width: 200px;
+    width: 50px;
     margin-top: 4px;
     margin-bottom: 4px;
 }
