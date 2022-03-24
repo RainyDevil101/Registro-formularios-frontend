@@ -43,9 +43,11 @@ const useIdForum = (forumId = '') => {
             const {data} = await backendConnect.get(`/api/forums/${id}`, {
                 headers: { 'x-token': localStorage.getItem('token') }
             })
+
             if(data === null) {
                 return errorMessage.value = 'No se pudo cargar el formulario.'
             }
+            
             forum.value = data
             userName.value = data.user.name
             userPosition.value = data.position.name
@@ -77,7 +79,7 @@ const useIdForum = (forumId = '') => {
             acMonth.value = monthAc
             acYearDay.value = yearDayAc
 
-            errorMessage.value = null
+            errorMessage.value = false
             onLoad.value = false
 
             if ( data.controls === true ) {
@@ -97,9 +99,12 @@ const useIdForum = (forumId = '') => {
 
             
         } catch (error) {
-            errorMessage.value = 'No se pudo cargar el formulario.'
+            console.log('pepe');
+            if(error.response.data)
+            errorMessage.value = true
         }
-        isLoading.value = false
+        errorMessage.value = true
+        onLoad.value = false
 
     }
 

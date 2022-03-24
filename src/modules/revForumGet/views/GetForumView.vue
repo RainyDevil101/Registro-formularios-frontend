@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <div v-if="onLoad === true">
+  <div v-if="onLoad === true || errorMessage === true ">
     <loader />
   </div>
   <div v-else>
@@ -84,17 +84,23 @@
         </div>
       </div>
       <div class="next">
-        <button v-show="showRe === false && showAn === false" @click="onNext" class="btn btn-primary next-btn">Siguiente</button>
+        <button
+          v-show="showRe === false && showAn === false"
+          @click="onNext"
+          class="btn btn-primary next-btn"
+        >Siguiente</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ref, watch } from "vue";
+
+import { onBeforeUpdate, onBeforeUnmount, onUpdated, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import useIdForum from '../composables/forumId';
+import useFormStore from "../composables/getForum";
 import Loader from '../../../components/Loader.vue';
 import ImgAn from "../components/imgAn.vue";
 import ImgRe from "../components/imgRe.vue";
@@ -106,8 +112,6 @@ export default {
     const route = useRoute();
     const router = useRouter();
     const store = useStore();
-
-    console.log(route.params.id);
 
     const showAn = ref(store.state.forums.imgAn);
     watch(
@@ -121,6 +125,25 @@ export default {
       () => showRe.value = store.state.forums.imgRe
     );
 
+    const { getForm } = useFormStore();
+
+    onUpdated(() => {
+      getForm(route.params.id)
+    })
+
+    onBeforeUnmount(() => {
+      getForm(null)
+    })
+
+
+    onBeforeUpdate(() => {
+      if (errorMessage.value === true)
+      router.push({ 'name': 'no-forum' })
+    })
+
+
+
+    
     const { forum, userName, userPosition, userTask, userControl, userControlRe, userAn, userRe, onLoad, userObligation, manDay, manMonth, manYearDay, acDay, acMonth, acYearDay, acMin, acHour, errorMessage, searchForum, isLoading } = useIdForum(route.params.id);
 
     return {
@@ -147,6 +170,7 @@ export default {
       acMin,
       acHour,
       userObligation,
+      getForm,
 
       onShowAn: () => {
 
@@ -158,6 +182,7 @@ export default {
         return store.dispatch('forums/changeImgRe', false)
 
       },
+
 
       onNext: async () => {
         const revForum = route.params.id
@@ -271,17 +296,14 @@ img {
 
 // Small devices (landscape phones, 576px and up)
 @media (max-width: 774px) {
-
 }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
-
 }
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
-
 }
 
 // Extra large devices (large desktops, 1200px and up)

@@ -16,5 +16,10 @@ export default {
             name: 'get-forum-next',
             component: () => import(/* webpackChunkName: "rev-next-forum" */ '@/modules/revForumGet/views/GetForumNext.vue'),
         },
+        {
+            path: '',
+            name: 'no-forum',
+            component: () => import(/* webpackChunkName: "no-forum" */ '@/modules/revForumGet/views/NoForum.vue'),
+        },
     ]
 }

@@ -29,7 +29,8 @@
                             <b>Usuarios</b>
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
+                   <div v-show="imgBlocked === false">
+                        <li class="nav-item dropdown">
                         <a
                             class="nav-link active dropdown-toggle box-a"
                             href="#"
@@ -53,6 +54,7 @@
                             </li>
                         </ul>
                     </li>
+                   </div>
                 </ul>
                 <button class="logout" @click="onLogOut">
                     <i class="fas fa-sign-out-alt"></i>
@@ -67,6 +69,7 @@ import { ref } from '@vue/reactivity';
 import { useRouter } from 'vue-router'
 import useAuth from '../modules/auth/composables/useAuth';
 import { useStore } from 'vuex';
+import { onActivated, onBeforeMount, watch } from '@vue/runtime-core';
 export default {
     setup() {
 
@@ -74,12 +77,24 @@ export default {
         const store = useStore();
         const { logOut } = useAuth();
 
+        watch(
+            () => store.state.forums.imgBlocked,
+            () => (imgBlocked.value = store.state.forums.imgBlocked) 
+        )
+
+        const imgBlocked = ref(store.state.forums.imgBlocked);
+
         const onImgAn = ref(store.state.forums.imgAn);
         const onImgRe = ref(store.state.forums.imgRe);
+
+        // onBeforeMount(() => {
+        //     imgBlocked.value = store.state.forums.imgBlocked
+        // })
 
         return {
             onImgAn,
             onImgRe,
+            imgBlocked,
 
             onShowAn: () => {
 

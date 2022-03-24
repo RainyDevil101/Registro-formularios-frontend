@@ -12,6 +12,12 @@ const useAuth = () => {
         return resp
     }
 
+    const reForms = async (pendingsForums) => {
+
+        const resp = await store.dispatch('forums/renoveForums', pendingsForums)
+        return resp
+    }
+
     const checkToken = async() => {
         const resp = await store.dispatch('auth/readToken')
         return resp
@@ -29,6 +35,7 @@ const useAuth = () => {
 
     const logOut = () => {
         store.commit('auth/logOut')
+        store.commit('forums/logOut')
     }
 
     return {
@@ -37,6 +44,7 @@ const useAuth = () => {
         logOut,
         getUsers,
         getForums,
+        reForms,
 
         authStatus: computed(() => store.getters['auth/currentState']),
         userName: computed(() => store.getters['auth/userName'])

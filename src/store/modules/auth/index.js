@@ -7,6 +7,7 @@ const state = {
     userId: null,
     position: null,
     task: null,
+    keyRe: 0,
 }
 
 const getters = {
@@ -40,6 +41,7 @@ const mutations = {
         state.user      = user
         state.status    = 'authenticated'
         state.userId    = userId
+        state.keyRe     = 0
     },
     logOut(state) {
 
@@ -49,6 +51,7 @@ const mutations = {
         state.userId    = null,
         state.position  = null,
         state.task      = null,
+        state.keyRe     = 1,
 
         localStorage.removeItem('token')
 
@@ -93,6 +96,7 @@ const actions = {
 
         if (!localStorage.getItem('token')) {
             commit('logOut')
+            commit('forums/logOut', null, {root: true})
             return { ok: false, message: 'No hay token' }
         }
 

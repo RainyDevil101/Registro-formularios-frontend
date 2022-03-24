@@ -24,11 +24,14 @@ export default {
   components: { FooterT },
   setup() {
 
-    const { checkToken } = useAuth();
+    const { checkToken, reForms } = useAuth();
 
     const loaded = ref(false);
 
     checkToken();
+
+    const lcForums = JSON.parse(localStorage.getItem('fP'))
+    reForms(lcForums);
     
 
     window.onload = () => {

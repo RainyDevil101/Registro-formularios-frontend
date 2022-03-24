@@ -1,24 +1,39 @@
 <template>
-    <div class="intro-box text-center">
-      <router-view />
-    </div>
+  <div class="intro-box text-center">
+    <router-view />
+  </div>
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { watch } from '@vue/runtime-core';
 export default {
-    setup() {
-        return {
-            
-        }
+  setup() {
+
+    const store = useStore();
+
+    watch(
+      () => store.state.auth.keyRe,
+      () => reload(),
+    )
+
+    const reload = () => {
+      if (store.state.auth.keyRe === 1) location.reload()
+
     }
+
+    return {
+      reload,
+
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-
-  body {
-    font-size: 16px;
-  }
+body {
+  font-size: 16px;
+}
 
 .intro-box {
   background-color: rgba($color: white, $alpha: 1);
@@ -34,44 +49,39 @@ export default {
 // Extra small devices (portrait phones, less than 576px)
 // x-Small devices (landscape phones, 375px and up)
 
-@media (min-width: 375px) { 
-
+@media (min-width: 375px) {
   body {
     font-size: 6px;
   }
 
-//   .intro-box {
-//   width: 80%;
-// }
- }
-
-// Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) { 
-
-//   .intro-box {
-//   width: 60%;
-// }
- }
-
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) { 
-
-//   .intro-box {
-//     font-size: 1rem;
-//   width: 50%;
-// }
- }
-
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) { 
-
-  .intro-box {
-  width: 400px;
+  //   .intro-box {
+  //   width: 80%;
+  // }
 }
 
- }
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  //   .intro-box {
+  //   width: 60%;
+  // }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  //   .intro-box {
+  //     font-size: 1rem;
+  //   width: 50%;
+  // }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .intro-box {
+    width: 400px;
+  }
+}
 
 // Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {  }
-
+@media (min-width: 1200px) {
+}
 </style>

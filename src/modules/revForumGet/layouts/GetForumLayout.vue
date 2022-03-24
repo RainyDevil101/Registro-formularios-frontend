@@ -6,12 +6,48 @@
 </template>
 
 <script>
+// import { onActivated, onBeforeMount, onBeforeUnmount, onBeforeUpdate, onDeactivated, onErrorCaptured, onMounted, onRenderTracked, onRenderTriggered, onUnmounted, onUpdated } from '@vue/runtime-core';
 import UserNavbar from '../../../components/UserNavbar.vue';
 
 export default {
   components: { UserNavbar },
 
   setup() {
+
+    // onBeforeMount(() => {
+    //   console.log('onBeforeMount');
+    // })
+    // onMounted(() => {
+    //   console.log('onMounted');
+    // })
+    // onBeforeUpdate(() => {
+    //   console.log('onBeforeUpdate');
+    // })
+    // onUpdated(() => {
+    //   console.log('onUpdated');
+    // })
+    // onBeforeUnmount(() => {
+    //   console.log('onBeforeUnmount');
+    // })
+    // onUnmounted(() => {
+    //   console.log('onUnmounted');
+    // })
+    // onErrorCaptured(() => {
+    //   console.log('onErrorCaptured');
+    // })
+    // onRenderTracked(() => {
+    //   console.log('onRenderTracked');
+    // })
+    // onRenderTriggered(() => {
+    //   console.log('onRenderTriggered');
+    // })
+    // onActivated(() => {
+      
+    // })
+    // onDeactivated(() => {
+    //   console.log('onDeactivated');
+    // })
+
     return {};
   },
 };
