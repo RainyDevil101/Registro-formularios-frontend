@@ -87,10 +87,6 @@ export default {
         const onImgAn = ref(store.state.forums.imgAn);
         const onImgRe = ref(store.state.forums.imgRe);
 
-        // onBeforeMount(() => {
-        //     imgBlocked.value = store.state.forums.imgBlocked
-        // })
-
         return {
             onImgAn,
             onImgRe,

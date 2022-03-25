@@ -30,7 +30,9 @@ const getters = {
     },
     getForumNeeded(state, getters, rootState) {
 
-        return state.userNeeded
+        const userN = JSON.parse(JSON.stringify(state.userNeeded))
+
+        return userN
 
     },
     statusState(state, getters, rootState) {

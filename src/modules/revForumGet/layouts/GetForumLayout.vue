@@ -6,6 +6,9 @@
 </template>
 
 <script>
+import { onActivated, onMounted, watch } from '@vue/runtime-core';
+import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
 // import { onActivated, onBeforeMount, onBeforeUnmount, onBeforeUpdate, onDeactivated, onErrorCaptured, onMounted, onRenderTracked, onRenderTriggered, onUnmounted, onUpdated } from '@vue/runtime-core';
 import UserNavbar from '../../../components/UserNavbar.vue';
 
@@ -13,6 +16,23 @@ export default {
   components: { UserNavbar },
 
   setup() {
+
+    const route = useRoute();
+    const store = useStore();
+
+    const getForumId = async () => {
+
+      const forumNeeded = await store.dispatch('forums/getForum', route.params.id)
+      return forumNeeded
+    }
+
+    watch(
+      () => route.params.id,
+      () => getForumId()
+    )
+
+    getForumId();
+    
 
     // onBeforeMount(() => {
     //   console.log('onBeforeMount');
@@ -48,7 +68,9 @@ export default {
     //   console.log('onDeactivated');
     // })
 
-    return {};
+    return {
+      getForumId,
+    };
   },
 };
 </script>

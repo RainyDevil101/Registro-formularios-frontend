@@ -1,9 +1,14 @@
 import { ref } from "vue";
+import useFormStore from "./getForum";
 import backendConnect from '../../../api/backend';
 import getDayMonthYear from '../../../helpers/DateFormat';
 import shortingText from '../../../helpers/shortingText';
 
 const useIdForum = (forumId = '') => {
+
+    const { userNeeded } = useFormStore();
+
+    console.log(userNeeded.value);
 
     const forum = ref(null);
     const userName = ref(null);
@@ -40,9 +45,11 @@ const useIdForum = (forumId = '') => {
 
         try {
 
-            const {data} = await backendConnect.get(`/api/forums/${id}`, {
-                headers: { 'x-token': localStorage.getItem('token') }
-            })
+            const f = userNeeded.value
+
+            const data = f[0]
+
+            console.log(data);
 
             if(data === null) {
                 return errorMessage.value = 'No se pudo cargar el formulario.'
@@ -99,7 +106,6 @@ const useIdForum = (forumId = '') => {
 
             
         } catch (error) {
-            console.log('pepe');
             if(error.response.data)
             errorMessage.value = true
         }
@@ -134,6 +140,7 @@ const useIdForum = (forumId = '') => {
         acYearDay,
         acMin,
         acHour,
+        userNeeded,
     }
 
 }

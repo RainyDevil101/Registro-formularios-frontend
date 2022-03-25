@@ -25,11 +25,13 @@ export default {
 
     setup(props) {
 
+
         const forumDate = ref();
         forumDate.value = props.forum.date
 
         return {
-            forumDate
+            forumDate,
+
         }
     }
 

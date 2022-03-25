@@ -9,7 +9,6 @@ const useFormStore = () => {
     const getForm = async (id) => {
 
         const resp = await store.dispatch('forums/getForum', id)
-        console.log(resp);
         return resp
 
     }
