@@ -1,14 +1,11 @@
 import { ref } from "vue";
 import useFormStore from "./getForum";
-import backendConnect from '../../../api/backend';
 import getDayMonthYear from '../../../helpers/DateFormat';
 import shortingText from '../../../helpers/shortingText';
 
 const useIdForum = (forumId = '') => {
 
     const { userNeeded } = useFormStore();
-
-    console.log(userNeeded.value);
 
     const forum = ref(null);
     const userName = ref(null);
@@ -17,7 +14,6 @@ const useIdForum = (forumId = '') => {
     const userControl = ref(null);
     const userControlRe = ref(null);
     const errorMessage = ref(null);
-    const isLoading = ref(true);
     const userAn = ref(null);
     const userRe = ref(null);
     const onLoad = ref(true);
@@ -38,11 +34,12 @@ const useIdForum = (forumId = '') => {
 
     const searchForum = async(id) => {
 
+        
         if(!id) return
-
+        
         forum.value = ('')
-        isLoading.value = true
-
+        onLoad.value = true
+        
         try {
 
             const f = userNeeded.value
@@ -50,10 +47,6 @@ const useIdForum = (forumId = '') => {
             const data = f[0]
 
             console.log(data);
-
-            if(data === null) {
-                return errorMessage.value = 'No se pudo cargar el formulario.'
-            }
             
             forum.value = data
             userName.value = data.user.name
@@ -121,7 +114,6 @@ const useIdForum = (forumId = '') => {
         userName,
         errorMessage,
         searchForum,
-        isLoading,
         userPosition,
         userTask,
         userControl,

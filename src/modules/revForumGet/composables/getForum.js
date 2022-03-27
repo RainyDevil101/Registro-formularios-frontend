@@ -13,6 +13,16 @@ const useFormStore = () => {
 
     }
 
+    const saveForum = async (id) => {
+
+        const resp = await store.dispatch('forumNext/saveForum', id)
+        return resp
+    }
+
+    const localStorageForum = () => {
+        store.commit('forums/renovateUserNeeded')
+    }
+
     // const checkToken = async() => {
     //     const resp = await store.dispatch('auth/readToken')
     //     return resp
@@ -34,6 +44,8 @@ const useFormStore = () => {
 
     return {
         getForm,
+        saveForum,
+        localStorageForum,
 
         userNeeded: computed(() => store.getters['forums/getForumNeeded']),
 

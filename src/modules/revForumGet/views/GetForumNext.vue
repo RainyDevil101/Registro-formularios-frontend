@@ -1,14 +1,15 @@
 <template>
-  <!-- <div v-if="onLoad === false">
+  <div v-if="onLoad === true">
     <loader />
-  </div>-->
+  </div>
 
-  <div>
+  <div v-else>
     <div class="forum-revisor">
       <div class="header">
         <h4><b>REVISOR</b></h4>
         <h1>NOMBRE: <b>{{user.name}}</b></h1>
         <h1>RUT: <b>{{user.rut}}</b></h1>
+        <h1>REVISANDO FOLIO: <b>{{userNeeded[0].code}}</b></h1>
       </div>
       <div class="forum-container">
         <div class="text">
@@ -22,8 +23,8 @@
 </template>
 
 <script>
-import { computed, ref } from "vue";
-
+import { computed, onActivated, onBeforeMount, onDeactivated, onUpdated, ref, watch } from "vue";
+import getForum from "../composables/getForum";
 import Loader from '../../../components/Loader.vue';
 import ImgAn from "../components/imgAn.vue";
 import ImgRe from "../components/imgRe.vue";
@@ -31,12 +32,14 @@ import TextAnswer from '../components/TextAnswer.vue';
 import questions from '../composables/questions';
 import { useStore } from 'vuex';
 import AnswerBox from "../components/answerBox.vue";
+import useFormStore from "../composables/getForum";
 
 export default {
   components: { Loader, ImgAn, ImgRe, TextAnswer, AnswerBox },
   setup() {
 
     const store = useStore();
+    const onLoad = ref(false);
 
     const userForm = ref({
 
@@ -44,12 +47,39 @@ export default {
 
     });
 
+    const { userNeeded, localStorageForum } = useFormStore();
+
     const { answers, answersText } = questions();
+
+    watch(
+      () => userNeeded.value,
+      () => onLoading()
+    )
+
+    const onLoading = () => {
+
+      if (userNeeded.value === '') {
+        return onLoad.value = true
+      } else {
+        return onLoad.value = false
+      }
+    }
+
+    onBeforeMount(() => {
+      localStorageForum()
+    })
+
+    onLoading();
 
     return {
       userForm,
       answers,
       answersText,
+      userNeeded,
+      localStorageForum,
+      onLoad,
+      onLoading,
+
       user: computed(() => store.getters['auth/getUser']),
     };
   },

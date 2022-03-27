@@ -96,7 +96,7 @@
 
 <script>
 
-import { onBeforeUpdate, onBeforeUnmount, onUpdated, ref, watch } from "vue";
+import { onBeforeUnmount, onUpdated, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import useIdForum from '../composables/forumId';
@@ -135,22 +135,12 @@ export default {
       getForm(null)
     })
 
-
-    onBeforeUpdate(() => {
-      if (errorMessage.value === true)
-      router.push({ 'name': 'no-forum' })
-    })
-
-
-
-    
-    const { forum, userName, userPosition, userTask, userControl, userControlRe, userAn, userRe, onLoad, userObligation, manDay, manMonth, manYearDay, acDay, acMonth, acYearDay, acMin, acHour, errorMessage, searchForum, isLoading } = useIdForum(route.params.id);
+    const { forum, userName, userPosition, userTask, userControl, userControlRe, userAn, userRe, onLoad, userObligation, manDay, manMonth, manYearDay, acDay, acMonth, acYearDay, acMin, acHour, errorMessage, searchForum } = useIdForum(route.params.id);
 
     return {
       forum,
       errorMessage,
       searchForum,
-      isLoading,
       userName,
       userPosition,
       userTask,

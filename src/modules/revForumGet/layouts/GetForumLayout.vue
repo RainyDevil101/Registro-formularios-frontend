@@ -6,10 +6,11 @@
 </template>
 
 <script>
-import { onActivated, onMounted, watch } from '@vue/runtime-core';
-import { useRoute } from 'vue-router';
+import { onBeforeMount, watch } from '@vue/runtime-core';
+import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-// import { onActivated, onBeforeMount, onBeforeUnmount, onBeforeUpdate, onDeactivated, onErrorCaptured, onMounted, onRenderTracked, onRenderTriggered, onUnmounted, onUpdated } from '@vue/runtime-core';
+import useIdForum from '../composables/forumId';
+// import { onBeforeMount, onBeforeUnmount, onBeforeUpdate, onDeactivated, onErrorCaptured, onRenderTracked, onRenderTriggered, onUnmounted, onUpdated } from 'vue';
 import UserNavbar from '../../../components/UserNavbar.vue';
 
 export default {
@@ -18,10 +19,16 @@ export default {
   setup() {
 
     const route = useRoute();
+    const router = useRouter();
     const store = useStore();
+
+    const { errorMessage } = useIdForum();
 
     const getForumId = async () => {
 
+      if (!route.params.id) {
+        return
+      }
       const forumNeeded = await store.dispatch('forums/getForum', route.params.id)
       return forumNeeded
     }
@@ -34,9 +41,11 @@ export default {
     getForumId();
     
 
-    // onBeforeMount(() => {
-    //   console.log('onBeforeMount');
-    // })
+    onBeforeMount(() => {
+      if(store.state.forums.error === true) {
+        router.push({ 'name': 'no-forum' })
+      }
+    })
     // onMounted(() => {
     //   console.log('onMounted');
     // })
@@ -70,6 +79,7 @@ export default {
 
     return {
       getForumId,
+      errorMessage,
     };
   },
 };

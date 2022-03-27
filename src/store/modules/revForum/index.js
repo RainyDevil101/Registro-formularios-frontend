@@ -8,6 +8,7 @@ const state = {
     imgAn: false,
     imgRe: false,
     imgBlocked: false,
+    error: false,
 }
 
 const getters = {
@@ -30,9 +31,16 @@ const getters = {
     },
     getForumNeeded(state, getters, rootState) {
 
-        const userN = JSON.parse(JSON.stringify(state.userNeeded))
+        if (state.userNeeded === '') {
+            return state.userNeeded
+        } else {
+            // const userN = JSON.parse(JSON.stringify(state.userNeeded))
+            // return userN
+            return state.userNeeded
 
-        return userN
+        }
+
+
 
     },
     statusState(state, getters, rootState) {
@@ -40,12 +48,17 @@ const getters = {
         return state.status
 
     },
+    errorState(state) {
+        return state.error
+    }
 
 }
 
 const mutations = {
 
     saveForums(state, { forumsPending }) {
+
+        state.userNeeded = ''
 
         if (!localStorage.getItem('fP')) {
             localStorage.setItem('fP', JSON.stringify(forumsPending));
@@ -66,10 +79,32 @@ const mutations = {
     getForumById(state, { id }) {
 
         if (id === null) {
-            return state.userNeeded = ''
+            state.userNeeded = ''
+            return
         }
 
-        state.userNeeded = state.forumsPending.filter(a => a._id == id)
+        const userNeeded = state.forumsPending.filter(a => a._id == id)
+
+        if (userNeeded.length === 0) {
+             state.userNeeded = ''
+             state.error = true
+             return
+        } else {
+            state.userNeeded = userNeeded
+            localStorage.setItem('uN', JSON.stringify(userNeeded))
+            state.error = false
+            return
+        }
+    },
+    renovateUserNeeded(state) {
+
+        if (!localStorage.getItem('uN')) {
+            return
+        } else {
+
+            state.userNeeded = JSON.parse(localStorage.getItem('uN'))
+
+        }
 
     },
     saveForumsCompleted(state, { forumsCompleted }) {
@@ -102,9 +137,11 @@ const mutations = {
         state.imgAn = false
         state.imgRe = false
         state.blocImg = false
+        state.error = false
 
         localStorage.removeItem('fP')
-
+        localStorage.removeItem('uN')
+        
     },
     blocImg(state) {
 
@@ -130,16 +167,11 @@ const actions = {
         try {
             const { data } = await backendConnect.get('/api/forums/', { headers: { 'x-token': localStorage.getItem('token') } })
 
-
             if (!data) {
-
                 commit('saveForums', [])
                 commit('saveForumsCompleted', [])
                 return
-
             }
-
-            console.log('si data');
 
             const { forums } = data
 
