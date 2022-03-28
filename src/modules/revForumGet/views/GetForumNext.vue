@@ -6,25 +6,41 @@
   <div v-else>
     <div class="forum-revisor">
       <div class="header">
-        <h4><b>REVISOR</b></h4>
-        <h1>NOMBRE: <b>{{user.name}}</b></h1>
-        <h1>RUT: <b>{{user.rut}}</b></h1>
-        <h1>REVISANDO FOLIO: <b>{{userNeeded[0].code}}</b></h1>
+        <h4>
+          <b>REVISOR</b>
+        </h4>
+        <h1>
+          NOMBRE:
+          <b>{{ user.name }}</b>
+        </h1>
+        <h1>
+          RUT:
+          <b>{{ user.rut }}</b>
+        </h1>
+        <h1>
+          REVISANDO FOLIO:
+          <b>{{ userNeeded[0].code }}</b>
+        </h1>
       </div>
       <div class="forum-container">
-        <div class="text">
-          <text-answer v-for="answer of answers" :key="answer.number" :answer="answer"/>
-          <answer-box v-for="answerText of answersText" :key="answerText.number" :answerText="answerText" />
-        <button class="btn btn-warning">ENVIAR</button>
-        </div>
+        <form @submit.prevent="onSubmit">
+          <div class="text">
+            <text-answer v-for="answer of answers" :key="answer.number" :answer="answer" />
+            <answer-box
+              v-for="answerText of answersText"
+              :key="answerText.number"
+              :answerText="answerText"
+            />
+            <button type="submit" class="btn btn-warning">ENVIAR</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, onActivated, onBeforeMount, onDeactivated, onUpdated, ref, watch } from "vue";
-import getForum from "../composables/getForum";
+import { computed, onBeforeMount, ref, watch } from "vue";
 import Loader from '../../../components/Loader.vue';
 import ImgAn from "../components/imgAn.vue";
 import ImgRe from "../components/imgRe.vue";
@@ -33,6 +49,7 @@ import questions from '../composables/questions';
 import { useStore } from 'vuex';
 import AnswerBox from "../components/answerBox.vue";
 import useFormStore from "../composables/getForum";
+import Swal from 'sweetalert2';
 
 export default {
   components: { Loader, ImgAn, ImgRe, TextAnswer, AnswerBox },
@@ -71,6 +88,8 @@ export default {
 
     onLoading();
 
+    console.log(userForm.value);
+
     return {
       userForm,
       answers,
@@ -79,6 +98,24 @@ export default {
       localStorageForum,
       onLoad,
       onLoading,
+
+      onSubmit: async () => {
+        console.log(answers.answer);
+      },
+
+      // onSubmit: async () => {
+
+      //   new Swal({
+      //     title: 'Espere por favor',
+      //     allowOutsideClick: false,
+      //   });
+      //   Swal.showLoading();
+
+      //   const check = userForm.value
+
+      //   if ()
+
+      // },
 
       user: computed(() => store.getters['auth/getUser']),
     };
@@ -109,7 +146,7 @@ p {
 }
 
 .forum-revisor {
-    // min-width: 693px;
+  // min-width: 693px;
   height: calc(100vh - 135px);
   overflow: scroll;
   overflow-x: hidden;

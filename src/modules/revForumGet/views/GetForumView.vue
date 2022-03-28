@@ -175,8 +175,6 @@ export default {
 
 
       onNext: async () => {
-        const revForum = route.params.id
-        const resp = await store.dispatch('forumNext/saveForum', revForum)
         router.push({ name: 'get-forum-next' })
       },
     };

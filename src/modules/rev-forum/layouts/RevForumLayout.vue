@@ -16,7 +16,7 @@ import useAuth from '../../auth/composables/useAuth';
 import getTerm from "../composables/forumTerm";
 import RevForumList from '../views/RevForumList.vue';
 import Loader from "../../../components/Loader.vue";
-import { onBeforeUpdate } from '@vue/runtime-core';
+import { onBeforeUpdate, onActivated } from '@vue/runtime-core';
 
 export default {
   components: { RevNavbar, RevForumList, Loader },
@@ -26,8 +26,12 @@ export default {
     const { getForums } = useAuth();
     const { statusState } = getTerm();
 
-    onBeforeUpdate(() => {
-      console.log('a');
+    // onBeforeUpdate(() => {
+    //   console.log('a');
+    //   getForums();
+    // })
+
+    onActivated(() => {
       getForums();
     })
 

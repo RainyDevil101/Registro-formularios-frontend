@@ -37,6 +37,14 @@ const mutations = {
 
 const actions = {
 
+    async saveAnswersForum({ commit }, answersForum) {
+
+        commit('saveAnswers', { answersForum })
+        console.log(answersForum);
+        return { ok: true, answersForum }
+
+    },
+
 }
 
 export default {
