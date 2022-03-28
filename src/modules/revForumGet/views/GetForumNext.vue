@@ -25,12 +25,16 @@
       <div class="forum-container">
         <form @submit.prevent="onSubmit">
           <div class="text">
-            <text-answer v-for="answer of answers" :key="answer.number" :answer="answer" />
+            <div v-for="(answer, i) of answers" :key="answer.number">
+              <input type="radio" v-model="answers[i].value">
+              {{i}}
+            </div>
+            <!-- <text-answer v-for="(answer, index) of answers" :key="answer.number" :answer="answer" />
             <answer-box
               v-for="answerText of answersText"
               :key="answerText.number"
               :answerText="answerText"
-            />
+            /> -->
             <button type="submit" class="btn btn-warning">ENVIAR</button>
           </div>
         </form>

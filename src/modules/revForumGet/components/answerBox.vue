@@ -26,9 +26,6 @@ export default {
         const responseBox = ref([]);
         responseBox.value = props.answerText.response
 
-        console.log([responseBox.value]);
-
-
         return {
             responseBox
         }

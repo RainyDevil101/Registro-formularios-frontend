@@ -5,11 +5,11 @@
             <div class="input-t">
                 <div class="checkbox-answers">
                     <div class="checkbox-ans">
-                        <input v-on:click.prevent="addAnswer" class="form-check-input" type="radio" value="SI" v-model="response" />
+                        <input v-on:click="onTest" class="form-check-input" type="radio" value="SI" v-model="response" />
                         <label class="form-check-label">Si</label>
                     </div>
                     <div class="checkbox-ans">
-                        <input v-on:click.prevent="addAnswer" class="form-check-input" type="radio" value="NO" v-model="response" />
+                        <input v-on:click="onTest" class="form-check-input" type="radio" value="NO" v-model="response" />
                         <label class="form-check-label">No</label>
                     </div>
                 </div>
@@ -20,29 +20,25 @@
 
 <script>
 import { ref } from '@vue/reactivity';
-import forumNext from '../composables/forumNextSaves';
+
 export default {
 
     props: {
         answer: {
             type: Object,
-            required: true,
         },
     },
 
     setup(props) {
 
-        const { answersText } = forumNext();
-
-        const response = ref([]);
+        const response = ref();
         response.value = props.answer.response
 
         return {
             response,
-            answersText,
 
-            addAnswer: () => {
-                answersText(response.value)
+            onTest: () => {
+                console.log(response.value);
             }
         }
     }
