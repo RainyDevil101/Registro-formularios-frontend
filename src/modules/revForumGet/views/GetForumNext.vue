@@ -24,18 +24,62 @@
       </div>
       <div class="forum-container">
         <form @submit.prevent="onSubmit">
-          <div class="text">
-            <div v-for="(answer, i) of answers" :key="answer.number">
-              <input type="radio" v-model="answers[i].value">
-              {{i}}
+          <div class="text-q">
+            
+
+              <div class="question my-2">
+                <h3>
+                  <b>¿SE IDENTIFICAN LA TOTALIDAD DE LOS RIESGOS CRÍTICOS (RC) PRESENTES EN LA TAREA?</b>
+                </h3>
+                <div class="controls">
+                  <div class="control">
+                    <p>Si</p>
+                    <input
+                      type="radio"
+                      v-model="userForm.questionOne"
+                      name="question1"
+                      value="si"
+                    />
+                  </div>
+                  <div class="control">
+                    <p>No</p>
+                    <input
+                      type="radio"
+                      v-model="userForm.questionOne"
+                      name="question1"
+                      value="name"
+                    />
+                  </div>
+                </div>
             </div>
-            <!-- <text-answer v-for="(answer, index) of answers" :key="answer.number" :answer="answer" />
-            <answer-box
-              v-for="answerText of answersText"
-              :key="answerText.number"
-              :answerText="answerText"
-            /> -->
-            <button type="submit" class="btn btn-warning">ENVIAR</button>
+            
+              <div class="question">
+                <h3>
+                  <b>¿LOS CONTROLES CRÍTICOS CORRESPONDEN A LOS RC IDENTIFICADOS DE LIBRETA DE PREGUNTAS?</b>
+                </h3>
+                <div class="controls">
+                  <div class="control">
+                    <p>Si</p>
+                    <input
+                      type="radio"
+                      v-model="userForm.questionTwo"
+                      name="question2"
+                      value="si"
+                    />
+                  </div>
+                  <div class="control">
+                    <p>No</p>
+                    <input
+                      type="radio"
+                      v-model="userForm.questionTwo"
+                      name="question2"
+                      value="name"
+                    />
+                  </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-warning my-2">ENVIAR</button>
           </div>
         </form>
       </div>
@@ -48,21 +92,29 @@ import { computed, onBeforeMount, ref, watch } from "vue";
 import Loader from '../../../components/Loader.vue';
 import ImgAn from "../components/imgAn.vue";
 import ImgRe from "../components/imgRe.vue";
-import TextAnswer from '../components/TextAnswer.vue';
 import questions from '../composables/questions';
 import { useStore } from 'vuex';
-import AnswerBox from "../components/answerBox.vue";
 import useFormStore from "../composables/getForum";
 import Swal from 'sweetalert2';
 
 export default {
-  components: { Loader, ImgAn, ImgRe, TextAnswer, AnswerBox },
+  components: { Loader, ImgAn, ImgRe },
   setup() {
 
     const store = useStore();
     const onLoad = ref(false);
 
     const userForm = ref({
+
+      questionOne: '',
+      questionTwo: '',
+      questionThree: '',
+      questionFour: '',
+      questionFive: '',
+      questionSix: '',
+      questionSeven: '',
+      questionEight: '',
+      questionNine: '',
 
       revStatusForum: "REVISADO",
 
@@ -91,8 +143,6 @@ export default {
     })
 
     onLoading();
-
-    console.log(userForm.value);
 
     return {
       userForm,
@@ -136,9 +186,32 @@ p {
   margin: 0;
 }
 
-.text {
-  text-align: center;
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center ;
 }
+
+.question {
+  margin: auto;
+    text-align: center;
+  width: 300px;
+  padding: 2px;
+  border-radius: 4px;
+  display: block;
+  background-color: white;
+}
+.control {
+  width: 40px;
+}
+.text-q {
+  text-align: center;
+  padding: 2px;
+  border-radius: 4px;
+  display: block;
+  margin: auto;
+}
+
 
 .header {
   margin: auto;
@@ -160,15 +233,24 @@ p {
 // No media query for `xs` since this is the default in Bootstrap
 
 // Small devices (landscape phones, 576px and up)
-@media (max-width: 774px) {
+@media (min-width: 600px) {
+    .question {
+        width: 400px;
+    }
 }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
+    .question {
+        width: 600px;
+    }
 }
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
+    .question {
+        width: 800px;
+    }
 }
 
 // Extra large devices (large desktops, 1200px and up)

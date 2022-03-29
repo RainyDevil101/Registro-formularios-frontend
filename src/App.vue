@@ -11,7 +11,7 @@
       </keep-alive>
     </router-view>
   </div>
-  <footer-t />
+  <footer-t class="footer-t" />
 </template>
 
 <script>
@@ -61,10 +61,20 @@ export default {
 }
 
 .hgt {
-  min-height: calc(100vh - 55px);
+  min-height: calc(100vh);
 }
 .loader {
-  min-height: calc(100vh - 55px);
+  min-height: calc(100vh);
+}
+
+.footer-t {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
 
 .loader>div {

@@ -88,7 +88,7 @@
           v-show="showRe === false && showAn === false"
           @click="onNext"
           class="btn btn-primary next-btn"
-        >Siguiente</button>
+        >CONTINUAR CON EL FORMULARIO</button>
       </div>
     </div>
   </div>
