@@ -5,7 +5,8 @@ const saveForum = () => {
 
     const errorsFor = ref([]);
 
-    const SaveForumDb = async (save, id = '') => {
+    const saveForumDb = async (save) => {
+
         if (!save || !id) {
             return
         } else {
@@ -40,8 +41,9 @@ const saveForum = () => {
     }
 
     return {
-        SaveForumDb,
-        errorsFor
+        saveForumDb,
+        errorsFor,
+        test,
     }
 }
 
