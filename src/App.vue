@@ -73,7 +73,7 @@ export default {
   justify-content: center;
   align-content: center;
   position: absolute;
-  width: 100%;
+  width: 100vw;
   bottom: 0;
 }
 

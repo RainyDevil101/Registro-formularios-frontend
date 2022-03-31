@@ -32,7 +32,7 @@ export default {
 }
 
 img {
-  width: 350px;
+  width: 300px;
   display: block;
   border: 1px solid white;
   margin: auto;

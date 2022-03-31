@@ -46,8 +46,6 @@ const useIdForum = (forumId = '') => {
 
             const data = f[0]
 
-            console.log(data);
-            
             forum.value = data
             userName.value = data.user.name
             userPosition.value = data.position.name

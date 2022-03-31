@@ -187,33 +187,25 @@
 
             <div class="question my-2">
               <h3>
-                <b>¿FUERON CORREGIDAS LAS DESVIACIONES?</b>
+                <b>OPORTUNIDADES ENCONTRADAS</b>
               </h3>
               <div class="controls">
-                <div class="control">
-                  <p>Si</p>
-                  <input type="radio" v-model="userForm.questionNine" name="question9" value="si" />
+                <div class="control-text">
+                  <textarea v-model="userForm.oportunidadesEncontradas" placeholder="agregar múltiples líneas" maxlength="300"></textarea>
                 </div>
-                <div class="control">
-                  <p>No</p>
-                  <input type="radio" v-model="userForm.questionNine" name="question9" value="name" />
-                </div>
+
               </div>
             </div>
 
             <div class="question my-2">
               <h3>
-                <b>¿FUERON CORREGIDAS LAS DESVIACIONES?</b>
+                <b>FORTALEZA DE LA CDP</b>
               </h3>
               <div class="controls">
-                <div class="control">
-                  <p>Si</p>
-                  <input type="radio" v-model="userForm.questionNine" name="question9" value="si" />
+                <div class="control-text">
+                  <textarea v-model="userForm.fortalezaODP" placeholder="agregar múltiples líneas" maxlength="300"></textarea>
                 </div>
-                <div class="control">
-                  <p>No</p>
-                  <input type="radio" v-model="userForm.questionNine" name="question9" value="name" />
-                </div>
+
               </div>
             </div>
 
@@ -334,9 +326,9 @@ export default {
           });
         }
 
-        const forumNeeded = localStorage.getItem('uN')
+        const forumNeeded = JSON.parse(localStorage.getItem('uN'))
 
-        const { errorsFor, ok } = await saveForumDb(forumNeeded);
+        const { errorsFor, ok } = await saveForumDb(forumNeeded, userForm.value);
 
         if( ok === false ) {
           Swal.fire({
@@ -369,6 +361,11 @@ export default {
 
 p {
   margin: 0;
+}
+
+textarea {
+  resize: none;
+  width: 250px;
 }
 
 .controls {
@@ -425,6 +422,10 @@ p {
   .header {
     width: 400px;
   }
+
+  textarea {
+    width: 350px;
+  }
 }
 
 // Medium devices (tablets, 768px and up)
@@ -433,6 +434,9 @@ p {
   .header {
     width: 600px;
   }
+    textarea {
+    width: 550px;
+  }
 }
 
 // Large devices (desktops, 992px and up)
@@ -440,6 +444,9 @@ p {
   .question,
   .header {
     width: 800px;
+  }
+    textarea {
+    width: 750px;
   }
 }
 
