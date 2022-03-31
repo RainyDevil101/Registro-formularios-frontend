@@ -1,5 +1,6 @@
 <template>
-  <div v-if="onLoad === true">
+  <div class="up">
+    <div v-if="onLoad === true">
     <loader />
   </div>
 
@@ -222,17 +223,20 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
 import { computed, onBeforeMount, ref, watch } from "vue";
+import { useStore } from 'vuex';
+import Swal from 'sweetalert2';
+
+import saveForum from "../composables/saveForum";
 import Loader from '../../../components/Loader.vue';
 import ImgAn from "../components/imgAn.vue";
 import ImgRe from "../components/imgRe.vue";
 import questions from '../composables/questions';
-import { useStore } from 'vuex';
 import useFormStore from "../composables/getForum";
-import Swal from 'sweetalert2';
 
 export default {
   components: { Loader, ImgAn, ImgRe },
@@ -240,6 +244,8 @@ export default {
 
     const store = useStore();
     const onLoad = ref(false);
+
+    const { errorsFor, saveForumDb } = saveForum();
 
     const userForm = ref({
 
@@ -291,6 +297,8 @@ export default {
       localStorageForum,
       onLoad,
       onLoading,
+      errorsFor,
+      saveForumDb,
 
       onSubmit: async () => {
         console.log(userForm.value);
@@ -321,9 +329,29 @@ export default {
         ) {
           return Swal.fire({
             title: "Error",
-            text: `Debe completar los campos`,
+            text: `Debe seleccionar los campos`,
             icon: "error",
           });
+        }
+
+        const forumNeeded = localStorage.getItem('uN')
+
+        const { errorsFor, ok } = await saveForumDb(forumNeeded);
+
+        if( ok === false ) {
+          Swal.fire({
+            title: "Error",
+            text: `${errorsFor.value}`,
+            icon: 'error',
+          });
+        } else {
+          Swal.fire('Guardado', `Formulario ${forumCode.value} guardado con éxito`, 'success').then(function (result) {
+            if ( result === true ) {
+              location.reload();
+            } else {
+              window.alert('Error, intente nuevamente');
+            }
+          })
         }
 
       },
@@ -378,6 +406,9 @@ p {
   text-align: center;
 }
 
+.up {
+  margin-top: 3rem;
+}
 .forum-revisor {
   // min-width: 693px;
   height: calc(100vh - 135px);

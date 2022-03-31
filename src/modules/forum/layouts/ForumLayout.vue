@@ -1,5 +1,5 @@
 <template>
-  <navbar />
+  <navbar class="navbar-fixed" />
   <div class="forum-view">
     <router-view />
   </div>
@@ -20,6 +20,11 @@ export default {
 .forum-view {
   padding-top: 20px;
   padding-bottom: 10px;
+}
+
+.navbar-fixed {
+  position: absolute;
+  width: 100%;
 }
 
 

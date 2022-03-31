@@ -1,5 +1,5 @@
 <template>
-  <rev-navbar />
+  <rev-navbar class="navbar-fixed" />
 
   <div v-if="statusState === 'CARGANDO'">
     <loader />
@@ -51,5 +51,9 @@ export default {
   padding-bottom: 10px;
 }
 
+.navbar-fixed {
+  position: absolute;
+  width: 100%;
+}
 
 </style>

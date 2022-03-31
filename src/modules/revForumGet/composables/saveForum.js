@@ -4,14 +4,15 @@ import backendConnect from '../../../api/backend';
 const saveForum = () => {
 
     const errorsFor = ref([]);
+    const forumCode = ref(null);
 
-    const saveForumDb = async (save) => {
+    const saveForumDb = async (forumNeeded) => {
 
-        if (!save || !id) {
+        if (!forumNeeded) {
             return
         } else {
             try {
-                const { name } = save
+                
                 const resp = await backendConnect.put(`/api/forums/${id}`, { name }, { headers: { 'x-token': localStorage.getItem('token') } }).catch(function (errors) {
 
                     if(errors.response.data.msg) { 
@@ -43,7 +44,7 @@ const saveForum = () => {
     return {
         saveForumDb,
         errorsFor,
-        test,
+        forumCode,
     }
 }
 

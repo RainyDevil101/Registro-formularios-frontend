@@ -1,5 +1,5 @@
 <template>
-  <rev-navbar />
+  <rev-navbar class="navbar-fixed" />
   <div class="menu-view">
     <router-view />
   </div>
@@ -20,6 +20,11 @@ export default {
 .menu-view {
   padding-top: 20px;
   padding-bottom: 10px;
+}
+
+.navbar-fixed {
+  position: absolute;
+  width: 100%;
 }
 
 

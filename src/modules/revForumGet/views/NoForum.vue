@@ -1,7 +1,9 @@
 <template>
   
-<div class="no-forum">
+<div class="up">
+    <div class="no-forum">
     <h1 class="align-self-center">NO EXISTE EL FORMULARIO</h1>
+</div>
 </div>
 
 </template>
@@ -44,6 +46,10 @@ setup () {
     height: 100%;
     width: 80%;
     border-radius: 4px;
+}
+
+.up {
+    margin-top: 3rem;
 }
 
 </style>

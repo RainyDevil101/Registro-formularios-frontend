@@ -1,6 +1,7 @@
 <template>
 
-<div v-if="authStatus === 'RECIBIDOS'">
+<div class="up">
+    <div v-if="authStatus === 'RECIBIDOS'">
     <loader />
 </div>
 
@@ -21,6 +22,7 @@
         :forum="forum"
         />
     </div>
+</div>
 </div>
   
 </template>
@@ -80,6 +82,10 @@ export default {
     width: 100%;
     overflow: scroll;
     overflow-x: hidden;
+}
+
+.up {
+    margin-top: 3rem;
 }
 
 </style>

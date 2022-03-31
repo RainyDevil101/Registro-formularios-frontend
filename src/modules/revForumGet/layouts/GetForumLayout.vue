@@ -1,5 +1,5 @@
 <template>
-  <user-navbar />
+  <user-navbar class="navbar-fixed" />
   <div class="forum-view">
     <router-view />
   </div>
@@ -91,6 +91,11 @@ export default {
   padding-top: 10px;
   padding-bottom: 10px;
   justify-content: center;
+}
+
+.navbar-fixed {
+  position: absolute;
+  width: 100%;
 }
 
 @media (max-width: 774px) {

@@ -8,5 +8,5 @@ export default {
             name: 'front-forum',
             component: () => import(/* webpackChunkName: "front-forum" */ '@/modules/forum/views/ForumView.vue'),
         },
-    ]
+    ],
 }

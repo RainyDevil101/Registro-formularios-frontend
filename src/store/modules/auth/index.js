@@ -45,12 +45,12 @@ const mutations = {
     },
     logOut(state) {
 
-        state.user      = null,
+        state.user      = '',
         state.token     = null,
         state.status    = null,
-        state.userId    = null,
-        state.position  = null,
-        state.task      = null,
+        state.userId    = '',
+        state.position  = '',
+        state.task      = '',
         state.keyRe     = 1,
 
         localStorage.removeItem('token')

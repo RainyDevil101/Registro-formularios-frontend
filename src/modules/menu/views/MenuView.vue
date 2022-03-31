@@ -38,6 +38,7 @@ export default {
   margin-left: 5%;
   margin-right: 5%;
   background-color: white;
+  margin-top: 3rem;
 }
 
 .bltn {

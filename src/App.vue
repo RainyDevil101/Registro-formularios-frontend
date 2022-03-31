@@ -6,7 +6,7 @@
 
   <div v-else class="hgt">
     <router-view v-slot="{ Component }">
-      <keep-alive>
+      <keep-alive exclude="@/modules/forum/views/ForumView.vue">
         <component :is="Component" />
       </keep-alive>
     </router-view>

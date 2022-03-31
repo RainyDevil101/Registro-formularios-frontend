@@ -1,5 +1,6 @@
 <template>
-  <div v-if="showAn === true">
+  <div class="up">
+    <div v-if="showAn === true">
     <div>
       <img-an :userAn="userAn" @on:close="onShowAn" />
     </div>
@@ -91,6 +92,7 @@
         >CONTINUAR CON EL FORMULARIO</button>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -251,6 +253,10 @@ p {
 .forum-container .questions {
   background-color: white;
   grid-area: questions;
+}
+
+.up {
+  margin-top: 3rem;
 }
 
 .in-forum {

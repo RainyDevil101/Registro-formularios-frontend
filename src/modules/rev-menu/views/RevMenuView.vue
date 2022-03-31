@@ -1,6 +1,8 @@
 <template>
-  <div class="front-page">
+  <div class="up">
+    <div class="front-page">
     <img src="../../../assets/gt1.jpg" alt="No disponible">
+  </div>
   </div>
 </template>
 
@@ -38,6 +40,10 @@ img {
 
 .front-page p {
   padding: 10px;
+}
+
+.up {
+  margin-top: 3rem;
 }
 
 @media (min-width: 768px) {

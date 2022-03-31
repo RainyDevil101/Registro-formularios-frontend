@@ -234,7 +234,6 @@ export default {
   setup() {
     const route = useRoute();
     const router = useRouter();
-    const store = useStore();
     const userForm = ref({
       dateAc: "",
       obligation: "",
@@ -320,7 +319,6 @@ export default {
         const pictureOne = await uploadImageOne(imgAn.value);
         const pictureTwo = await uploadImageTwo(imgRe.value);
         const { ok, errors, forumCode } = await createForum(userForm.value, pictureOne, pictureTwo, userIdState.value, position.value, task.value);
-        console.log(forumCode.value);
         if (ok === false) {
           Swal.fire({
             title: "Error",
@@ -381,6 +379,7 @@ p {
 }
 
 .forum-one {
+  margin-top: 3rem;
   height: calc(100vh - 135px);
   overflow: scroll;
   overflow-x: hidden;
