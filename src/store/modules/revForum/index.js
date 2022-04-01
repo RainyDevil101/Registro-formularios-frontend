@@ -59,6 +59,8 @@ const mutations = {
     saveForums(state, { forumsPending }) {
 
         state.userNeeded = ''
+        state.forumsPending = ''
+        localStorage.removeItem('fP')
 
         if (!localStorage.getItem('fP')) {
             localStorage.setItem('fP', JSON.stringify(forumsPending));

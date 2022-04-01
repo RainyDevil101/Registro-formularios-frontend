@@ -29,7 +29,6 @@
 
 <script>
 import { ref } from '@vue/reactivity';
-import { useRoute } from 'vue-router';
 import { watch } from '@vue/runtime-core';
 
 import getTerm from '../composables/forumTerm';
@@ -43,7 +42,6 @@ export default {
 
     setup() {
 
-        const route = useRoute();
         const store = useStore();
 
         const term = ref('');
@@ -56,7 +54,7 @@ export default {
         );
 
         watch(
-            () => store.state.forums.forums,
+            () => store.state.forums.forumsPending,
             () => forumsTerm(term.value)
         );
 

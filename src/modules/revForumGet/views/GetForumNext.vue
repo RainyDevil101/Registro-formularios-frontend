@@ -37,7 +37,7 @@
                 </div>
                 <div class="control">
                   <p>No</p>
-                  <input type="radio" v-model="userForm.questionOne" name="question1" value="name" />
+                  <input type="radio" v-model="userForm.questionOne" name="question1" value="no" />
                 </div>
               </div>
             </div>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="control">
                   <p>No</p>
-                  <input type="radio" v-model="userForm.questionTwo" name="question2" value="name" />
+                  <input type="radio" v-model="userForm.questionTwo" name="question2" value="no" />
                 </div>
               </div>
             </div>
@@ -73,7 +73,7 @@
                     type="radio"
                     v-model="userForm.questionThree"
                     name="question3"
-                    value="name"
+                    value="no"
                   />
                 </div>
               </div>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="control">
                   <p>No</p>
-                  <input type="radio" v-model="userForm.questionFour" name="question4" value="name" />
+                  <input type="radio" v-model="userForm.questionFour" name="question4" value="no" />
                 </div>
               </div>
             </div>
@@ -106,7 +106,7 @@
                 </div>
                 <div class="control">
                   <p>No</p>
-                  <input type="radio" v-model="userForm.questionFive" name="question5" value="name" />
+                  <input type="radio" v-model="userForm.questionFive" name="question5" value="no" />
                 </div>
               </div>
             </div>
@@ -122,7 +122,7 @@
                 </div>
                 <div class="control">
                   <p>No</p>
-                  <input type="radio" v-model="userForm.questionSix" name="question6" value="name" />
+                  <input type="radio" v-model="userForm.questionSix" name="question6" value="no" />
                 </div>
               </div>
             </div>
@@ -142,7 +142,7 @@
                     type="radio"
                     v-model="userForm.questionSeven"
                     name="question7"
-                    value="name"
+                    value="no"
                   />
                 </div>
               </div>
@@ -163,7 +163,7 @@
                     type="radio"
                     v-model="userForm.questionEight"
                     name="question8"
-                    value="name"
+                    value="no"
                   />
                 </div>
               </div>
@@ -180,7 +180,7 @@
                 </div>
                 <div class="control">
                   <p>No</p>
-                  <input type="radio" v-model="userForm.questionNine" name="question9" value="name" />
+                  <input type="radio" v-model="userForm.questionNine" name="question9" value="no" />
                 </div>
               </div>
             </div>
@@ -191,7 +191,7 @@
               </h3>
               <div class="controls">
                 <div class="control-text">
-                  <textarea v-model="userForm.oportunidadesEncontradas" placeholder="agregar múltiples líneas" maxlength="300"></textarea>
+                  <textarea v-model="userForm.oportunidadesEncontradas" maxlength="300"></textarea>
                 </div>
 
               </div>
@@ -203,7 +203,7 @@
               </h3>
               <div class="controls">
                 <div class="control-text">
-                  <textarea v-model="userForm.fortalezaODP" placeholder="agregar múltiples líneas" maxlength="300"></textarea>
+                  <textarea v-model="userForm.fortalezaODP" maxlength="300"></textarea>
                 </div>
 
               </div>
@@ -229,14 +229,19 @@ import ImgAn from "../components/imgAn.vue";
 import ImgRe from "../components/imgRe.vue";
 import questions from '../composables/questions';
 import useFormStore from "../composables/getForum";
+import counter from "../composables/counter";
+import { useRouter } from 'vue-router';
+import useAuth from "../../auth/composables/useAuth";
 
 export default {
   components: { Loader, ImgAn, ImgRe },
   setup() {
 
+    const router = useRouter();
     const store = useStore();
     const onLoad = ref(false);
 
+    const { aCounter } = counter();
     const { errorsFor, saveForumDb } = saveForum();
 
     const userForm = ref({
@@ -256,6 +261,8 @@ export default {
       statusForum: "REVISADO",
 
     });
+
+    const { getForums } = useAuth();
 
     const { userNeeded, localStorageForum } = useFormStore();
 
@@ -291,6 +298,7 @@ export default {
       onLoading,
       errorsFor,
       saveForumDb,
+      aCounter,
 
       onSubmit: async () => {
         console.log(userForm.value);
@@ -326,9 +334,13 @@ export default {
           });
         }
 
+        const { calidad, si } = aCounter(userForm.value);
+
         const forumNeeded = JSON.parse(localStorage.getItem('uN'))
 
-        const { errorsFor, ok } = await saveForumDb(forumNeeded, userForm.value);
+
+
+        const { errorsFor, ok, code } = await saveForumDb(forumNeeded, userForm.value, calidad, si);
 
         if( ok === false ) {
           Swal.fire({
@@ -337,9 +349,10 @@ export default {
             icon: 'error',
           });
         } else {
-          Swal.fire('Guardado', `Formulario ${forumCode.value} guardado con éxito`, 'success').then(function (result) {
-            if ( result === true ) {
-              location.reload();
+          Swal.fire('Guardado', `Formulario ${code.value} revisado con éxito`, 'success').then(function (result) {
+            if ( true ) {
+              getForums();
+              router.push({ 'name': 'rev-list-forum' });
             } else {
               window.alert('Error, intente nuevamente');
             }
@@ -364,8 +377,10 @@ p {
 }
 
 textarea {
+  border-radius: 4px;
   resize: none;
   width: 250px;
+  background-color: rgba($color: #dbdbdb, $alpha: 1.0);
 }
 
 .controls {
