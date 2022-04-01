@@ -21,7 +21,7 @@
                     </li>
              <li class="nav-item box-a">
                         <a @click="menu" class="nav-link active pointer">
-                            <b>Todas</b>
+                            <b>Revisadas</b>
                         </a>
                     </li>
                     <li class="nav-item box-a">

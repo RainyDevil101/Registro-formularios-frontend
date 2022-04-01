@@ -16,7 +16,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 txt-c">
                     <li class="nav-item box-a">
                         <a @click="menu" class="nav-link active pointer">
-                            <b>Todas</b>
+                            <b>Revisadas</b>
                         </a>
                     </li>
                     <li class="nav-item box-a">

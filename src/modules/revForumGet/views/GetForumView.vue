@@ -1,98 +1,99 @@
 <template>
   <div class="up">
+
     <div v-if="showAn === true">
-    <div>
-      <img-an :userAn="userAn" @on:close="onShowAn" />
-    </div>
-  </div>
-
-  <div v-if="showRe === true">
-    <div>
-      <img-re :userRe="userRe" @on:closeRe="onShowRe" />
-    </div>
-  </div>
-
-  <div v-if="onLoad === true || errorMessage === true ">
-    <loader />
-  </div>
-  <div v-else>
-    <div class="full-forum">
-      <div class="header-forum">
-        <h4>
-          SUPERVISOR:
-          <b>{{ forum.name }}</b>
-        </h4>
-        <h4>
-          N° DE FOLIO:
-          <b>{{ forum.code }}</b>
-        </h4>
+      <div>
+        <img-an :userAn="userAn" @on:close="onShowAn" />
       </div>
-      <div class="forum-container">
-        <div class="questions">
-          <div class="in-forum">
-            <p class="hdr">DATOS SUPERVISOR</p>
-            <div class="lines"></div>
-            <p>Usuario:</p>
-            <p>Fecha en sistema:</p>
-            <p>Fecha ingresada:</p>
-            <p>Rut:</p>
-            <p>Cargo:</p>
-            <p class="activity">Actividad:</p>
-            <p>Faena:</p>
-            <div class="lines"></div>
-            <p>ALTERNATIVAS</p>
-            <p>Alternativa 1:</p>
-            <p>Alternativa 2:</p>
-            <p>Alternativa 3:</p>
-            <p>Alternativa 4:</p>
-            <p>Alternativa 5:</p>
-            <div class="lines"></div>
-            <p class="controls">¿En los controles existen "NO" como respuestas?:</p>
-            <div class="lines"></div>
-            <p
-              v-if="userControl === 'Si'"
-            >SEÑALE LAS MEDIDAS DE CONTROL IMPLEMENTADAS ANTES DE COMENZAR LA TAREA</p>
-            <div v-if="userControl === 'Si'" class="lines"></div>
-            <p>
-              ESTADO DEL FORMULARIO:
-              <b>{{ forum.statusForum }}</b>
-            </p>
+    </div>
+
+    <div v-if="showRe === true">
+      <div>
+        <img-re :userRe="userRe" @on:closeRe="onShowRe" />
+      </div>
+    </div>
+
+    <div v-if="onLoad === true || errorMessage === true">
+      <loader />
+    </div>
+    <div v-else>
+      <div class="full-forum">
+        <div class="header-forum">
+          <h4>
+            SUPERVISOR:
+            <b>{{ forum.name }}</b>
+          </h4>
+          <h4>
+            N° DE FOLIO:
+            <b>{{ forum.code }}</b>
+          </h4>
+        </div>
+        <div class="forum-container">
+          <div class="questions">
+            <div class="in-forum">
+              <p class="hdr">DATOS SUPERVISOR</p>
+              <div class="lines"></div>
+              <p>Usuario:</p>
+              <p>Fecha en sistema:</p>
+              <p>Fecha ingresada:</p>
+              <p>Rut:</p>
+              <p>Cargo:</p>
+              <p class="activity">Actividad:</p>
+              <p>Faena:</p>
+              <div class="lines"></div>
+              <p>ALTERNATIVAS</p>
+              <p>Alternativa 1:</p>
+              <p>Alternativa 2:</p>
+              <p>Alternativa 3:</p>
+              <p>Alternativa 4:</p>
+              <p>Alternativa 5:</p>
+              <div class="lines"></div>
+              <p class="controls">¿En los controles existen "NO" como respuestas?:</p>
+              <div class="lines"></div>
+              <p
+                v-if="userControl === 'Si'"
+              >SEÑALE LAS MEDIDAS DE CONTROL IMPLEMENTADAS ANTES DE COMENZAR LA TAREA</p>
+              <div v-if="userControl === 'Si'" class="lines"></div>
+              <p>
+                ESTADO DEL FORMULARIO:
+                <b>{{ forum.statusForum }}</b>
+              </p>
+            </div>
+          </div>
+          <div class="answers">
+            <div class="in-forum">
+              <p class="hdr">RESPUESTAS</p>
+              <div class="lines"></div>
+              <p>{{ userName }}</p>
+              <p>{{ manDay }} {{ manMonth }} {{ manYearDay }}</p>
+              <p>{{ acDay }} {{ acMonth }} {{ acYearDay }}</p>
+              <p>{{ forum.run }}</p>
+              <p>{{ userPosition }}</p>
+              <p class="activity">{{ userObligation }}</p>
+              <p>{{ userTask }}</p>
+              <div class="lines"></div>
+              <p>ALTERNATIVAS SELECCIONADAS</p>
+              <p>Opción {{ forum.question1 }}</p>
+              <p>Opción {{ forum.question2 }}</p>
+              <p>Opción {{ forum.question3 }}</p>
+              <p>Opción {{ forum.question4 }}</p>
+              <p>Opción {{ forum.question5 }}</p>
+              <div class="lines"></div>
+              <p class="controls">{{ userControl }}</p>
+              <div class="lines"></div>
+              <p v-if="userControl === 'Si'">{{ forum.postControl }}</p>
+            </div>
           </div>
         </div>
-        <div class="answers">
-          <div class="in-forum">
-            <p class="hdr">RESPUESTAS</p>
-            <div class="lines"></div>
-            <p>{{ userName }}</p>
-            <p>{{ manDay }} {{ manMonth }} {{ manYearDay }}</p>
-            <p>{{ acDay }} {{ acMonth }} {{ acYearDay }}</p>
-            <p>{{ forum.run }}</p>
-            <p>{{ userPosition }}</p>
-            <p class="activity">{{ userObligation }}</p>
-            <p>{{ userTask }}</p>
-            <div class="lines"></div>
-            <p>ALTERNATIVAS SELECCIONADAS</p>
-            <p>Opción {{ forum.question1 }}</p>
-            <p>Opción {{ forum.question2 }}</p>
-            <p>Opción {{ forum.question3 }}</p>
-            <p>Opción {{ forum.question4 }}</p>
-            <p>Opción {{ forum.question5 }}</p>
-            <div class="lines"></div>
-            <p class="controls">{{ userControl }}</p>
-            <div class="lines"></div>
-            <p v-if="userControl === 'Si'">{{ forum.postControl }}</p>
-          </div>
+        <div class="next">
+          <button
+            v-show="showRe === false && showAn === false"
+            @click="onNext"
+            class="btn btn-primary next-btn"
+          >CONTINUAR CON EL FORMULARIO</button>
         </div>
       </div>
-      <div class="next">
-        <button
-          v-show="showRe === false && showAn === false"
-          @click="onNext"
-          class="btn btn-primary next-btn"
-        >CONTINUAR CON EL FORMULARIO</button>
-      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -137,7 +138,7 @@ export default {
       getForm(null)
     })
 
-    const { forum, userName, userPosition, userTask, userControl, userControlRe, userAn, userRe, onLoad, userObligation, manDay, manMonth, manYearDay, acDay, acMonth, acYearDay, acMin, acHour, errorMessage, searchForum } = useIdForum(route.params.id);
+    const { forum, userName, userPosition, userTask, userControl, userControlRe, userAn, userRe, onLoad, userObligation, manDay, manMonth, manYearDay, acDay, acMonth, acYearDay, acMin, acHour, errorMessage, searchForum } = useIdForum();
 
     return {
       forum,

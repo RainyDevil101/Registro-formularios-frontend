@@ -3,7 +3,7 @@ import useFormStore from "./getForum";
 import getDayMonthYear from '../../../helpers/DateFormat';
 import shortingText from '../../../helpers/shortingText';
 
-const useIdForum = (forumId = '') => {
+const useIdForum = () => {
 
     const { userNeeded } = useFormStore();
 
@@ -32,19 +32,17 @@ const useIdForum = (forumId = '') => {
     const acMin = ref(null);
     const acHour = ref(null);
 
-    const searchForum = async(id) => {
+    const searchForum = async(userNeeded) => {
 
-        
-        if(!id) return
-        
+        if ( userNeeded == '' ) return
+
         forum.value = ('')
         onLoad.value = true
-        
+
+        const a = userNeeded.value
+        const data = a[0]
+
         try {
-
-            const f = userNeeded.value
-
-            const data = f[0]
 
             forum.value = data
             userName.value = data.user.name
@@ -52,7 +50,7 @@ const useIdForum = (forumId = '') => {
             userTask.value = data.task.name
             userAn.value = data.imgAn
             userRe.value = data.imgRe
-            
+
             manDay.value = data.dayList
             manMonth.value = data.monthList
             manYearDay.value = data.yearList
@@ -105,7 +103,7 @@ const useIdForum = (forumId = '') => {
 
     }
 
-    searchForum(forumId)
+    searchForum(userNeeded)
 
     return {
         forum,

@@ -2,7 +2,7 @@ import backendConnect from '../../../api/backend';
 
 const state = {
     status: 'AUTHENTICATING',
-    user: null,
+    user: '',
     token: null,
     userId: null,
     position: null,

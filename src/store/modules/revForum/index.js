@@ -13,6 +13,11 @@ const state = {
 
 const getters = {
 
+    userNeededId(state) {
+
+        return state.userNeeded[0]._id
+
+    },
     forumsState: (state, getters, rootState) => (term = '') => {
 
 
@@ -32,7 +37,7 @@ const getters = {
     getForumNeeded(state, getters, rootState) {
 
         if (state.userNeeded === '') {
-            return state.userNeeded
+            return JSON.parse(localStorage.getItem('fP'));
         } else {
             // const userN = JSON.parse(JSON.stringify(state.userNeeded))
             // return userN

@@ -48,6 +48,7 @@ const useFormStore = () => {
         localStorageForum,
 
         userNeeded: computed(() => store.getters['forums/getForumNeeded']),
+        userNeededId: computed(() => store.getters['forums/getForumNeededId']),
 
         // authStatus: computed(() => store.getters['auth/currentState']),
         // userName: computed(() => store.getters['auth/userName'])
