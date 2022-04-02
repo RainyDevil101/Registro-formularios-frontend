@@ -17,6 +17,16 @@ const useAuth = () => {
         const resp = await store.dispatch('forums/renoveForums', pendingsForums)
         return resp
     }
+    const reCompleted = async (completedForums) => {
+
+        const resp = await store.dispatch('forums/renoveCompleted', completedForums)
+        return resp
+    }
+    const reAll = async (allForums) => {
+
+        const resp = await store.dispatch('forums/renoveAll', allForums)
+        return resp
+    }
 
     const checkToken = async() => {
         const resp = await store.dispatch('auth/readToken')
@@ -45,6 +55,8 @@ const useAuth = () => {
         getUsers,
         getForums,
         reForms,
+        reCompleted,
+        reAll,
 
         authStatus: computed(() => store.getters['auth/currentState']),
         userName: computed(() => store.getters['auth/userName'])

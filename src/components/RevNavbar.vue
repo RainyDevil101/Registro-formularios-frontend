@@ -20,7 +20,7 @@
                         </a>
                     </li>
              <li class="nav-item box-a">
-                        <a @click="menu" class="nav-link active pointer">
+                        <a @click="revisadas" class="nav-link active pointer">
                             <b>Revisadas</b>
                         </a>
                     </li>
@@ -59,6 +59,9 @@ export default {
       },
       menu: () => {
         router.push({ name: 'rev-front-menu' })
+      },
+      revisadas: () => {
+        router.push({ name: 'rev-list-completed' })
       },
       lista: () => {
         router.push({ name: 'rev-list-forum' })

@@ -24,7 +24,7 @@ export default {
   components: { FooterT },
   setup() {
 
-    const { checkToken, reForms } = useAuth();
+    const { checkToken, reForms, reCompleted, reAll } = useAuth();
 
     const loaded = ref(false);
 
@@ -33,6 +33,11 @@ export default {
     const lcForums = JSON.parse(localStorage.getItem('fP'))
     reForms(lcForums);
     
+    const clForums = JSON.parse(localStorage.getItem('fC'))
+    reCompleted(clForums);
+
+    const allForums = JSON.parse(localStorage.getItem('aF'))
+    reAll(allForums);
 
     window.onload = () => {
 

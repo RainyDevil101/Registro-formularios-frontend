@@ -2,8 +2,11 @@ import backendConnect from '../../../api/backend';
 
 const state = {
     status: 'CARGANDO',
+    statusC: 'CARGANDO',
+    statusA: 'CARGANDO',
     forumsCompleted: '',
     forumsPending: '',
+    allForums: '',
     userNeeded: '',
     imgAn: false,
     imgRe: false,
@@ -13,12 +16,7 @@ const state = {
 
 const getters = {
 
-    userNeededId(state) {
-
-        return state.userNeeded[0]._id
-
-    },
-    forumsState: (state, getters, rootState) => (term = '') => {
+    forumsState: (state) => (term = '') => {
 
 
         if (term.length === 0) return state.forumsPending
@@ -26,7 +24,7 @@ const getters = {
         return state.forumsPending.filter(forum => forum.name.toLowerCase().includes(term.toLocaleLowerCase()))
 
     },
-    forumsStateCompleted: (state, getters, rootState) => (term = '') => {
+    forumsStateCompleted: (state) => (term = '') => {
 
 
         if (term.length === 0) return state.forumsCompleted
@@ -34,23 +32,25 @@ const getters = {
         return state.forumsCompleted.filter(forum => forum.name.toLowerCase().includes(term.toLocaleLowerCase()))
 
     },
-    getForumNeeded(state, getters, rootState) {
+    getForumNeeded(state) {
 
         if (state.userNeeded === '') {
             return JSON.parse(localStorage.getItem('fP'));
         } else {
-            // const userN = JSON.parse(JSON.stringify(state.userNeeded))
-            // return userN
             return state.userNeeded
-
         }
 
 
 
     },
-    statusState(state, getters, rootState) {
+    statusState(state) {
 
         return state.status
+
+    },
+    completedState(state) {
+
+        return state.statusC
 
     },
     errorState(state) {
@@ -61,6 +61,28 @@ const getters = {
 
 const mutations = {
 
+    allForums(state, { allForums }) {
+
+        state.userNeeded = ''
+        state.allForums = ''
+        localStorage.removeItem('aF')
+
+        if (!localStorage.getItem('aF')) {
+            localStorage.setItem('aF', JSON.stringify(allForums));
+            const aForums = JSON.parse(localStorage.getItem('aF'));
+            state.allForums = aForums
+            state.statusA = 'RECIBIDOS'
+            return
+        } else {
+            const aForums = JSON.parse(localStorage.getItem('aF'));
+            state.allForums = aForums
+            state.statusA = 'RECIBIDOS'
+            return
+        }
+
+
+
+    },
     saveForums(state, { forumsPending }) {
 
         state.userNeeded = ''
@@ -83,6 +105,30 @@ const mutations = {
 
 
     },
+    saveForumsCompleted(state, { forumsCompleted }) {
+
+        state.userNeeded = ''
+        state.forumsCompleted = ''
+        localStorage.removeItem('fC')
+
+        if (!localStorage.getItem('fC')) {
+            console.log('a');
+            localStorage.setItem('fC', JSON.stringify(forumsCompleted));
+            const fCompleted = JSON.parse(localStorage.getItem('fC'));
+            state.forumsCompleted = fCompleted
+            state.statusC = 'RECIBIDOS'
+            return
+        } else {
+            console.log('b');
+            const fCompleted = JSON.parse(localStorage.getItem('fC'));
+            state.forumsCompleted = fCompleted
+            state.statusC = 'RECIBIDOS'
+            return
+        }
+
+
+
+    },
     getForumById(state, { id }) {
 
         if (id === null) {
@@ -90,7 +136,27 @@ const mutations = {
             return
         }
 
-        const userNeeded = state.forumsPending.filter(a => a._id == id)
+        const userNeeded = state.allForums.filter(a => a._id == id)
+
+        if (userNeeded.length === 0) {
+             state.userNeeded = ''
+             state.error = true
+             return
+        } else {
+            state.userNeeded = userNeeded
+            localStorage.setItem('uN', JSON.stringify(userNeeded))
+            state.error = false
+            return
+        }
+    },
+    getForumByCompleted(state, { id }) {
+
+        if (id === null) {
+            state.userNeeded = ''
+            return
+        }
+
+        const userNeeded = state.forumsCompleted.filter(a => a._id == id)
 
         if (userNeeded.length === 0) {
              state.userNeeded = ''
@@ -114,15 +180,14 @@ const mutations = {
         }
 
     },
-    saveForumsCompleted(state, { forumsCompleted }) {
-
-        state.forumsCompleted = forumsCompleted
-        state.status = 'RECIBIDOS'
-
-    },
     deleteForumM(state, { id }) {
 
         state.forumsPending = state.forumsPending.filter(u => u.uid == id)
+
+    },
+    deleteForumC(state, { id }) {
+
+        state.forumsCompleted = state.forumsCompleted.filter(u => u.uid == id)
 
     },
     changeImgAn(state, { onImgAn }) {
@@ -138,8 +203,11 @@ const mutations = {
     logOut(state) {
 
         state.status = 'CARGANDO',
+        state.statusC = 'CARGANDO',
+        state.statusA = 'CARGANDO',
         state.forumsCompleted = '',
         state.forumsPending = '',
+        state.allForums = '',
         state.userNeeded = '',
         state.imgAn = false
         state.imgRe = false
@@ -148,6 +216,8 @@ const mutations = {
 
         localStorage.removeItem('fP')
         localStorage.removeItem('uN')
+        localStorage.removeItem('fC')
+        localStorage.removeItem('aF')
         
     },
     blocImg(state) {
@@ -184,9 +254,11 @@ const actions = {
 
             const forumsPending = forums.filter(pending => pending.statusForum == 'PENDIENTE')
             const forumsCompleted = forums.filter(completed => completed.statusForum == 'REVISADO')
+            const allForums = forums
 
             commit('saveForums', { forumsPending })
             commit('saveForumsCompleted', { forumsCompleted })
+            commit('allForums', { allForums })
 
             return { ok: true }
 
@@ -217,6 +289,16 @@ const actions = {
     async renoveForums({ commit }, forumsPending) {
         if (!forumsPending) return
         commit('saveForums', { forumsPending })
+        return { ok: true }
+    },
+    async renoveCompleted({ commit }, forumsCompleted) {
+        if (!forumsCompleted) return
+        commit('saveForumsCompleted', { forumsCompleted })
+        return { ok: true }
+    },
+    async renoveAll({ commit }, forums) {
+        if (!forums) return
+        commit('allForums', { forums })
         return { ok: true }
     },
 

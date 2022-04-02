@@ -1,7 +1,7 @@
 <template>
 
 <div class="up">
-    <div v-if="authStatus === 'RECIBIDOS'">
+    <div v-if="completedState === 'CARGANDO'">
     <loader />
 </div>
 
@@ -16,8 +16,8 @@
     </div>
 
     <div class="forum-scrollarea">
-        <forum
-        v-for="forum of forumsRef"
+        <rev-forum-completed
+        v-for="forum of forumsCompletedRef"
         :key="forum._id"
         :forum="forum"
         />
@@ -33,12 +33,12 @@ import { watch } from '@vue/runtime-core';
 import { useStore } from 'vuex';
 
 import getTerm from '../composables/forumTerm';
-import Forum from '../components/RevForum.vue';
+import RevForumCompleted from '../components/RevForumCompleted.vue';
 import Loader from '../../../components/Loader.vue';
 
 export default {
 
-    components: { Forum, Loader },
+    components: { Loader, RevForumCompleted },
 
     setup() {
 
@@ -46,22 +46,24 @@ export default {
 
         const term = ref('');
 
-        const { forumsRef, forumsTerm, authStatus } = getTerm(term.value);
+        const { forumsCompletedRef, forumsCompletedTerm, completedState } = getTerm(term.value);
 
         watch(
             () => term.value,
-            () => forumsTerm(term.value)
+            () => forumsCompletedTerm(term.value)
         );
 
         watch(
-            () => store.state.forums.forumsPending,
-            () => forumsTerm(term.value)
+            () => store.state.forums.forumsCompleted,
+            () => forumsCompletedTerm(term.value)
         );
+
+        console.log(store.state.forums.forumsCompleted);
 
         return {
             term,
-            forumsRef,
-            authStatus,
+            forumsCompletedRef,
+            completedState,
         }
     }
 

@@ -15,7 +15,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 txt-c">
                     <li class="nav-item box-a">
-                        <a @click="menu" class="nav-link active pointer">
+                        <a @click="revisadas" class="nav-link active pointer">
                             <b>Revisadas</b>
                         </a>
                     </li>
@@ -128,6 +128,9 @@ export default {
             },
             lista: () => {
                 router.push({ name: 'rev-list-forum' })
+            },
+            revisadas: () => {
+                router.push({ name: 'rev-list-completed' })
             },
             usuario: () => {
                 router.push({ name: 'user-view-create' })

@@ -6,7 +6,7 @@
   </div>
 
   <div v-else class="forum-view">
-    <rev-forum-list/>
+    <router-view />
   </div>
 </template>
 
@@ -16,7 +16,7 @@ import useAuth from '../../auth/composables/useAuth';
 import getTerm from "../composables/forumTerm";
 import RevForumList from '../views/RevForumList.vue';
 import Loader from "../../../components/Loader.vue";
-import { onBeforeUpdate, onActivated } from '@vue/runtime-core';
+import { onActivated } from '@vue/runtime-core';
 
 export default {
   components: { RevNavbar, RevForumList, Loader },
@@ -25,11 +25,6 @@ export default {
 
     const { getForums } = useAuth();
     const { statusState } = getTerm();
-
-    // onBeforeUpdate(() => {
-    //   console.log('a');
-    //   getForums();
-    // })
 
     onActivated(() => {
       getForums();
