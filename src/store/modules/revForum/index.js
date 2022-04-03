@@ -67,17 +67,25 @@ const mutations = {
         state.allForums = ''
         localStorage.removeItem('aF')
 
+        if ( allForums === undefined ) return
+
         if (!localStorage.getItem('aF')) {
+
             localStorage.setItem('aF', JSON.stringify(allForums));
             const aForums = JSON.parse(localStorage.getItem('aF'));
             state.allForums = aForums
             state.statusA = 'RECIBIDOS'
+
             return
+
         } else {
+
             const aForums = JSON.parse(localStorage.getItem('aF'));
             state.allForums = aForums
             state.statusA = 'RECIBIDOS'
+
             return
+
         }
 
 
@@ -112,14 +120,12 @@ const mutations = {
         localStorage.removeItem('fC')
 
         if (!localStorage.getItem('fC')) {
-            console.log('a');
             localStorage.setItem('fC', JSON.stringify(forumsCompleted));
             const fCompleted = JSON.parse(localStorage.getItem('fC'));
             state.forumsCompleted = fCompleted
             state.statusC = 'RECIBIDOS'
             return
         } else {
-            console.log('b');
             const fCompleted = JSON.parse(localStorage.getItem('fC'));
             state.forumsCompleted = fCompleted
             state.statusC = 'RECIBIDOS'
@@ -135,6 +141,8 @@ const mutations = {
             state.userNeeded = ''
             return
         }
+
+        if (state.allForums === '') return
 
         const userNeeded = state.allForums.filter(a => a._id == id)
 

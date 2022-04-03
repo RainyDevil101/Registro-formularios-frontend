@@ -11,15 +11,11 @@ const getTerm = (term) => {
 
         const resp = computed(() => store.getters['forums/forumsState'](term) )
 
-        console.log(resp, 'pendiente');
-        
         return forumsRef.value = resp.value
     }
     const forumsCompletedTerm = (term = '') => {
 
         const resp = computed(() => store.getters['forums/forumsStateCompleted'](term) )
-
-        console.log(resp, 'completada');
 
         return forumsCompletedRef.value = resp.value
     }

@@ -1,12 +1,12 @@
 <template>
     <div
         class="mx-1 forum-container pointer p-2"
-        @click="$router.push({ name: 'get-forum', params: { id: forum._id } })"
+        @click="$router.push({ name: 'get-forum-completed', params: { id: forumCompleted._id } })"
     >
         <div class="forum-title user-container">
-            <span class="user-name">{{ forum.name }}</span>
-            <span class="user-code">{{ forum.code }}</span>
-            <span class="mx-1 user-date">{{ forum.dayList }} {{ forum.monthList }} {{ forum.yearList }}</span>
+            <span class="user-name">{{ forumCompleted.name }}</span>
+            <span class="user-code">{{ forumCompleted.code }}</span>
+            <span class="mx-1 user-date">{{ forumCompleted.dayList }} {{ forumCompleted.monthList }} {{ forumCompleted.yearList }}</span>
         </div>
     </div>
 </template>
@@ -17,7 +17,7 @@ import { ref } from '@vue/reactivity';
 export default {
 
     props: {
-        forum: {
+        forumCompleted: {
             type: Object,
             required: true,
         },
@@ -27,7 +27,7 @@ export default {
 
 
         const forumDate = ref();
-        forumDate.value = props.forum.date
+        forumDate.value = props.forumCompleted.date
 
         return {
             forumDate,

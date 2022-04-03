@@ -12,6 +12,14 @@ export default {
             },
         },
         {
+            path: 'completed/:id',
+            name: 'get-forum-completed',
+            component: () => import(/* webpackChunkName: "rev-front-completed" */ '@/modules/revForumGet/views/ForumCompletedView.vue'),
+            props: (route) => {
+                id: route.params.id
+            },
+        },
+        {
             path: 'get-forum-next',
             name: 'get-forum-next',
             component: () => import(/* webpackChunkName: "rev-next-forum" */ '@/modules/revForumGet/views/GetForumNext.vue'),

@@ -411,14 +411,10 @@ export default {
 
       onShowAn: () => {
 
-        console.log(userAn);
-
         return store.dispatch('forums/changeImgAn', false)
 
       },
       onShowRe: () => {
-
-        console.log(userRe);
 
         return store.dispatch('forums/changeImgRe', false)
 

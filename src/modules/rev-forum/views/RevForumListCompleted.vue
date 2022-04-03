@@ -17,9 +17,9 @@
 
     <div class="forum-scrollarea">
         <rev-forum-completed
-        v-for="forum of forumsCompletedRef"
-        :key="forum._id"
-        :forum="forum"
+        v-for="forumCompleted of forumsCompletedRef"
+        :key="forumCompleted._id"
+        :forumCompleted="forumCompleted"
         />
     </div>
 </div>
@@ -57,8 +57,6 @@ export default {
             () => store.state.forums.forumsCompleted,
             () => forumsCompletedTerm(term.value)
         );
-
-        console.log(store.state.forums.forumsCompleted);
 
         return {
             term,
