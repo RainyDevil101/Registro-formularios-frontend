@@ -63,7 +63,7 @@ img {
     height: auto;
     max-height: 600px;
     width: auto;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .fade-in {

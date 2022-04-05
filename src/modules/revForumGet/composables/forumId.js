@@ -7,6 +7,8 @@ const useIdForum = () => {
 
     const { userNeeded } = useFormStore();
 
+    console.log(userNeeded.value);
+
     const forum = ref(null);
     const userName = ref(null);
     const userPosition = ref(null);
@@ -19,6 +21,7 @@ const useIdForum = () => {
     const onLoad = ref(true);
     // const shortingText = ref(null);
     const userObligation = ref(null);
+    const forumEmpty = ref(false);
 
     const manDay = ref(null);
     const manMonth = ref(null);
@@ -34,12 +37,13 @@ const useIdForum = () => {
 
     const searchForum = async(userNeeded) => {
 
-        if ( userNeeded == '' ) return
+        if (userNeeded.value == '' || userNeeded.value === null) return
 
         forum.value = ('')
         onLoad.value = true
 
         const a = userNeeded.value
+
         const data = a[0]
 
         try {
@@ -118,6 +122,7 @@ const useIdForum = () => {
         userRe,
         onLoad,
         userObligation,
+        forumEmpty,
 
         manDay,
         manMonth,

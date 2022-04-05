@@ -1,46 +1,51 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bcc">
-        <div class="container-fluid">
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 txt-c">
-             <li class="nav-item box-a">
-                        <a @click="menu" class="nav-link active pointer">
-                            <b>Menu</b>
-                        </a>
-                    </li>
-             <li class="nav-item box-a">
-                        <a @click="revisadas" class="nav-link active pointer">
-                            <b>Revisadas</b>
-                        </a>
-                    </li>
-                    <li class="nav-item box-a">
-                        <a @click="lista" class="nav-link active pointer">
-                            <b>Pendientes</b>
-                        </a>
-                    </li>
-                    <li class="nav-item box-a">
-                        <a @click="usuario" class="nav-link active pointer">
-                            <b>Usuarios</b>
-                        </a>
-                    </li>
-                </ul>
-                    <button class="logout" @click="onLogOut">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
-            </div>
-        </div>
-    </nav>
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 txt-c">
+          <li class="nav-item box-a">
+            <a @click="menu" class="nav-link active pointer">
+              <b>Menu</b>
+            </a>
+          </li>
+          <li class="nav-item box-a">
+            <a @click="all" class="nav-link active pointer">
+              <b>Todas</b>
+            </a>
+          </li>
+          <li class="nav-item box-a">
+            <a @click="revisadas" class="nav-link active pointer">
+              <b>Revisadas</b>
+            </a>
+          </li>
+          <li class="nav-item box-a">
+            <a @click="lista" class="nav-link active pointer">
+              <b>Pendientes</b>
+            </a>
+          </li>
+          <li class="nav-item box-a">
+            <a @click="usuario" class="nav-link active pointer">
+              <b>Usuarios</b>
+            </a>
+          </li>
+        </ul>
+        <button class="logout" @click="onLogOut">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -59,6 +64,9 @@ export default {
       },
       menu: () => {
         router.push({ name: 'rev-front-menu' })
+      },
+      all: () => {
+        router.push({ name: 'all-forums' })
       },
       revisadas: () => {
         router.push({ name: 'rev-list-completed' })
@@ -81,7 +89,7 @@ export default {
 }
 
 .txt-c {
-    text-align: center;
+  text-align: center;
 }
 
 .logout {
@@ -102,15 +110,13 @@ export default {
 }
 
 @media (max-width: 440px) {
-
   .nav-btn {
     font-size: 13px;
   }
-
 }
 
 @media (min-width: 991px) {
-    .box-a {
+  .box-a {
     background-color: black;
     margin: 0px 4px 0px 4px;
     width: 150px;
@@ -118,9 +124,8 @@ export default {
     border-radius: 4px;
 
     &:hover {
-        background-color: rgba($color: #1a1a1a, $alpha: 1.0);
+      background-color: rgba($color: #1a1a1a, $alpha: 1);
     }
+  }
 }
-}
-
 </style>

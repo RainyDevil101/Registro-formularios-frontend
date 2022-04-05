@@ -20,6 +20,14 @@ export default {
             },
         },
         {
+            path: 'call/:id',
+            name: 'get-forum-all',
+            component: () => import(/* webpackChunkName: "rev-front-all" */ '@/modules/revForumGet/views/AllForumsView.vue'),
+            props: (route) => {
+                id: route.params.id
+            },
+        },
+        {
             path: 'get-forum-next',
             name: 'get-forum-next',
             component: () => import(/* webpackChunkName: "rev-next-forum" */ '@/modules/revForumGet/views/GetForumNext.vue'),

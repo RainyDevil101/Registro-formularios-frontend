@@ -1,7 +1,7 @@
 <template>
 
 <div class="up">
-    <div v-if="completedState === 'CARGANDO'">
+    <div v-if="allState === 'CARGANDO'">
     <loader />
 </div>
 
@@ -16,10 +16,10 @@
     </div>
 
     <div class="forum-scrollarea">
-        <rev-forum-completed
-        v-for="forumCompleted of forumsCompletedRef"
-        :key="forumCompleted._id"
-        :forumCompleted="forumCompleted"
+        <all-forum
+        v-for="allForums of allForumsRef"
+        :key="allForums._id"
+        :allForums="allForums"
         />
     </div>
 </div>
@@ -33,12 +33,12 @@ import { watch } from '@vue/runtime-core';
 import { useStore } from 'vuex';
 
 import getTerm from '../composables/forumTerm';
-import RevForumCompleted from '../components/RevForumCompleted.vue';
 import Loader from '../../../components/Loader.vue';
+import AllForum from '../components/AllForum.vue';
 
 export default {
 
-    components: { Loader, RevForumCompleted },
+    components: { Loader, AllForum },
 
     setup() {
 
@@ -46,22 +46,22 @@ export default {
 
         const term = ref('');
 
-        const { forumsCompletedRef, forumsCompletedTerm, completedState } = getTerm(term.value);
+        const { allForumsRef, allForumsTerm, allState } = getTerm(term.value);
 
         watch(
             () => term.value,
-            () => forumsCompletedTerm(term.value)
+            () => allForumsTerm(term.value)
         );
 
         watch(
-            () => store.state.forums.forumsCompleted,
-            () => forumsCompletedTerm(term.value)
+            () => store.state.forums.allForums,
+            () => allForumsTerm(term.value)
         );
 
         return {
             term,
-            forumsCompletedRef,
-            completedState,
+            allForumsRef,
+            allState,
         }
     }
 

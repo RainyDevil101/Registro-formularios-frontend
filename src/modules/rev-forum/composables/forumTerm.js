@@ -6,6 +6,7 @@ const getTerm = (term) => {
     const store = useStore();
     const forumsRef = ref('');
     const forumsCompletedRef = ref('');
+    const allForumsRef = ref('');
 
     const forumsTerm = (term = '') => {
 
@@ -19,10 +20,18 @@ const getTerm = (term) => {
 
         return forumsCompletedRef.value = resp.value
     }
+    const allForumsTerm = (term = '') => {
+
+        const resp = computed(() => store.getters['forums/allForumsState'](term) )
+
+        return allForumsRef.value = resp.value
+    }
 
     forumsTerm(term)
 
     forumsCompletedTerm(term)
+
+    allForumsTerm(term)
     
 
     return {
@@ -30,6 +39,8 @@ const getTerm = (term) => {
         forumsCompletedTerm,
         forumsRef,
         forumsCompletedRef,
+        allForumsRef,
+        allForumsTerm,
 
         statusState: computed(() => store.getters['forums/statusState']),
         completedState: computed(() => store.getters['forums/completedState']),

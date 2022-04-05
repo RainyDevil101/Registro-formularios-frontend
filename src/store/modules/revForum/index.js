@@ -18,6 +18,9 @@ const getters = {
 
     forumsState: (state) => (term = '') => {
 
+        if (state.forumsPending.length === 0) {
+            return ''
+        }
 
         if (term.length === 0) return state.forumsPending
 
@@ -26,16 +29,30 @@ const getters = {
     },
     forumsStateCompleted: (state) => (term = '') => {
 
+        if (state.forumsCompleted.length === 0) {
+            return ''
+        }
 
         if (term.length === 0) return state.forumsCompleted
 
         return state.forumsCompleted.filter(forum => forum.name.toLowerCase().includes(term.toLocaleLowerCase()))
 
     },
-    getForumNeeded(state) {
+    allForumsState: (state) => (term = '') => {
 
+        if (state.allForums.length === 0) {
+            return ''
+        }
+
+        if (term.length === 0) return state.allForums
+
+        return state.allForums.filter(forum => forum.name.toLowerCase().includes(term.toLocaleLowerCase()))
+
+    },
+    getForumNeeded(state) {
         if (state.userNeeded === '') {
-            return JSON.parse(localStorage.getItem('fP'));
+
+            return state.userNeeded = JSON.parse(localStorage.getItem('uN'));
         } else {
             return state.userNeeded
         }
@@ -65,7 +82,6 @@ const mutations = {
 
         state.userNeeded = ''
         state.allForums = ''
-        localStorage.removeItem('aF')
 
         if ( allForums === undefined ) return
 
@@ -92,6 +108,11 @@ const mutations = {
 
     },
     saveForums(state, { forumsPending }) {
+
+        if (forumsPending.length === 0) {
+            state.forumsPending = ''
+            state.status = 'RECIBIDOS'
+        }
 
         state.userNeeded = ''
         state.forumsPending = ''

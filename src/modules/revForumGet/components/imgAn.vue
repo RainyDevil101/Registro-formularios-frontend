@@ -57,7 +57,7 @@ img {
     max-height: 600px;
     height: auto;
     width: auto;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .modal-container {

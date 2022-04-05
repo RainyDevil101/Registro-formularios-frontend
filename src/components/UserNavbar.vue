@@ -15,6 +15,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 txt-c">
                     <li class="nav-item box-a">
+                        <a @click="menu" class="nav-link active pointer">
+                            <b>Menu</b>
+                        </a>
+                    </li>
+                    <li class="nav-item box-a">
+                        <a @click="all" class="nav-link active pointer">
+                            <b>Todas</b>
+                        </a>
+                    </li>
+                    <li class="nav-item box-a">
                         <a @click="revisadas" class="nav-link active pointer">
                             <b>Revisadas</b>
                         </a>
@@ -29,32 +39,32 @@
                             <b>Usuarios</b>
                         </a>
                     </li>
-                   <div v-show="imgBlocked === false">
+                    <div v-show="imgBlocked === false">
                         <li class="nav-item dropdown">
-                        <a
-                            class="nav-link active dropdown-toggle box-a"
-                            href="#"
-                            id="navbarDropdown"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                        >
-                            <b>Imagenes</b>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a @click="onShowAn" class="dropdown-item pointer">
-                                    <b>Anverso ART</b>
-                                </a>
-                            </li>
-                            <li>
-                                <a @click="onShowRe" class="dropdown-item pointer">
-                                    <b>Reverso ART</b>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                   </div>
+                            <a
+                                class="nav-link active dropdown-toggle box-a"
+                                href="#"
+                                id="navbarDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                <b>Imagenes</b>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a @click="onShowAn" class="dropdown-item pointer">
+                                        <b>Anverso ART</b>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a @click="onShowRe" class="dropdown-item pointer">
+                                        <b>Reverso ART</b>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
                 </ul>
                 <button class="logout" @click="onLogOut">
                     <i class="fas fa-sign-out-alt"></i>
@@ -79,7 +89,7 @@ export default {
 
         watch(
             () => store.state.forums.imgBlocked,
-            () => (imgBlocked.value = store.state.forums.imgBlocked) 
+            () => (imgBlocked.value = store.state.forums.imgBlocked)
         )
 
         const imgBlocked = ref(store.state.forums.imgBlocked);
@@ -109,10 +119,10 @@ export default {
                 if (onImgRe.value === false) {
 
                     return store.dispatch('forums/changeImgRe', true)
-                    
+
                 }
                 if (onImgRe.value === true) {
-                    
+
                     return store.dispatch('forums/changeImgRe', false)
 
                 }
@@ -125,6 +135,9 @@ export default {
             },
             menu: () => {
                 router.push({ name: 'rev-front-menu' })
+            },
+            all: () => {
+                router.push({ name: 'all-forums' })
             },
             lista: () => {
                 router.push({ name: 'rev-list-forum' })

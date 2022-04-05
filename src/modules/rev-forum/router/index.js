@@ -13,6 +13,10 @@ export default {
             name: 'rev-list-completed',
             component: () => import(/* webpackChunkName: "rev-list-completed" */ '@/modules/rev-forum/views/RevForumListCompleted.vue'),
         },
-
+        {
+            path: 'all-forums',
+            name: 'all-forums',
+            component: () => import(/* webpackChunkName: "all-forums" */ '@/modules/rev-forum/views/ReForumAll.vue'),
+        },
     ]
 }
