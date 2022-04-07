@@ -6,7 +6,7 @@
 
   <div v-else class="hgt">
     <router-view v-slot="{ Component }">
-      <keep-alive exclude="@/modules/forum/views/ForumView.vue">
+      <keep-alive>
         <component :is="Component" />
       </keep-alive>
     </router-view>
@@ -61,7 +61,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
   height: 100%;
-  min-height: 100vh;
+  min-height: 300px;
   background: url("./assets/backgroundft.png");
 }
 
@@ -95,6 +95,15 @@ export default {
   bottom: 0;
   border-radius: 50%;
   animation: spin 1.5s infinite linear;
+}
+
+@media (min-width: 400px) {
+
+  .footer-t {
+    position: fixed;
+    bottom: 0;
+  }
+
 }
 
 @keyframes spin {

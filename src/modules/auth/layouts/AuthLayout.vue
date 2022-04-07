@@ -1,6 +1,8 @@
 <template>
-  <div class="intro-box text-center">
+  <div class="pd">
+      <div class="intro-box">
     <router-view />
+  </div>
   </div>
 </template>
 
@@ -36,14 +38,18 @@ body {
 }
 
 .intro-box {
+  padding: 4px;
+  width: 400px;
+  text-align: center;
   background-color: rgba($color: white, $alpha: 1);
-  height: 600px;
-  left: 50%;
-  position: absolute;
-  top: 43%;
-  transform: translate(-50%, -50%);
-  width: 300px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.pd {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  padding-top: 2rem;
 }
 
 // Extra small devices (portrait phones, less than 576px)
@@ -76,9 +82,7 @@ body {
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
-  .intro-box {
-    width: 400px;
-  }
+
 }
 
 // Extra large devices (large desktops, 1200px and up)

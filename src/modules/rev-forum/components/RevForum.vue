@@ -65,13 +65,13 @@ span {
 
 .forum-container {
     text-align: center;
-    background-color: white;
+    background-color: rgba($color: #ffe70e, $alpha: 1.0);
     margin-bottom: 0.2rem;
     margin-top: 0.2rem;
-    border: 0.01rem solid rgb(255, 255, 255);
+    border: 2px solid #d4c009;
 
     &:hover {
-        background-color: lighten($color: grey, $amount: 45);
+        background-color: rgba($color: #d4c009, $alpha: 1.0);
         transition: 0.2s all ease-in;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }

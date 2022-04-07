@@ -68,7 +68,7 @@ span {
     background-color: white;
     margin-bottom: 0.2rem;
     margin-top: 0.2rem;
-    border: 0.01rem solid rgb(255, 255, 255);
+    border: 2px solid rgb(255, 255, 255);
 
     &:hover {
         background-color: lighten($color: grey, $amount: 45);

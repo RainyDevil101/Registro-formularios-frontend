@@ -70,12 +70,6 @@ body {
   font-size: 16px;
 }
 
-.in-span {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-}
-
 .forum-mail {
   font-size: 1.5rem;
   text-align: center;
@@ -187,11 +181,6 @@ select:focus {
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
-  .in-span {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-  }
 
   .forum-mail {
     font-size: 1.5rem;

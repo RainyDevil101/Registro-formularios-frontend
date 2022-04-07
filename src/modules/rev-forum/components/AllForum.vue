@@ -1,6 +1,7 @@
 <template>
     <div
         class="mx-1 forum-container pointer p-2"
+        v-bind:style="[ allForums.statusForum === 'PENDIENTE' ? {backgroundColor: color1, borderColor: border1} : {backgroundColor:color2, borderColor: border2}]"
         @click="$router.push({ name: 'get-forum-all', params: { id: allForums._id } })"
     >
         <div class="forum-title user-container">
@@ -25,12 +26,20 @@ export default {
 
     setup(props) {
 
+        const color1 = ref('#ffe70e');
+        const border1 = ref('#d4c009');
+        const color2 = ref('#fff');
+        const border2 = ref('grey');
 
         const forumDate = ref();
         forumDate.value = props.allForums.date
 
         return {
             forumDate,
+            color1,
+            color2,
+            border2,
+            border1,
 
         }
     }
@@ -65,13 +74,11 @@ span {
 
 .forum-container {
     text-align: center;
-    background-color: white;
     margin-bottom: 0.2rem;
     margin-top: 0.2rem;
-    border: 0.01rem solid rgb(255, 255, 255);
+    border: 2px solid;
 
     &:hover {
-        background-color: lighten($color: grey, $amount: 45);
         transition: 0.2s all ease-in;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
