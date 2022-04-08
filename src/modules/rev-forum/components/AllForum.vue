@@ -1,7 +1,7 @@
 <template>
     <div
         class="mx-1 forum-container pointer p-2"
-        v-bind:style="[ allForums.statusForum === 'PENDIENTE' ? {backgroundColor: color1, borderColor: border1} : {backgroundColor:color2, borderColor: border2}]"
+        :class="[ allForums.statusForum === 'PENDIENTE' ? test1 : test2 ]"
         @click="$router.push({ name: 'get-forum-all', params: { id: allForums._id } })"
     >
         <div class="forum-title user-container">
@@ -26,20 +26,16 @@ export default {
 
     setup(props) {
 
-        const color1 = ref('#ffe70e');
-        const border1 = ref('#d4c009');
-        const color2 = ref('#fff');
-        const border2 = ref('grey');
+        const test1 = ref('testing1');
+        const test2 = ref('testing2');
 
         const forumDate = ref();
         forumDate.value = props.allForums.date
 
         return {
             forumDate,
-            color1,
-            color2,
-            border2,
-            border1,
+            test1,
+            test2,
 
         }
     }
@@ -52,6 +48,28 @@ export default {
 
 span {
     font-size: 10px;
+}
+
+.testing1 {
+    background-color: #ffe70e;
+    border: 2px solid #d4c009;
+
+        &:hover {
+        background-color: rgba($color: #d4c009, $alpha: 1.0);
+        transition: 0.2s all ease-in;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+}
+
+.testing2 {
+    background-color: #fff;
+    border: 2px solid grey;
+
+    &:hover {
+        background-color: lighten($color: grey, $amount: 45);
+        transition: 0.2s all ease-in;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
 }
 .user-container {
     display: flex;
@@ -76,7 +94,6 @@ span {
     text-align: center;
     margin-bottom: 0.2rem;
     margin-top: 0.2rem;
-    border: 2px solid;
 
     &:hover {
         transition: 0.2s all ease-in;
