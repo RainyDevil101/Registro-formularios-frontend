@@ -20,6 +20,11 @@
                         </a>
                     </li>
                     <li class="nav-item box-a">
+                        <a @click="dashboard" class="nav-link active pointer">
+                            <b>Dashboard</b>
+                        </a>
+                    </li>
+                    <li class="nav-item box-a">
                         <a @click="all" class="nav-link active pointer">
                             <b>Todas</b>
                         </a>
@@ -135,6 +140,9 @@ export default {
             },
             menu: () => {
                 router.push({ name: 'rev-front-menu' })
+            },
+            dashboard: () => {
+                router.push({ name: 'dashboard-view' })
             },
             all: () => {
                 router.push({ name: 'all-forums' })

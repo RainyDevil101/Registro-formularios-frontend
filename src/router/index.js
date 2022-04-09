@@ -1,17 +1,18 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-import user from '../modules/user/router'
-import forum from '../modules/forum/router'
-import revForum from '../modules/rev-forum/router'
-import menu from '../modules/menu/router'
-import revMenu from '../modules/rev-menu/router'
-import getForum from '../modules/revForumGet/router'
 import auth from '../modules/auth/router'
-import loading from '../modules/load/router'
 import authGuard from '../modules/auth/router/auth-guard'
-import supervisor from '../modules/auth/router/supervisor-verification'
-import revisor from '../modules/auth/router/revisor-verification'
+import dashboard from '../modules/dashboard/router'
+import forum from '../modules/forum/router'
+import getForum from '../modules/revForumGet/router'
+import loading from '../modules/load/router'
+import menu from '../modules/menu/router'
 import redirect from '../modules/auth/router/redirect'
+import revForum from '../modules/rev-forum/router'
+import revisor from '../modules/auth/router/revisor-verification'
+import revMenu from '../modules/rev-menu/router'
+import supervisor from '../modules/auth/router/supervisor-verification'
+import user from '../modules/user/router'
 
 const routes = [
   
@@ -49,6 +50,12 @@ const routes = [
     beforeEnter: [authGuard],
     beforeEnter: [revisor],
     ...revForum
+  },
+  {
+    path: '/dashboard',
+    beforeEnter: [authGuard],
+    beforeEnter: [revisor],
+    ...dashboard
   },
   {
     path: '/rev-menu',
