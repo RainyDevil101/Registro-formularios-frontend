@@ -77,7 +77,7 @@ export default {
   text-align: center;
   justify-content: center;
   align-content: center;
-  position: absolute;
+  position: fixed;
   width: 100vw;
   bottom: 0;
 }

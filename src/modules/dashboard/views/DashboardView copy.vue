@@ -3,9 +3,7 @@
         <div class="totalAndReviewed">
             <total-and-reviewed-forums />
         </div>
-        <div class="averageReviewed">
-            <donut />
-        </div>
+        <div class="averageReviewed"></div>
         <div class="artToDate"></div>
         <div class="averageCompleted"></div>
         <div class="rcPrevented"></div>
@@ -16,12 +14,11 @@
 </template>
 
 <script>
-import Donut from '../components/Donut.vue'
 import TotalAndReviewedForums from '../components/TotalAndReviewedForums.vue'
 
 export default {
 
-    components: { TotalAndReviewedForums, Donut },
+    components: { TotalAndReviewedForums },
 
     setup() {
 
