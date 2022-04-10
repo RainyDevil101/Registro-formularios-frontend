@@ -47,20 +47,23 @@ export default {
     return {
       chartData: {
         labels: [
-          'REGISTROS',
-          'REGISTROS CHEQUEADOS',
+          'TEST 1',
+          'TEST 2',
+          'TEST 3',
+          'TEST 4',
         ],
         datasets: [
           {
-            label: 'TOTAL REGISTROS V/S REGISTROS CHEQUEADOS',
-            backgroundColor: '#B5D99C',
-            data: [40, 20]
+            label: 'PERSONAL SUPERVISOR-CANTIDAD ART A LA FECHA',
+            backgroundColor: ['rgb(255, 206, 86)'],
+            fontSize: 40,
+            data: [40, 20, 15, 9]
           }
         ]
       },
       chartOptions: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
       }
     }
   }

@@ -1,6 +1,16 @@
 <template>
   <div class="up">
-    <Doughnut />
+    <Doughnut 
+          :chart-options="chartOptions"
+      :chart-data="chartData"
+      :chart-id="chartId"
+      :dataset-id-key="datasetIdKey"
+      :plugins="plugins"
+      :css-classes="cssClasses"
+      :styles="styles"
+      :width="width"
+      :height="height"
+    />
   </div>
 </template>
 
@@ -16,8 +26,7 @@ import {
   Tooltip,
   Legend,
   ArcElement,
-  CategoryScale,
-  Plugin
+  CategoryScale
 } from 'chart.js'
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
@@ -32,6 +41,10 @@ export default defineComponent({
     chartId: {
       type: String,
       default: 'doughnut-chart'
+    },
+        datasetIdKey: {
+      type: String,
+      default: 'label'
     },
     width: {
       type: Number,
@@ -50,37 +63,29 @@ export default defineComponent({
       default: () => {}
     },
     plugins: {
-      type: Array ,
+      type: Object ,
       default: () => []
     }
   },
-  setup(props) {
-    const chartData = {
-      labels: ['REVISADOS', 'POR REVISAR'],
-      datasets: [
-        {
-          backgroundColor: ['#41B883', '#E46651'],
-          data: [40, 20]
-        }
-      ]
+  setup() {
+
+
+
+    return {
+
+      chartData: {
+        labels: ['REVISADOS', 'POR REVISAR'],
+        datasets: [{ data: [23,10],
+        backgroundColor: ['rgb(153, 102, 255)', 'rgb(255, 206, 86)']
+        }]
+      },
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+      }
+
     }
 
-    const chartOptions = {
-      responsive: true,
-      maintainAspectRatio: false
-    }
-
-    return () =>
-      h(Doughnut, {
-        chartData,
-        chartOptions,
-        chartId: props.chartId,
-        width: props.width,
-        height: props.height,
-        cssClasses: props.cssClasses,
-        styles: props.styles,
-        plugins: props.plugins
-      })
   }
 })
 </script>

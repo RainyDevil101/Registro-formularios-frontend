@@ -6,8 +6,12 @@
         <div class="averageReviewed">
             <donut />
         </div>
-        <div class="artToDate"></div>
-        <div class="averageCompleted"></div>
+        <div class="artToDate">
+            <lines-art />
+        </div>
+        <div class="averageCompleted">
+            <pie />
+        </div>
         <div class="rcPrevented"></div>
         <div class="noPerAnswer"></div>
         <div class="cuantityfaena"></div>
@@ -18,10 +22,12 @@
 <script>
 import Donut from '../components/Donut.vue'
 import TotalAndReviewedForums from '../components/TotalAndReviewedForums.vue'
+import LinesArt from '../components/LinesArt.vue'
+import Pie from '../components/Pie.vue'
 
 export default {
 
-    components: { TotalAndReviewedForums, Donut },
+    components: { TotalAndReviewedForums, Donut, LinesArt, Pie },
 
     setup() {
 
