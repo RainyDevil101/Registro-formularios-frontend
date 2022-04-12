@@ -47,16 +47,22 @@ export default {
     return {
       chartData: {
         labels: [
-          'TEST 1',
-          'TEST 2',
-          'TEST 3',
-          'TEST 4',
+          'RQSV N°1',
+          'RQSV N°2',
+          'RQSV N°3',
+          'RQSV N°4',
+          'RQSV N°5',
+          'RQSV N°6',
+          'RQSV N°10',
+          'RQSV N°15',
+          'RQSV N°18',
+          'RQSV N°20',
         ],
         datasets: [
           {
-            label: 'PERSONAL SUPERVISOR-CANTIDAD ART A LA FECHA',
-            backgroundColor: ['rgb(255, 206, 86)'],
-            data: [40, 20, 15, 9]
+            label: 'CANTIDAD DE RC VINCULADOS A LA HERRAMIENTA PREVENTIVA',
+            backgroundColor: ['#1c7293'],
+            data: [2, 1, 3, 5, 6, 40, 20, 15, 9, 4]
           }
         ]
       },

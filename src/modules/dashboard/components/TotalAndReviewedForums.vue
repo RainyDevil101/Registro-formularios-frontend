@@ -60,7 +60,14 @@ export default {
       },
       chartOptions: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          }
+        }
       }
     }
   }

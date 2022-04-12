@@ -12,7 +12,9 @@
         <div class="averageCompleted">
             <pie />
         </div>
-        <div class="rcPrevented"></div>
+        <div class="rcPrevented">
+            <line-pre />
+        </div>
         <div class="noPerAnswer"></div>
         <div class="cuantityfaena"></div>
         <div class="questions"></div>
@@ -24,10 +26,11 @@ import Donut from '../components/Donut.vue'
 import TotalAndReviewedForums from '../components/TotalAndReviewedForums.vue'
 import LinesArt from '../components/LinesArt.vue'
 import Pie from '../components/Pie.vue'
+import LinePre from '../components/LinePre.vue'
 
 export default {
 
-    components: { TotalAndReviewedForums, Donut, LinesArt, Pie },
+    components: { TotalAndReviewedForums, Donut, LinesArt, Pie, LinePre },
 
     setup() {
 
