@@ -237,11 +237,11 @@ export default {
     const userForm = ref({
       dateAc: "",
       obligation: "",
-      question1: "",
-      question2: "",
-      question3: "",
-      question4: "",
-      question5: "",
+      question1: "omitida",
+      question2: "omitida",
+      question3: "omitida",
+      question4: "omitida",
+      question5: "omitida",
       controls: false,
       postControl: "",
       statusForum: "PENDIENTE",
@@ -297,12 +297,7 @@ export default {
         Swal.showLoading();
         const check = userForm.value;
         if (check.dateAc === "" ||
-          check.obligation === "" ||
-          check.question1 === "" ||
-          check.question2 === "" ||
-          check.question3 === "" ||
-          check.question4 === "" ||
-          check.question5 === "") {
+          check.obligation === "") {
           return Swal.fire({
             title: "Error",
             text: `Debe completar los campos`,
