@@ -38,7 +38,7 @@ export default {
 }
 
 .footer {
-  background-color: rgba($color: rgb(94, 0, 0), $alpha: 1);
+  background-color: rgba($color: rgb(0, 65, 127), $alpha: 1);
   padding-top: 15px;
   padding-bottom: 15px;
   color: white;

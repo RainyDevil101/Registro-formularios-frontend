@@ -44,6 +44,7 @@ const getTerm = (term) => {
 
         statusState: computed(() => store.getters['forums/statusState']),
         completedState: computed(() => store.getters['forums/completedState']),
+        totalC: computed(() => store.getters['forums/countAll']),
     }
 
 

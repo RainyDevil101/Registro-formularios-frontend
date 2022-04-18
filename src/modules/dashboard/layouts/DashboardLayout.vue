@@ -6,12 +6,24 @@
 </template>
 
 <script>
+import { onActivated } from '@vue/runtime-core';
 import RevNavbar from "../../../components/RevNavbar.vue";
+import useAuth from "../../auth/composables/useAuth";
 export default {
   components: { RevNavbar },
 
   setup() {
-    return {};
+
+    const { getForums } = useAuth();
+
+    onActivated(() => {
+      console.log('getForums');
+      getForums();
+    })
+
+    return {
+
+    };
   },
 };
 </script>

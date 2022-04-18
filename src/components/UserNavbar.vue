@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark bcc">
+    <nav class="navbar navbar-expand-lg navbar-light bcc">
         <div class="container-fluid">
             <button
                 class="navbar-toggler"
@@ -80,11 +80,11 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router'
-import useAuth from '../modules/auth/composables/useAuth';
 import { useStore } from 'vuex';
-import { onActivated, onBeforeMount, watch } from '@vue/runtime-core';
+import { watch } from '@vue/runtime-core';
+import useAuth from '../modules/auth/composables/useAuth';
 export default {
     setup() {
 
@@ -164,7 +164,7 @@ export default {
 
 <style lang="scss" scoped>
 .bcc {
-    background-color: rgba($color: rgb(94, 0, 0), $alpha: 1);
+    background-color: rgba($color: rgb(0, 65, 127), $alpha: 1);
 }
 
 .txt-c {
@@ -196,15 +196,14 @@ export default {
 
 @media (min-width: 991px) {
     .box-a {
-        background-color: black;
+        background-color: white;
         margin: 0px 4px 0px 4px;
         width: 150px;
-        border: 1px solid black;
         border-radius: 4px;
 
-        &:hover {
-            background-color: rgba($color: #1a1a1a, $alpha: 1);
-        }
+    &:hover {
+      background-color: rgb(203, 203, 203);
+    }
     }
 }
 </style>

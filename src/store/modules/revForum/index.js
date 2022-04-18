@@ -7,6 +7,8 @@ const state = {
     forumsCompleted: '',
     forumsPending: '',
     allForums: '',
+    allArray: '',
+    allCountRdy: false,
     userNeeded: '',
     imgAn: false,
     imgRe: false,
@@ -60,6 +62,24 @@ const getters = {
 
 
     },
+    countAll(state) {
+
+        if (state.allForums.length === 0) {
+            return ''
+        }
+
+        return state.allForums.length
+
+    },
+    countCompleted(state) {
+
+        if (state.forumsCompleted.length === 0) {
+            return ''
+        }
+
+        return state.forumsCompleted.length
+
+    },
     statusState(state) {
 
         return state.status
@@ -82,29 +102,40 @@ const mutations = {
 
         state.userNeeded = ''
         state.allForums = ''
+        state.allCount = ''
+        state.allCountRdy = false
 
         if ( allForums === undefined ) return
 
         if (!localStorage.getItem('aF')) {
 
             localStorage.setItem('aF', JSON.stringify(allForums));
+
+            const forumsCompleted = allForums.filter(completed => completed.statusForum == 'REVISADO')
+
             const aForums = JSON.parse(localStorage.getItem('aF'));
             state.allForums = aForums
+            state.allArray = [aForums.length, forumsCompleted.length]
             state.statusA = 'RECIBIDOS'
+            state.allCountRdy = true
 
             return
 
         } else {
 
+            const forumsCompleted = allForums.filter(completed => completed.statusForum == 'REVISADO')
+
+            
             const aForums = JSON.parse(localStorage.getItem('aF'));
             state.allForums = aForums
+            state.allArray = [aForums.length, forumsCompleted.length]
             state.statusA = 'RECIBIDOS'
+            state.allCountRdy = true
+            console.log(state.allArray)
 
             return
 
         }
-
-
 
     },
     saveForums(state, { forumsPending }) {

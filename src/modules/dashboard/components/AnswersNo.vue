@@ -47,22 +47,21 @@ export default {
     return {
       chartData: {
         labels: [
-          'RQSV N°1',
-          'RQSV N°2',
-          'RQSV N°3',
-          'RQSV N°4',
-          'RQSV N°5',
-          'RQSV N°6',
-          'RQSV N°10',
-          'RQSV N°15',
-          'RQSV N°18',
-          'RQSV N°20',
+          'PREGUNTA 1',
+          'PREGUNTA 2',
+          'PREGUNTA 3',
+          'PREGUNTA 4',
+          'PREGUNTA 5',
+          'PREGUNTA 6',
+          'PREGUNTA 7',
+          'PREGUNTA 8',
+          'PREGUNTA 9',
         ],
         datasets: [
           {
             label: 'CANTIDAD DE RC VINCULADOS A LA HERRAMIENTA PREVENTIVA',
-            backgroundColor: ['#1c7293'],
-            data: [2, 1, 3, 5, 6, 40, 20, 15, 9, 4]
+            backgroundColor: ['#D5D6AA'],
+            data: [2, 1, 3, 5, 6, 40, 20, 15, 9]
           }
         ]
       },

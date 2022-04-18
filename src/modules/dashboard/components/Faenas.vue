@@ -47,22 +47,20 @@ export default {
     return {
       chartData: {
         labels: [
-          'RQSV N°1',
-          'RQSV N°2',
-          'RQSV N°3',
-          'RQSV N°4',
-          'RQSV N°5',
-          'RQSV N°6',
-          'RQSV N°10',
-          'RQSV N°15',
-          'RQSV N°18',
-          'RQSV N°20',
+          'DET',
+          'DAND',
+          'DFV',
+          'DSAL',
+          'DCH',
+          'SDAND',
+          'SDET',
+          'CASA MATRÍZ',
         ],
         datasets: [
           {
-            label: 'CANTIDAD DE RC VINCULADOS A LA HERRAMIENTA PREVENTIVA',
-            backgroundColor: ['#1c7293'],
-            data: [2, 1, 3, 5, 6, 40, 20, 15, 9, 4]
+            label: 'CANTIDAD ART POR FAENA',
+            backgroundColor: ['#E75A7C'],
+            data: [2, 1, 3, 5, 6, 40, 20, 15, 9]
           }
         ]
       },

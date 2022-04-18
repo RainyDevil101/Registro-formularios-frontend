@@ -1,12 +1,16 @@
 <template>
   <div class="up">
     <Bar :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId" :dataset-id-key="datasetIdKey"
-      :plugins="plugins" :css-classes="cssClasses" :styles="styles" :width="width" :height="height" />  </div>
+      :plugins="plugins" :css-classes="cssClasses" :styles="styles" :width="width" :height="height" />
+  </div>
 </template>
 
 <script>
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import { computed, onActivated, ref, watch } from 'vue'
+import { useStore } from 'vuex'
+import getTerm from '../../rev-forum/composables/forumTerm'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
@@ -14,6 +18,10 @@ export default {
   name: 'BarChart',
   components: { Bar },
   props: {
+    allC: {
+      type: Array,
+      required: true,
+    },
     chartId: {
       type: String,
       default: 'bar-chart'
@@ -24,11 +32,11 @@ export default {
     },
     width: {
       type: Number,
-      default: 400
+      default: 300
     },
     height: {
       type: Number,
-      default: 400
+      default: 300
     },
     cssClasses: {
       default: '',
@@ -43,8 +51,14 @@ export default {
       default: () => { }
     }
   },
-  data() {
+  setup(props) {
+
+    const allCount = ref('');
+    allCount.value = props.allC
+
     return {
+      allCount,
+
       chartData: {
         labels: [
           'REGISTROS',
@@ -54,7 +68,7 @@ export default {
           {
             label: 'TOTAL REGISTROS V/S REGISTROS CHEQUEADOS',
             backgroundColor: '#B5D99C',
-            data: [40, 20]
+            data: allCount.value
           }
         ]
       },
@@ -74,4 +88,5 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

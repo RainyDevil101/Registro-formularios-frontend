@@ -1,11 +1,11 @@
 <template>
   <div class="up">
+    <Pie :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId"
+      :plugins="plugins" :css-classes="cssClasses" :styles="styles" :width="width" :height="height" />
   </div>
 </template>
 
 <script>
-
-import { defineComponent, h, PropType } from 'vue'
 
 import { Pie } from 'vue-chartjs'
 import {
@@ -15,12 +15,12 @@ import {
   Legend,
   ArcElement,
   CategoryScale,
-  Plugin
+
 } from 'chart.js'
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
 
-export default defineComponent({
+export default {
   name: 'PieChart',
   components: {
     Pie
@@ -32,11 +32,11 @@ export default defineComponent({
     },
     width: {
       type: Number,
-      default: 400
+      default: 300
     },
     height: {
       type: Number,
-      default: 400
+      default: 300
     },
     cssClasses: {
       default: '',
@@ -44,47 +44,39 @@ export default defineComponent({
     },
     styles: {
       type: Object,
-      default: () => {}
+      default: () => { }
     },
     plugins: {
       type: Array,
       default: () => []
     }
   },
-  setup(props) {
-    const chartData = {
-      labels: ['CUMPLIDA', 'POR CUMPLIR'],
-      datasets: [
-        {
-          label: 'aadadsasds',
-          backgroundColor: ['#41B883', '#E46651'],
-          data: [40, 20]
-        }
-      ]
-    }
+  setup() {
 
-    const chartOptions = {
-      responsive: true,
-      maintainAspectRatio: false
-    }
 
-    return () =>
-      h(Pie, {
-        chartData,
-        chartOptions,
-        chartId: props.chartId,
-        width: props.width,
-        height: props.height,
-        cssClasses: props.cssClasses,
-        styles: props.styles,
-        plugins: props.plugins
-      })
+    return {
+
+      chartData: {
+        labels: ['CUMPLIDA', 'POR CUMPLIR'],
+        datasets: [
+          {
+            backgroundColor: ['#41B883', '#E46651'],
+            data: [40, 20]
+          }
+        ]
+      },
+
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+
+    }
   }
-})
+}
 
 
 </script>
 
 <style lang="scss" scoped>
-
 </style>
