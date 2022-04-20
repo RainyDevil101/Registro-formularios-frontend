@@ -2,7 +2,7 @@
     <div
         class="mx-1 forum-container pointer p-2"
         :class="[ allForums.statusForum === 'PENDIENTE' ? test1 : test2 ]"
-        @click="$router.push({ name: 'get-forum-all', params: { id: allForums._id } })"
+        @click="[ allForums.statusForum === 'PENDIENTE' ? $router.push({ name: 'get-forum', params: { id: allForums._id } }) : $router.push({ name: 'get-forum-completed', params: { id: allForums._id } }) ]"
     >
         <div class="forum-title user-container">
             <span class="user-name">{{ allForums.name }}</span>

@@ -1,15 +1,9 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bcc">
         <div class="container-fluid">
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            >
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -46,14 +40,8 @@
                     </li>
                     <div v-show="imgBlocked === false">
                         <li class="nav-item dropdown">
-                            <a
-                                class="nav-link active dropdown-toggle box-a"
-                                href="#"
-                                id="navbarDropdown"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                            >
+                            <a class="nav-link active dropdown-toggle box-a" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <b>Imagenes</b>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -171,6 +159,16 @@ export default {
     text-align: center;
 }
 
+nav .navbar-nav li a {
+    color: white !important;
+}
+
+.dropdown-menu {
+    align-content: center;
+    text-align: center;
+    background-color: rgba($color: rgb(0, 54, 105), $alpha: 1);
+}
+
 .logout {
     height: 40px;
     width: 40px;
@@ -195,15 +193,28 @@ export default {
 }
 
 @media (min-width: 991px) {
+
+    nav .navbar-nav li a {
+        color: black !important;
+    }
+
+    .dropdown-menu li a {
+        color: black !important;
+    }
+
+    .dropdown-menu {
+        background-color: white;
+    }
+
     .box-a {
         background-color: white;
         margin: 0px 4px 0px 4px;
-        width: 150px;
+        width: 120px;
         border-radius: 4px;
 
-    &:hover {
-      background-color: rgb(203, 203, 203);
-    }
+        &:hover {
+            background-color: rgb(203, 203, 203);
+        }
     }
 }
 </style>

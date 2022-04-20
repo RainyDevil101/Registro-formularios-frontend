@@ -7,8 +7,9 @@ const state = {
     forumsCompleted: '',
     forumsPending: '',
     allForums: '',
-    allArray: '',
-    allCountRdy: false,
+    allArray: [],
+    allPercent: [],
+    completedArray: [],
     userNeeded: '',
     imgAn: false,
     imgRe: false,
@@ -62,22 +63,24 @@ const getters = {
 
 
     },
-    countAll(state) {
+    userCount(state) {
 
-        if (state.allForums.length === 0) {
-            return ''
+        if (state.allForums === '') {
+            return
+        } else {
+
+
+
+            const users = []
+            const allForum = state.allForums
+
+            for (const u of allForum) {
+                users.push(u.user)
+            }
+
+            return users
+
         }
-
-        return state.allForums.length
-
-    },
-    countCompleted(state) {
-
-        if (state.forumsCompleted.length === 0) {
-            return ''
-        }
-
-        return state.forumsCompleted.length
 
     },
     statusState(state) {
@@ -102,36 +105,56 @@ const mutations = {
 
         state.userNeeded = ''
         state.allForums = ''
-        state.allCount = ''
-        state.allCountRdy = false
+        state.allArray = []
+        state.allPercent = []
 
-        if ( allForums === undefined ) return
+
+        if (allForums === undefined) return
 
         if (!localStorage.getItem('aF')) {
+
+            console.log('if');
 
             localStorage.setItem('aF', JSON.stringify(allForums));
 
             const forumsCompleted = allForums.filter(completed => completed.statusForum == 'REVISADO')
 
             const aForums = JSON.parse(localStorage.getItem('aF'));
+
+            // Primer gráfico
+
             state.allForums = aForums
             state.allArray = [aForums.length, forumsCompleted.length]
             state.statusA = 'RECIBIDOS'
-            state.allCountRdy = true
+
+            // Segundo gráfico
+
+            const total = (forumsCompleted.length * 100) / aForums.length
+            const rest = 100 - total
+            state.allPercent = [total, rest]
 
             return
 
         } else {
 
+            console.log('else');
+
             const forumsCompleted = allForums.filter(completed => completed.statusForum == 'REVISADO')
 
-            
+
             const aForums = JSON.parse(localStorage.getItem('aF'));
+
+            // Primer gráfico
+
             state.allForums = aForums
             state.allArray = [aForums.length, forumsCompleted.length]
             state.statusA = 'RECIBIDOS'
-            state.allCountRdy = true
-            console.log(state.allArray)
+
+            // Segundo gráfico
+
+            const total = (forumsCompleted.length * 100) / aForums.length
+            const rest = 100 - total
+            state.allPercent = [total, rest]
 
             return
 
@@ -199,9 +222,9 @@ const mutations = {
         const userNeeded = state.allForums.filter(a => a._id == id)
 
         if (userNeeded.length === 0) {
-             state.userNeeded = ''
-             state.error = true
-             return
+            state.userNeeded = ''
+            state.error = true
+            return
         } else {
             state.userNeeded = userNeeded
             localStorage.setItem('uN', JSON.stringify(userNeeded))
@@ -219,9 +242,9 @@ const mutations = {
         const userNeeded = state.forumsCompleted.filter(a => a._id == id)
 
         if (userNeeded.length === 0) {
-             state.userNeeded = ''
-             state.error = true
-             return
+            state.userNeeded = ''
+            state.error = true
+            return
         } else {
             state.userNeeded = userNeeded
             localStorage.setItem('uN', JSON.stringify(userNeeded))
@@ -263,22 +286,24 @@ const mutations = {
     logOut(state) {
 
         state.status = 'CARGANDO',
-        state.statusC = 'CARGANDO',
-        state.statusA = 'CARGANDO',
-        state.forumsCompleted = '',
-        state.forumsPending = '',
-        state.allForums = '',
-        state.userNeeded = '',
-        state.imgAn = false
+            state.statusC = 'CARGANDO',
+            state.statusA = 'CARGANDO',
+            state.forumsCompleted = '',
+            state.forumsPending = '',
+            state.allForums = '',
+            state.userNeeded = '',
+            state.imgAn = false
         state.imgRe = false
         state.blocImg = false
         state.error = false
+        state.allArray = []
+        state.allPercent = []
 
         localStorage.removeItem('fP')
         localStorage.removeItem('uN')
         localStorage.removeItem('fC')
         localStorage.removeItem('aF')
-        
+
     },
     blocImg(state) {
 

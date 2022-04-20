@@ -90,9 +90,15 @@ export default {
 
 }
 
+
+
 .txt-c {
   text-align: center;
 }
+
+  nav .navbar-nav li a{
+  color: white !important;
+  }
 
 .logout {
   height: 40px;
@@ -118,10 +124,14 @@ export default {
 }
 
 @media (min-width: 991px) {
+
+  nav .navbar-nav li a{
+  color: black !important;
+  }
   .box-a {
     background-color: white;
     margin: 0px 4px 0px 4px;
-    width: 150px;
+    width: 120px;
     border-radius: 4px;
 
     &:hover {

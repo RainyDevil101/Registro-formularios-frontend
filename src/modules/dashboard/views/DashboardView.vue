@@ -1,10 +1,10 @@
 <template>
     <div class="dashboard-view my-5">
-        <div v-if="allCR === true" class="totalAndReviewed">
-            <total-and-reviewed-forums :allC="allC" />
+        <div class="totalAndReviewed">
+            <total-and-reviewed-forums :key="allC" :allC="allC" />
         </div>
         <div class="averageReviewed">
-            <donut />
+            <donut :key="allPercent" :allPercent="allPercent" />
         </div>
         <div class="artToDate">
             <lines-art />
@@ -27,7 +27,7 @@
 
 <script>
 import { useStore } from 'vuex'
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import Donut from '../components/Donut.vue'
 import TotalAndReviewedForums from '../components/TotalAndReviewedForums.vue'
 import LinesArt from '../components/LinesArt.vue'
@@ -45,23 +45,23 @@ export default {
         const store = useStore();
 
         const allC = ref(store.state.forums.allArray)
-        const allCR = ref(store.state.forums.allCoountRdy)
 
+        const allPercent = ref(store.state.forums.allPercent)
 
         watch(
-            () => store.state.forums.allCountRdy,
+            () => store.state.forums.allArray,
             () => (allC.value = store.state.forums.allArray)
         )
 
         watch(
-            () => store.state.forums.allCountRdy,
-            () => (allCR.value = store.state.forums.allCountRdy)
+            () => store.state.forums.allPercent,
+            () => (allPercent.value = store.state.forums.allPercent)
         )
 
         return {
             allC,
-            allCR,
-
+            allPercent,
+            userTotal: computed(() => store.getters['forums/userCount'])
         }
 
     }

@@ -1,6 +1,6 @@
 <template>
-  <div class="up">
-    <Doughnut 
+  <div  class="up">
+    <Doughnut
           :chart-options="chartOptions"
       :chart-data="chartData"
       :chart-id="chartId"
@@ -15,10 +15,7 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router';
-
-import { defineComponent, h, PropType } from 'vue'
-import { ref } from '@vue/reactivity';
+import { ref } from 'vue';
 import { Doughnut } from 'vue-chartjs'
 import {
   Chart as ChartJS,
@@ -31,13 +28,16 @@ import {
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
 
-
-export default defineComponent({
+export default {
   name: 'DoughnutChart',
   components: {
     Doughnut
   },
   props: {
+    allPercent: {
+      type: Array,
+      required: true,
+    },
     chartId: {
       type: String,
       default: 'doughnut-chart'
@@ -67,15 +67,16 @@ export default defineComponent({
       default: () => []
     }
   },
-  setup() {
+  setup(props) {
 
-
+    const percentC = ref();
+    percentC.value = props.allPercent
 
     return {
 
       chartData: {
         labels: ['REVISADOS', 'POR REVISAR'],
-        datasets: [{ data: [23,10],
+        datasets: [{ data: percentC.value,
         backgroundColor: ['rgb(153, 102, 255)', 'rgb(255, 206, 86)']
         }]
       },
@@ -87,7 +88,7 @@ export default defineComponent({
     }
 
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>
