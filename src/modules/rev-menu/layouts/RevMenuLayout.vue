@@ -18,7 +18,7 @@ export default {
 
 <style lang="scss" scoped>
 .menu-view {
-  padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 10px;
 }
 

@@ -53,6 +53,8 @@ export default {
     const users = ref();
     users.value = props.userTotal
 
+    console.log(props.userTotal);
+
     return {
       chartData: {
         labels: users.value,

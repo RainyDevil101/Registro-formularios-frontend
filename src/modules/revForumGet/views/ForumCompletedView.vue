@@ -84,6 +84,23 @@
               <p v-if="userControl === 'Si'">{{ forum.postControl }}</p>
             </div>
           </div>
+          <div class="answers-two">
+            <div class="in-forum">
+              <p class="hdr">RESPUESTAS SEGUNDA PARTE</p>
+              <div class="lines"></div>
+              <p>¿SE IDENTIFICAN LA TOTALIDAD DE LOS RIESGOS CRÍTICOS (RC) PRESENTES EN LA TAREA?: <b>{{ forum.riesgosCriticos }}</b></p>
+              <p>¿LOS CONTROLES CRÍTICOS CORRESPONDEN A LOS RC IDENTIFICADOS DE LIBRETA DE PREGUNTAS?: <b>{{ forum.controlesCriticos }}</b></p>
+              <p>¿SE CUMPLEN LOS CONTROLES CRÍTICOS ESTABLECIDOS POR EL SUPERVISOR?: <b>{{ forum.cumplenControles }}</b></p>
+              <p>¿SE CUMPLEN LOS CONTROLES CRÍTICOS ESTABLECIDOS POR EL TRABAJADOR?: <b>{{ forum.trabControles }}</b></p>
+              <p>¿SE CONTESTARON TODAS LAS PREGUNTAS TRANSVERSALES (CUANDO APLICAN)?: <b>{{ forum.contestaronPreguntas }}</b></p>
+              <p>¿TODOS LOS TRABAJADORES FIRMARON LA TOMA DE CONOCIMIENTO DE LA ART?: <b>{{ forum.todosTrabajadores }}</b></p>
+              <p>¿TODOS LOS INTEGRANTES DE LA TAREA CONOCEN EL CORRECTO USO DE LA ART?: <b>{{ forum.todosIntegrantes }}</b></p>
+              <p>¿EL SUPERVISOR TITULAR O SUPERVISOR REEMPLAZANTE FIRMÓ EL ART?: <b>{{ forum.supervisorTitular }}</b></p>
+              <p>¿FUERON CORREGIDAS LAS DESVIACIONES?: <b>{{ forum.fueronCorregidas }}</b></p>
+              <p>OPORTUNIDADES ENCONTRADAS: <b>{{ forum.oportunidadesEncontradas }}</b></p>
+              <p>FORTALEZAS ODP: <b>{{ forum.fortalezaODP }}</b></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -245,7 +262,7 @@ p {
 }
 
 .up {
-  margin-top: 3rem;
+  margin-top: 3.5rem;
 }
 
 .in-forum {

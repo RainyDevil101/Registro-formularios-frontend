@@ -42,8 +42,7 @@ export default {
 .forum-view {
   width: 90%;
   margin-left: 5%;
-  padding-top: 20px;
-  padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 .navbar-fixed {

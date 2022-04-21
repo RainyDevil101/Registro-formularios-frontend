@@ -118,13 +118,18 @@ const mutations = {
             // Tercer gráfico
 
             const users = []
+
+            const counts = []
+            
             const allForum = state.allForums
 
             for (const u of allForum) {
                 users.push(u.user.name)
             }
 
-            state.userArray = users
+            Object.values(users).forEach(function (x) { counts[x] = (counts[x] || 0) + 1 })
+
+            state.userArray = counts
 
             return
 
@@ -152,13 +157,18 @@ const mutations = {
             // Tercer gráfico
 
             const users = []
+            const counts = []
             const allForum = state.allForums
 
             for (const u of allForum) {
                 users.push(u.user.name)
             }
 
-            state.userArray = users
+            const test = ['alexis', 'ivan', 'ivan']
+
+            Object.values(test).forEach(function (x) { counts[x] = (counts[x] || 0) + 1 })
+
+            state.userArray = counts
 
             return
 

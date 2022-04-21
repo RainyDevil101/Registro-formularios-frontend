@@ -476,7 +476,7 @@ textarea {
 }
 
 .up {
-  margin-top: 3rem;
+  margin-top: 3.5rem;
 }
 .forum-revisor {
   // min-width: 693px;

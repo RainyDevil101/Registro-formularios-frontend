@@ -39,10 +39,10 @@ export default {
     )
 
     getForumId();
-    
+
 
     onBeforeMount(() => {
-      if(store.state.forums.error === true) {
+      if (store.state.forums.error === true) {
         router.push({ 'name': 'no-forum' })
       }
     })
@@ -71,7 +71,7 @@ export default {
     //   console.log('onRenderTriggered');
     // })
     // onActivated(() => {
-      
+
     // })
     // onDeactivated(() => {
     //   console.log('onDeactivated');
@@ -89,8 +89,8 @@ export default {
 .forum-view {
   display: block;
   padding-top: 10px;
-  padding-bottom: 10px;
   justify-content: center;
+  overflow: auto;
 }
 
 .navbar-fixed {
@@ -99,9 +99,6 @@ export default {
 }
 
 @media (max-width: 774px) {
-  .forum-view {
-    overflow: scroll;
-    overflow-y: hidden;
-  }
+  
 }
 </style>

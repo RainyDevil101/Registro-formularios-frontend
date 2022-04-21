@@ -14,15 +14,15 @@ export default {
 
     const store = useStore();
 
-    watch(
-      () => store.state.auth.keyRe,
-      () => reload(),
-    )
 
     const reload = () => {
       if (store.state.auth.keyRe === 1) location.reload()
 
     }
+      watch(
+        () => store.state.auth.keyRe,
+        () => reload(),
+      )
 
     return {
       reload,

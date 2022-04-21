@@ -257,7 +257,7 @@ p {
 }
 
 .up {
-  margin-top: 3rem;
+  margin-top: 3.5rem;
 }
 
 .in-forum {
