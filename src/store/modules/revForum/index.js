@@ -10,6 +10,7 @@ const state = {
     allArray: [],
     allPercent: [],
     completedArray: [],
+    userArray: [],
     userNeeded: '',
     imgAn: false,
     imgRe: false,
@@ -63,26 +64,6 @@ const getters = {
 
 
     },
-    userCount(state) {
-
-        if (state.allForums === '') {
-            return
-        } else {
-
-
-
-            const users = []
-            const allForum = state.allForums
-
-            for (const u of allForum) {
-                users.push(u.user)
-            }
-
-            return users
-
-        }
-
-    },
     statusState(state) {
 
         return state.status
@@ -107,6 +88,7 @@ const mutations = {
         state.allForums = ''
         state.allArray = []
         state.allPercent = []
+        state.userArray = []
 
 
         if (allForums === undefined) return
@@ -133,6 +115,17 @@ const mutations = {
             const rest = 100 - total
             state.allPercent = [total, rest]
 
+            // Tercer gráfico
+
+            const users = []
+            const allForum = state.allForums
+
+            for (const u of allForum) {
+                users.push(u.user.name)
+            }
+
+            state.userArray = users
+
             return
 
         } else {
@@ -155,6 +148,17 @@ const mutations = {
             const total = (forumsCompleted.length * 100) / aForums.length
             const rest = 100 - total
             state.allPercent = [total, rest]
+
+            // Tercer gráfico
+
+            const users = []
+            const allForum = state.allForums
+
+            for (const u of allForum) {
+                users.push(u.user.name)
+            }
+
+            state.userArray = users
 
             return
 
@@ -298,6 +302,7 @@ const mutations = {
         state.error = false
         state.allArray = []
         state.allPercent = []
+        state.userArray = []
 
         localStorage.removeItem('fP')
         localStorage.removeItem('uN')

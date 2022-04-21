@@ -7,6 +7,7 @@
 <script>
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import { ref } from '@vue/reactivity'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
@@ -14,6 +15,10 @@ export default {
   name: 'BarChart',
   components: { Bar },
   props: {
+    userTotal: {
+      type: Array,
+      required: true
+    },
     chartId: {
       type: String,
       default: 'bar-chart'
@@ -43,15 +48,14 @@ export default {
       default: () => { }
     }
   },
-  data() {
+  setup(props) {
+
+    const users = ref();
+    users.value = props.userTotal
+
     return {
       chartData: {
-        labels: [
-          'TEST 1',
-          'TEST 2',
-          'TEST 3',
-          'TEST 4',
-        ],
+        labels: users.value,
         datasets: [
           {
             label: 'PERSONAL SUPERVISOR-CANTIDAD ART A LA FECHA',
