@@ -8,24 +8,30 @@
 
 <script>
 import { useStore } from 'vuex'
-import { watch } from '@vue/runtime-core';
+import { onActivated, watch } from '@vue/runtime-core';
 export default {
   setup() {
 
     const store = useStore();
 
 
-    const reload = () => {
-      if (store.state.auth.keyRe === 1) location.reload()
+    const reloadLogOut = () => {
+      if (store.state.auth.keyRe === false) {
+        console.log('aber');
+      }
 
     }
       watch(
         () => store.state.auth.keyRe,
-        () => reload(),
+        () => reloadLogOut(),
       )
 
+      onActivated(() => {
+        reloadLogOut();
+      })
+
     return {
-      reload,
+      
 
     }
   }

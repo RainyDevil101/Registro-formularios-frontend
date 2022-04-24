@@ -7,10 +7,10 @@
             <donut :key="allPercent" :allPercent="allPercent" />
         </div>
         <div class="artToDate">
-            <lines-art :key="userTotal" :userTotal="userTotal" />
+            <lines-art :key="userTotal" :userTotal="userTotal" :userRepeat="userRepeat" />
         </div>
         <div class="averageCompleted">
-            <pie />
+            <pie :key="averageQuality" :averageQuality="averageQuality" />
         </div>
         <div class="rcPrevented">
             <line-pre />
@@ -50,25 +50,24 @@ export default {
         
         const userTotal = ref(store.state.forums.userArray)
 
-        watch(
-            () => store.state.forums.allArray,
-            () => (allC.value = store.state.forums.allArray)
-        )
+        const userRepeat = ref(store.state.forums.userRepeat)
+
+        const averageQuality = ref(store.state.forums.forumQuality)
+
+        const status = ref(store.state.forums.statusA)
 
         watch(
-            () => store.state.forums.allPercent,
-            () => (allPercent.value = store.state.forums.allPercent)
-        )
-
-        watch(
-            () => store.state.forums.userArray,
-            () => (userTotal.value = store.state.forums.userArray)
+            () => store.state.forums.statusA,
+            () => (status.value = store.state.forums.statusA)
         )
 
         return {
             allC,
             allPercent,
             userTotal,
+            userRepeat,
+            averageQuality,
+            status,
         }
 
     }

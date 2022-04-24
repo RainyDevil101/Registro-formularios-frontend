@@ -47,7 +47,11 @@ const useAuth = () => {
         store.commit('auth/logOut')
         store.commit('forums/logOut')
     }
+    
+    const resetA = () => {
+        store.commit('forums/resetA')
 
+    }
     return {
         checkToken,
         loginUser,
@@ -57,6 +61,7 @@ const useAuth = () => {
         reForms,
         reCompleted,
         reAll,
+        resetA,
 
         authStatus: computed(() => store.getters['auth/currentState']),
         userName: computed(() => store.getters['auth/userName'])

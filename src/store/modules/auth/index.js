@@ -7,7 +7,7 @@ const state = {
     userId: null,
     position: null,
     task: null,
-    keyRe: 0,
+    keyRe: true,
 }
 
 const getters = {
@@ -41,17 +41,17 @@ const mutations = {
         state.user      = user
         state.status    = 'authenticated'
         state.userId    = userId
-        state.keyRe     = 0
+        state.keyRe     = true
     },
     logOut(state) {
 
         state.user      = '',
         state.token     = null,
-        state.status    = null,
+        state.status    = 'AUTHENTICATING',
         state.userId    = '',
         state.position  = '',
         state.task      = '',
-        state.keyRe     = 1,
+        state.keyRe     = false,
 
         localStorage.removeItem('token')
 

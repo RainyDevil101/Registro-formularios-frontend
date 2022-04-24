@@ -6,11 +6,13 @@ const state = {
     statusA: 'CARGANDO',
     forumsCompleted: '',
     forumsPending: '',
-    allForums: '',
+    allForums: [],
     allArray: [],
     allPercent: [],
     completedArray: [],
     userArray: [],
+    userRepeat: [],
+    forumQuality: [],
     userNeeded: '',
     imgAn: false,
     imgRe: false,
@@ -64,9 +66,19 @@ const getters = {
 
 
     },
+    allArray(state) {
+
+        return state.allArray
+
+    },
     statusState(state) {
 
         return state.status
+
+    },
+    statusStateA(state) {
+
+        return state.statusA
 
     },
     completedState(state) {
@@ -85,17 +97,18 @@ const mutations = {
     allForums(state, { allForums }) {
 
         state.userNeeded = ''
-        state.allForums = ''
+        state.allForums = []
         state.allArray = []
         state.allPercent = []
         state.userArray = []
+        state.userRepeat = []
+        state.forumQuality = []
 
+        state.statusA = 'CARGANDO'
 
         if (allForums === undefined) return
 
         if (!localStorage.getItem('aF')) {
-
-            console.log('if');
 
             localStorage.setItem('aF', JSON.stringify(allForums));
 
@@ -107,10 +120,9 @@ const mutations = {
 
             state.allForums = aForums
             state.allArray = [aForums.length, forumsCompleted.length]
-            state.statusA = 'RECIBIDOS'
-
+            
             // Segundo gráfico
-
+            
             const total = (forumsCompleted.length * 100) / aForums.length
             const rest = 100 - total
             state.allPercent = [total, rest]
@@ -118,24 +130,52 @@ const mutations = {
             // Tercer gráfico
 
             const users = []
+            const counts = {}
 
-            const counts = []
-            
-            const allForum = state.allForums
-
-            for (const u of allForum) {
-                users.push(u.user.name)
+            for (const u of aForums) {
+                if (u.userRevisor) {
+                    users.push(u.userRevisor.name)
+                }
             }
+
 
             Object.values(users).forEach(function (x) { counts[x] = (counts[x] || 0) + 1 })
 
-            state.userArray = counts
+            state.userArray = Object.keys(counts)
+            state.userRepeat = Object.values(counts)
 
+            // Cuarto gráfico
+
+            const quality = []
+            const totalAverage = []
+
+            for (const q of aForums) {
+                if (q.userRevisor) {
+                    quality.push(q.calidad)
+                }
+            }
+
+            const stringNumbers = Object.values(quality)
+            const toNumbers = stringNumbers.map(Number)
+
+            const add = toNumbers.reduce(function (x, y) {
+                return x + y;
+            }, 0)
+
+            const totalNumbers = toNumbers.length
+
+            const average = add / totalNumbers
+
+            const percentAverage = 100 - average
+
+            totalAverage.push(average, percentAverage)
+
+            state.forumQuality = totalAverage
+            
+            state.statusA = 'RECIBIDOS'
             return
-
+            
         } else {
-
-            console.log('else');
 
             const forumsCompleted = allForums.filter(completed => completed.statusForum == 'REVISADO')
 
@@ -146,10 +186,9 @@ const mutations = {
 
             state.allForums = aForums
             state.allArray = [aForums.length, forumsCompleted.length]
-            state.statusA = 'RECIBIDOS'
-
+            
             // Segundo gráfico
-
+            
             const total = (forumsCompleted.length * 100) / aForums.length
             const rest = 100 - total
             state.allPercent = [total, rest]
@@ -157,19 +196,50 @@ const mutations = {
             // Tercer gráfico
 
             const users = []
-            const counts = []
-            const allForum = state.allForums
+            const counts = {}
 
-            for (const u of allForum) {
-                users.push(u.user.name)
+            for (const u of aForums) {
+                if (u.userRevisor) {
+                    users.push(u.userRevisor.name)
+                }
             }
 
-            const test = ['alexis', 'ivan', 'ivan']
 
-            Object.values(test).forEach(function (x) { counts[x] = (counts[x] || 0) + 1 })
+            Object.values(users).forEach(function (x) { counts[x] = (counts[x] || 0) + 1 })
 
-            state.userArray = counts
+            state.userArray = Object.keys(counts)
+            state.userRepeat = Object.values(counts)
 
+            // Cuarto gráfico
+
+            const quality = []
+            const totalAverage = []
+
+            for (const q of aForums) {
+                if (q.userRevisor) {
+                    quality.push(q.calidad)
+                }
+            }
+
+            const stringNumbers = Object.values(quality)
+            const toNumbers = stringNumbers.map(Number)
+
+            const add = toNumbers.reduce(function (x, y) {
+                return x + y;
+            }, 0)
+
+            const totalNumbers = toNumbers.length
+
+            const average = add / totalNumbers
+
+            const percentAverage = 100 - average
+
+            totalAverage.push(average, percentAverage)
+
+            state.forumQuality = totalAverage
+            console.log('a');
+            state.statusA = 'RECIBIDOS'
+            console.log('b');
             return
 
         }
@@ -297,6 +367,11 @@ const mutations = {
         state.imgRe = onImgRe
 
     },
+    resetA(state) {
+
+        state.statusA = 'CARGANDO'
+
+    },
     logOut(state) {
 
         state.status = 'CARGANDO',
@@ -304,7 +379,7 @@ const mutations = {
             state.statusA = 'CARGANDO',
             state.forumsCompleted = '',
             state.forumsPending = '',
-            state.allForums = '',
+            state.allForums = [],
             state.userNeeded = '',
             state.imgAn = false
         state.imgRe = false
@@ -313,6 +388,8 @@ const mutations = {
         state.allArray = []
         state.allPercent = []
         state.userArray = []
+        state.userRepeat = []
+        state.forumQuality = []
 
         localStorage.removeItem('fP')
         localStorage.removeItem('uN')

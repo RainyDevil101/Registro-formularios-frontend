@@ -5,11 +5,7 @@
   </div>
 
   <div v-else class="hgt">
-    <router-view v-slot="{ Component }">
-      <keep-alive>
-        <component :is="Component" />
-      </keep-alive>
-    </router-view>
+    <router-view />
   </div>
   <footer-t class="footer-t" />
 </template>
@@ -19,6 +15,7 @@ import { ref } from '@vue/reactivity';
 
 import FooterT from './components/FooterT.vue';
 import useAuth from './modules/auth/composables/useAuth';
+import { useStore } from 'vuex';
 
 export default {
   components: { FooterT },
@@ -27,8 +24,11 @@ export default {
     const { checkToken, reForms, reCompleted, reAll } = useAuth();
 
     const loaded = ref(false);
+    const store = useStore();
 
     checkToken();
+
+    const status = store.state.auth.status
 
     const lcForums = JSON.parse(localStorage.getItem('fP'))
     reForms(lcForums);
@@ -48,6 +48,7 @@ export default {
     return {
       checkToken,
       loaded,
+      status,
 
     };
   },

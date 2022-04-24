@@ -1,5 +1,6 @@
 <template>
   <div class="up">
+    <h5>Promedio de cumplimiento de calidad</h5>
     <Pie :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId"
       :plugins="plugins" :css-classes="cssClasses" :styles="styles" :width="width" :height="height" />
   </div>
@@ -17,6 +18,7 @@ import {
   CategoryScale,
 
 } from 'chart.js'
+import { ref } from '@vue/reactivity'
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
 
@@ -26,6 +28,10 @@ export default {
     Pie
   },
   props: {
+    averageQuality: {
+      type: Array,
+      required: true
+    },
     chartId: {
       type: String,
       default: 'pie-chart'
@@ -51,17 +57,23 @@ export default {
       default: () => []
     }
   },
-  setup() {
+  setup(props) {
+
+    const average = ref();
+    average.value = props.averageQuality
+
+    console.log(average.value,'a');
 
 
     return {
+      average,
 
       chartData: {
         labels: ['CUMPLIDA', 'POR CUMPLIR'],
         datasets: [
           {
             backgroundColor: ['#41B883', '#E46651'],
-            data: [40, 20]
+            data: average.value
           }
         ]
       },

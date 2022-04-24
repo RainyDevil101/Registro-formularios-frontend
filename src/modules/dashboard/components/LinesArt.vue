@@ -7,7 +7,8 @@
 <script>
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
-import { ref } from '@vue/reactivity'
+import { ref, watch } from 'vue'
+import { useStore } from 'vuex'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
@@ -15,8 +16,12 @@ export default {
   name: 'BarChart',
   components: { Bar },
   props: {
+    userRepeat: {
+      type: Object,
+      required: true
+    },
     userTotal: {
-      type: Array,
+      type: Object,
       required: true
     },
     chartId: {
@@ -50,19 +55,24 @@ export default {
   },
   setup(props) {
 
+    const store = useStore();
+
     const users = ref();
     users.value = props.userTotal
-
-    console.log(props.userTotal);
+    const count = ref();
+    count.value = props.userRepeat
 
     return {
+      users,
+      count,
+
       chartData: {
         labels: users.value,
         datasets: [
           {
             label: 'PERSONAL SUPERVISOR-CANTIDAD ART A LA FECHA',
             backgroundColor: ['rgb(255, 206, 86)'],
-            data: [40, 20, 15, 9]
+            data: count.value
           }
         ]
       },

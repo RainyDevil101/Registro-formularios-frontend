@@ -8,7 +8,7 @@
 <script>
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
-import { ref } from 'vue'
+import { onDeactivated, ref } from 'vue'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
@@ -53,6 +53,8 @@ export default {
 
     const allCount = ref('');
     allCount.value = props.allC
+
+    console.log(props.allCount, 'c');
 
     return {
       allCount,
