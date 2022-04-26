@@ -54,8 +54,6 @@ export default {
     const allCount = ref('');
     allCount.value = props.allC
 
-    console.log(props.allCount, 'c');
-
     return {
       allCount,
 

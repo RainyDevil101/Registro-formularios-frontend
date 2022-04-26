@@ -13,7 +13,7 @@
             <pie :key="averageQuality" :averageQuality="averageQuality" />
         </div>
         <div class="rcPrevented">
-            <line-pre />
+            <line-pre :key="answersRq" :answersRq="answersRq" />
         </div>
         <div class="noPerAnswer">
             <answers-no />
@@ -54,6 +54,8 @@ export default {
 
         const averageQuality = ref(store.state.forums.forumQuality)
 
+        const answersRq = ref(store.state.forums.answersArray)
+
         const status = ref(store.state.forums.statusA)
 
         watch(
@@ -68,6 +70,7 @@ export default {
             userRepeat,
             averageQuality,
             status,
+            answersRq,
         }
 
     }

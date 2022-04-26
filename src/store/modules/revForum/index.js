@@ -13,6 +13,7 @@ const state = {
     userArray: [],
     userRepeat: [],
     forumQuality: [],
+    answersArray: [],
     userNeeded: '',
     imgAn: false,
     imgRe: false,
@@ -69,6 +70,11 @@ const getters = {
     allArray(state) {
 
         return state.allArray
+
+    },
+    answersRqValue(state) {
+
+        return state.answersArray
 
     },
     statusState(state) {
@@ -237,9 +243,7 @@ const mutations = {
             totalAverage.push(average, percentAverage)
 
             state.forumQuality = totalAverage
-            console.log('a');
             state.statusA = 'RECIBIDOS'
-            console.log('b');
             return
 
         }
@@ -282,12 +286,94 @@ const mutations = {
             localStorage.setItem('fC', JSON.stringify(forumsCompleted));
             const fCompleted = JSON.parse(localStorage.getItem('fC'));
             state.forumsCompleted = fCompleted
-            state.statusC = 'RECIBIDOS'
+            
+            // Quinto gráfico
+
+            const qOne = []
+            const qTwo = []
+            const qThree = []
+            const qFour = []
+            const qFive = []
+
+            const answersRepeat = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
+
+            for(const fC of forumsCompleted) {
+                qOne.push(fC.question1)
+            }
+
+            for(const fC of forumsCompleted) {
+                qTwo.push(fC.question2)
+            }
+
+            for(const fC of forumsCompleted) {
+                qThree.push(fC.question3)
+            }
+
+            for(const fC of forumsCompleted) {
+                qFour.push(fC.question4)
+            }
+
+            for(const fC of forumsCompleted) {
+                qFive.push(fC.question5)
+            }
+
+            Object.values(qOne).forEach(function (x) { answersRepeat[x] = (answersRepeat[x] || 0) + 1 })
+            Object.values(qTwo).forEach(function (x) { answersRepeat[x] = (answersRepeat[x] || 0) + 1 })
+            Object.values(qThree).forEach(function (x) { answersRepeat[x] = (answersRepeat[x] || 0) + 1 })
+            Object.values(qFour).forEach(function (x) { answersRepeat[x] = (answersRepeat[x] || 0) + 1 })
+            Object.values(qFive).forEach(function (x) { answersRepeat[x] = (answersRepeat[x] || 0) + 1 })
+
+            
+            const arrayValues = Object.values(answersRepeat)
+
+            state.answersArray = arrayValues
+
+            // Sexto gráfico
+
+            
+            const noAnswers1 = []
+            const noAnswers2 = []
+            const noAnswers3 = []
+            const noAnswers4 = []
+            const noAnswers5 = []
+            const noAnswers6 = []
+            const noAnswers7 = []
+            const noAnswers8 = []
+            const noAnswers9 = []
+            const noAnswers10 = []
+
+            const noAnswersRepeat = []
+
+            for(const n of forumsCompleted) {
+                if(n.riesgosCriticos === 'no') {
+                    noAnswers1.push(n.riesgosCriticos)
+                }
+            }
+
+            for(const n of forumsCompleted) {
+                if(n.riesgosCriticos === 'no') {
+                    noAnswers2.push(n.controelsCriticos)
+                }
+            }
+
+            for(const n of forumsCompleted) {
+                if(n.riesgosCriticos === 'no') {
+                    noAnswers3.push(n.cumplenControles)
+                }
+            }
+            
+            noAnswersRepeat.push(noAnswers1.length)
+            noAnswersRepeat.push(noAnswers2.length)
+            noAnswersRepeat.push(noAnswers3.length)
+            
+            console.log(noAnswersRepeat);
+
+            state.statusA = 'RECIBIDOS'
             return
         } else {
             const fCompleted = JSON.parse(localStorage.getItem('fC'));
             state.forumsCompleted = fCompleted
-            state.statusC = 'RECIBIDOS'
+            state.statusA = 'RECIBIDOS'
             return
         }
 
@@ -375,13 +461,13 @@ const mutations = {
     logOut(state) {
 
         state.status = 'CARGANDO',
-            state.statusC = 'CARGANDO',
-            state.statusA = 'CARGANDO',
-            state.forumsCompleted = '',
-            state.forumsPending = '',
-            state.allForums = [],
-            state.userNeeded = '',
-            state.imgAn = false
+        state.statusC = 'CARGANDO',
+        state.statusA = 'CARGANDO',
+        state.forumsCompleted = '',
+        state.forumsPending = '',
+        state.allForums = [],
+        state.userNeeded = '',
+        state.imgAn = false
         state.imgRe = false
         state.blocImg = false
         state.error = false
@@ -390,6 +476,7 @@ const mutations = {
         state.userArray = []
         state.userRepeat = []
         state.forumQuality = []
+        state.answersArray = []
 
         localStorage.removeItem('fP')
         localStorage.removeItem('uN')

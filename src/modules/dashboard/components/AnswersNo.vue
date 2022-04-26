@@ -59,7 +59,7 @@ export default {
         ],
         datasets: [
           {
-            label: 'CANTIDAD DE RC VINCULADOS A LA HERRAMIENTA PREVENTIVA',
+            label: 'CANTIDAD DE "NO" POR RESPUESTAS REVISADAS',
             backgroundColor: ['#D5D6AA'],
             data: [2, 1, 3, 5, 6, 40, 20, 15, 9]
           }

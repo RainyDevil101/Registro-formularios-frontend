@@ -62,9 +62,6 @@ export default {
     const average = ref();
     average.value = props.averageQuality
 
-    console.log(average.value,'a');
-
-
     return {
       average,
 
