@@ -7,6 +7,7 @@
 <script>
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import { ref } from '@vue/reactivity'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
@@ -14,6 +15,10 @@ export default {
   name: 'BarChart',
   components: { Bar },
   props: {
+    answersNo: {
+      type: Object,
+      required: true,
+    },
     chartId: {
       type: String,
       default: 'bar-chart'
@@ -43,8 +48,15 @@ export default {
       default: () => { }
     }
   },
-  data() {
+  setup(props) {
+
+    const noAnswers = ref();
+    noAnswers.value = props.answersNo
+
     return {
+
+      noAnswers,
+
       chartData: {
         labels: [
           'PREGUNTA 1',
@@ -61,7 +73,7 @@ export default {
           {
             label: 'CANTIDAD DE "NO" POR RESPUESTAS REVISADAS',
             backgroundColor: ['#D5D6AA'],
-            data: [2, 1, 3, 5, 6, 40, 20, 15, 9]
+            data: noAnswers.value
           }
         ]
       },

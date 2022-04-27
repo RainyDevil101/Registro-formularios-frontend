@@ -53,8 +53,6 @@ export default {
     const answers = ref();
     answers.value = props.answersRq
 
-    console.log(props.answersRq);
-
     return {
       chartData: {
         labels: [

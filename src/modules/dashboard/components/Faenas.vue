@@ -7,6 +7,7 @@
 <script>
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import { ref } from '@vue/reactivity'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
@@ -14,6 +15,10 @@ export default {
   name: 'BarChart',
   components: { Bar },
   props: {
+    taskForums: {
+      type: Object,
+      required: true,
+    },
     chartId: {
       type: String,
       default: 'bar-chart'
@@ -43,8 +48,14 @@ export default {
       default: () => { }
     }
   },
-  data() {
+  setup(props) {
+
+    const taskForm = ref();
+    taskForm.value = props.taskForums
+
     return {
+      taskForm,
+
       chartData: {
         labels: [
           'DET',
@@ -60,7 +71,7 @@ export default {
           {
             label: 'CANTIDAD ART POR FAENA',
             backgroundColor: ['#E75A7C'],
-            data: [2, 1, 3, 5, 6, 40, 20, 15, 9]
+            data: taskForm.value
           }
         ]
       },

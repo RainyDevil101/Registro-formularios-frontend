@@ -14,6 +14,8 @@ const state = {
     userRepeat: [],
     forumQuality: [],
     answersArray: [],
+    noAnswers: [],
+    artTask: [],
     userNeeded: '',
     imgAn: false,
     imgRe: false,
@@ -280,6 +282,8 @@ const mutations = {
 
         state.userNeeded = ''
         state.forumsCompleted = ''
+        state.noAnswers = []
+        state.artTask = []
         localStorage.removeItem('fC')
 
         if (!localStorage.getItem('fC')) {
@@ -299,21 +303,9 @@ const mutations = {
 
             for(const fC of forumsCompleted) {
                 qOne.push(fC.question1)
-            }
-
-            for(const fC of forumsCompleted) {
                 qTwo.push(fC.question2)
-            }
-
-            for(const fC of forumsCompleted) {
                 qThree.push(fC.question3)
-            }
-
-            for(const fC of forumsCompleted) {
                 qFour.push(fC.question4)
-            }
-
-            for(const fC of forumsCompleted) {
                 qFive.push(fC.question5)
             }
 
@@ -340,7 +332,6 @@ const mutations = {
             const noAnswers7 = []
             const noAnswers8 = []
             const noAnswers9 = []
-            const noAnswers10 = []
 
             const noAnswersRepeat = []
 
@@ -348,25 +339,79 @@ const mutations = {
                 if(n.riesgosCriticos === 'no') {
                     noAnswers1.push(n.riesgosCriticos)
                 }
-            }
-
-            for(const n of forumsCompleted) {
-                if(n.riesgosCriticos === 'no') {
+                if(n.controelsCriticos === 'no') {
                     noAnswers2.push(n.controelsCriticos)
                 }
-            }
-
-            for(const n of forumsCompleted) {
-                if(n.riesgosCriticos === 'no') {
+                if(n.cumplenControles === 'no') {
                     noAnswers3.push(n.cumplenControles)
+                }
+                if(n.trabControles === 'no') {
+                    noAnswers4.push(n.trabControles)
+                }
+                if(n.contestaronPreguntas === 'no') {
+                    noAnswers5.push(n.contestaronPreguntas)
+                }
+                if(n.todosTrabajadores === 'no') {
+                    noAnswers6.push(n.todosTrabajadores)
+                }
+                if(n.todosIntegrantes === 'no') {
+                    noAnswers7.push(n.todosIntegrantes)
+                }
+                if(n.supervisorTitular === 'no') {
+                    noAnswers8.push(n.supervisorTitular)
+                }
+                if(n.fueronCorregidas === 'no') {
+                    noAnswers9.push(n.fueronCorregidas)
                 }
             }
             
-            noAnswersRepeat.push(noAnswers1.length)
-            noAnswersRepeat.push(noAnswers2.length)
-            noAnswersRepeat.push(noAnswers3.length)
+            noAnswersRepeat.push(noAnswers1.length, noAnswers2.length, noAnswers3.length, noAnswers4.length, noAnswers5.length, noAnswers6.length, noAnswers7.length, noAnswers8.length, noAnswers9.length)
             
-            console.log(noAnswersRepeat);
+            state.noAnswers = noAnswersRepeat
+
+            // Séptimo gráfico
+
+            const det = []
+            const dand = []
+            const dfv = []
+            const dsal = []
+            const dch = []
+            const sdand = []
+            const sdet = []
+            const casaMatríz = []
+
+            const faenasChart = []
+
+            for(const f of forumsCompleted) {
+                if(f.task.name === 'DET') {
+                    det.push(f.task.name)
+                }
+                if(f.task.name === 'DAND') {
+                    dand.push(f.task.name)
+                }
+                if(f.task.name === 'DFV') {
+                    dfv.push(f.task.name)
+                }
+                if(f.task.name === 'DSAL') {
+                    dsal.push(f.task.name)
+                }
+                if(f.task.name === 'DCH') {
+                    dch.push(f.task.name)
+                }
+                if(f.task.name === 'SDAND') {
+                    sdand.push(f.task.name)
+                }
+                if(f.task.name === 'SDET') {
+                    sdet.push(f.task.name)
+                }
+                if(f.task.name === 'CASA MATRIZ') {
+                    casaMatríz.push(f.task.name)
+                }
+            }
+
+            faenasChart.push(det.length, dand.length, dfv.length, dsal.length, dch.length, sdand.length, sdet.length, casaMatríz.length)
+
+            state.artTask = faenasChart
 
             state.statusA = 'RECIBIDOS'
             return
@@ -477,6 +522,8 @@ const mutations = {
         state.userRepeat = []
         state.forumQuality = []
         state.answersArray = []
+        state.noAnswers = []
+        state.artTask = []
 
         localStorage.removeItem('fP')
         localStorage.removeItem('uN')

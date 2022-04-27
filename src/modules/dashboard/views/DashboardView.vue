@@ -16,10 +16,10 @@
             <line-pre :key="answersRq" :answersRq="answersRq" />
         </div>
         <div class="noPerAnswer">
-            <answers-no />
+            <answers-no :key="answersNo" :answersNo="answersNo" />
         </div>
         <div class="cuantityfaena">
-            <faenas />
+            <faenas :key="taskForums" :taskForums="taskForums" />
         </div>
         <div class="questions"></div>
     </div>
@@ -56,7 +56,11 @@ export default {
 
         const answersRq = ref(store.state.forums.answersArray)
 
+        const answersNo = ref(store.state.forums.noAnswers)
+
         const status = ref(store.state.forums.statusA)
+
+        const taskForums = ref(store.state.forums.artTask)
 
         watch(
             () => store.state.forums.statusA,
@@ -71,6 +75,8 @@ export default {
             averageQuality,
             status,
             answersRq,
+            answersNo,
+            taskForums,
         }
 
     }
