@@ -13,11 +13,7 @@
       </div>
     </div>
 
-    <div v-if="onLoad === true">
-      <loader />
-    </div>
-
-    <div v-else>
+    <div>
       <div class="forum-revisor">
         <div class="header">
           <h4>

@@ -21,7 +21,6 @@
         <div class="cuantityfaena">
             <faenas :key="taskForums" :taskForums="taskForums" />
         </div>
-        <div class="questions"></div>
     </div>
 </template>
 

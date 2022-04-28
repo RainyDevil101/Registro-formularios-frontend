@@ -13,10 +13,7 @@
       </div>
     </div>
 
-    <div v-if="onLoad === true || errorMessage === true">
-      <loader />
-    </div>
-    <div v-else>
+    <div>
       <div class="full-forum">
         <div class="header-forum">
           <h4>
@@ -85,7 +82,7 @@
             </div>
           </div>
           <div class="answers-two">
-            <div class="in-forum">
+            <div class="in-forum-2">
               <p class="hdr">RESPUESTAS SEGUNDA PARTE</p>
               <div class="lines"></div>
               <p>¿SE IDENTIFICAN LA TOTALIDAD DE LOS RIESGOS CRÍTICOS (RC) PRESENTES EN LA TAREA?: <b>{{ forum.riesgosCriticos }}</b></p>
@@ -253,12 +250,18 @@ p {
   grid-gap: 10px;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(1, auto);
-  grid-template-areas: "questions answers";
+  grid-template-areas: "questions answers"
+                        "questionsTwo questionsTwo";
 }
 
 .forum-container .questions {
   background-color: white;
   grid-area: questions;
+}
+
+.forum-container .answers-two {
+  background-color: red;
+  grid-area: questionsTwo;
 }
 
 .up {
@@ -272,11 +275,6 @@ p {
 .forum-container .answers {
   background-color: white;
   grid-area: answers;
-}
-
-.forum-container {
-  background-color: white;
-  grid-area: checkbox;
 }
 
 .header-forum h4 {

@@ -103,9 +103,9 @@ const getters = {
 const mutations = {
 
     allForums(state, { allForums }) {
+        console.log(allForums);
 
         state.userNeeded = ''
-        state.allForums = []
         state.allArray = []
         state.allPercent = []
         state.userArray = []
@@ -116,7 +116,12 @@ const mutations = {
 
         if (allForums === undefined) return
 
+
+        localStorage.removeItem('aF')
+
         if (!localStorage.getItem('aF')) {
+
+            console.log('a');
 
             localStorage.setItem('aF', JSON.stringify(allForums));
 
@@ -181,11 +186,14 @@ const mutations = {
             state.forumQuality = totalAverage
             
             state.statusA = 'RECIBIDOS'
+            
             return
             
         } else {
 
             const forumsCompleted = allForums.filter(completed => completed.statusForum == 'REVISADO')
+
+            console.log('b');
 
 
             const aForums = JSON.parse(localStorage.getItem('aF'));
@@ -263,12 +271,14 @@ const mutations = {
         localStorage.removeItem('fP')
 
         if (!localStorage.getItem('fP')) {
+            console.log('c');
             localStorage.setItem('fP', JSON.stringify(forumsPending));
             const fPending = JSON.parse(localStorage.getItem('fP'));
             state.forumsPending = fPending
             state.status = 'RECIBIDOS'
             return
         } else {
+            console.log('d');
             const fPending = JSON.parse(localStorage.getItem('fP'));
             state.forumsPending = fPending
             state.status = 'RECIBIDOS'
@@ -279,6 +289,8 @@ const mutations = {
 
     },
     saveForumsCompleted(state, { forumsCompleted }) {
+
+        console.log(forumsCompleted);
 
         state.userNeeded = ''
         state.forumsCompleted = ''
@@ -414,11 +426,13 @@ const mutations = {
             state.artTask = faenasChart
 
             state.statusA = 'RECIBIDOS'
+            state.statusC = 'RECIBIDOS'
             return
         } else {
             const fCompleted = JSON.parse(localStorage.getItem('fC'));
             state.forumsCompleted = fCompleted
             state.statusA = 'RECIBIDOS'
+            
             return
         }
 
@@ -436,14 +450,18 @@ const mutations = {
 
         const userNeeded = state.allForums.filter(a => a._id == id)
 
+        console.log(userNeeded);
+
         if (userNeeded.length === 0) {
             state.userNeeded = ''
             state.error = true
+            state.statusC = 'RECIBIDOS'
             return
         } else {
             state.userNeeded = userNeeded
             localStorage.setItem('uN', JSON.stringify(userNeeded))
             state.error = false
+            state.statusC = 'RECIBIDOS'
             return
         }
     },
@@ -558,6 +576,7 @@ const actions = {
             if (!data) {
                 commit('saveForums', [])
                 commit('saveForumsCompleted', [])
+                commit('allForums', [])
                 return
             }
 
@@ -607,9 +626,9 @@ const actions = {
         commit('saveForumsCompleted', { forumsCompleted })
         return { ok: true }
     },
-    async renoveAll({ commit }, forums) {
-        if (!forums) return
-        commit('allForums', { forums })
+    async renoveAll({ commit }, allForums) {
+        if (!allForums) return
+        commit('allForums', { allForums })
         return { ok: true }
     },
 

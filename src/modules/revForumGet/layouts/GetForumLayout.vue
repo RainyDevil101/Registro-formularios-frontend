@@ -1,20 +1,25 @@
 <template>
   <user-navbar class="navbar-fixed" />
-  <div class="forum-view">
+
+      <div v-if="onLoad === 'CARGANDO' || errorMessage === true">
+      <loader />
+    </div>
+
+  <div v-else class="forum-view">
     <router-view />
   </div>
 </template>
 
 <script>
-import { onBeforeMount, watch } from '@vue/runtime-core';
+import { ref, watch } from '@vue/runtime-core';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import useIdForum from '../composables/forumId';
-// import { onBeforeMount, onBeforeUnmount, onBeforeUpdate, onDeactivated, onErrorCaptured, onRenderTracked, onRenderTriggered, onUnmounted, onUpdated } from 'vue';
 import UserNavbar from '../../../components/UserNavbar.vue';
+import Loader from '../../../components/Loader.vue';
 
 export default {
-  components: { UserNavbar },
+  components: { UserNavbar, Loader },
 
   setup() {
 
@@ -23,6 +28,8 @@ export default {
     const store = useStore();
 
     const { errorMessage } = useIdForum();
+
+    const onLoad = ref(store.state.forums.statusC);
 
     const getForumId = async () => {
 
@@ -40,46 +47,10 @@ export default {
 
     getForumId();
 
-
-    onBeforeMount(() => {
-      if (store.state.forums.error === true) {
-        router.push({ 'name': 'no-forum' })
-      }
-    })
-    // onMounted(() => {
-    //   console.log('onMounted');
-    // })
-    // onBeforeUpdate(() => {
-    //   console.log('onBeforeUpdate');
-    // })
-    // onUpdated(() => {
-    //   console.log('onUpdated');
-    // })
-    // onBeforeUnmount(() => {
-    //   console.log('onBeforeUnmount');
-    // })
-    // onUnmounted(() => {
-    //   console.log('onUnmounted');
-    // })
-    // onErrorCaptured(() => {
-    //   console.log('onErrorCaptured');
-    // })
-    // onRenderTracked(() => {
-    //   console.log('onRenderTracked');
-    // })
-    // onRenderTriggered(() => {
-    //   console.log('onRenderTriggered');
-    // })
-    // onActivated(() => {
-
-    // })
-    // onDeactivated(() => {
-    //   console.log('onDeactivated');
-    // })
-
     return {
       getForumId,
       errorMessage,
+      onLoad,
     };
   },
 };
