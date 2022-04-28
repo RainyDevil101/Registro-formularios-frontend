@@ -132,78 +132,9 @@ const mutations = {
 
             state.allForums = aForums
             state.allArray = [aForums.length, forumsCompleted.length]
-            
+
             // Segundo gráfico
-            
-            const total = (forumsCompleted.length * 100) / aForums.length
-            const rest = 100 - total
-            state.allPercent = [total, rest]
 
-            // Tercer gráfico
-
-            const users = []
-            const counts = {}
-
-            for (const u of aForums) {
-
-                    users.push(u.user.name)
-
-            }
-
-
-            Object.values(users).forEach(function (x) { counts[x] = (counts[x] || 0) + 1 })
-
-            state.userArray = Object.keys(counts)
-            state.userRepeat = Object.values(counts)
-
-            // Cuarto gráfico
-
-            const quality = []
-            const totalAverage = []
-
-            for (const q of aForums) {
-                if (q.userRevisor) {
-                    quality.push(q.calidad)
-                }
-            }
-
-            const stringNumbers = Object.values(quality)
-            const toNumbers = stringNumbers.map(Number)
-
-            const add = toNumbers.reduce(function (x, y) {
-                return x + y;
-            }, 0)
-
-            const totalNumbers = toNumbers.length
-
-            const average = add / totalNumbers
-
-            const percentAverage = 100 - average
-
-            totalAverage.push(average, percentAverage)
-
-            state.forumQuality = totalAverage
-            
-            state.statusA = 'RECIBIDOS'
-            
-            return
-            
-        } else {
-
-            const forumsCompleted = allForums.filter(completed => completed.statusForum == 'REVISADO')
-
-            console.log('b');
-
-
-            const aForums = JSON.parse(localStorage.getItem('aF'));
-
-            // Primer gráfico
-
-            state.allForums = aForums
-            state.allArray = [aForums.length, forumsCompleted.length]
-            
-            // Segundo gráfico
-            
             const total = (forumsCompleted.length * 100) / aForums.length
             const rest = 100 - total
             state.allPercent = [total, rest]
@@ -217,7 +148,8 @@ const mutations = {
 
                 users.push(u.user.name)
 
-        }
+            }
+
 
             Object.values(users).forEach(function (x) { counts[x] = (counts[x] || 0) + 1 })
 
@@ -251,6 +183,163 @@ const mutations = {
             totalAverage.push(average, percentAverage)
 
             state.forumQuality = totalAverage
+
+            // Séptimo gráfico
+
+            const det = []
+            const dand = []
+            const dfv = []
+            const dsal = []
+            const dch = []
+            const sdand = []
+            const sdet = []
+            const casaMatríz = []
+
+            const faenasChart = []
+
+            for (const f of aForums) {
+                if (f.task.name === 'DET') {
+                    det.push(f.task.name)
+                }
+                if (f.task.name === 'DAND') {
+                    dand.push(f.task.name)
+                }
+                if (f.task.name === 'DFV') {
+                    dfv.push(f.task.name)
+                }
+                if (f.task.name === 'DSAL') {
+                    dsal.push(f.task.name)
+                }
+                if (f.task.name === 'DCH') {
+                    dch.push(f.task.name)
+                }
+                if (f.task.name === 'SDAND') {
+                    sdand.push(f.task.name)
+                }
+                if (f.task.name === 'SDET') {
+                    sdet.push(f.task.name)
+                }
+                if (f.task.name === 'CASA MATRIZ') {
+                    casaMatríz.push(f.task.name)
+                }
+            }
+
+            faenasChart.push(det.length, dand.length, dfv.length, dsal.length, dch.length, sdand.length, sdet.length, casaMatríz.length)
+
+            state.artTask = faenasChart
+
+            state.statusA = 'RECIBIDOS'
+
+            return
+
+        } else {
+
+            const forumsCompleted = allForums.filter(completed => completed.statusForum == 'REVISADO')
+
+            console.log('b');
+
+
+            const aForums = JSON.parse(localStorage.getItem('aF'));
+
+            // Primer gráfico
+
+            state.allForums = aForums
+            state.allArray = [aForums.length, forumsCompleted.length]
+
+            // Segundo gráfico
+
+            const total = (forumsCompleted.length * 100) / aForums.length
+            const rest = 100 - total
+            state.allPercent = [total, rest]
+
+            // Tercer gráfico
+
+            const users = []
+            const counts = {}
+
+            for (const u of aForums) {
+
+                users.push(u.user.name)
+
+            }
+
+            Object.values(users).forEach(function (x) { counts[x] = (counts[x] || 0) + 1 })
+
+            state.userArray = Object.keys(counts)
+            state.userRepeat = Object.values(counts)
+
+            // Cuarto gráfico
+
+            const quality = []
+            const totalAverage = []
+
+            for (const q of aForums) {
+                if (q.userRevisor) {
+                    quality.push(q.calidad)
+                }
+            }
+
+            const stringNumbers = Object.values(quality)
+            const toNumbers = stringNumbers.map(Number)
+
+            const add = toNumbers.reduce(function (x, y) {
+                return x + y;
+            }, 0)
+
+            const totalNumbers = toNumbers.length
+
+            const average = add / totalNumbers
+
+            const percentAverage = 100 - average
+
+            totalAverage.push(average, percentAverage)
+
+            state.forumQuality = totalAverage
+
+            // Séptimo gráfico
+
+            const det = []
+            const dand = []
+            const dfv = []
+            const dsal = []
+            const dch = []
+            const sdand = []
+            const sdet = []
+            const casaMatríz = []
+
+            const faenasChart = []
+
+            for (const f of aForums) {
+                if (f.task.name === 'DET') {
+                    det.push(f.task.name)
+                }
+                if (f.task.name === 'DAND') {
+                    dand.push(f.task.name)
+                }
+                if (f.task.name === 'DFV') {
+                    dfv.push(f.task.name)
+                }
+                if (f.task.name === 'DSAL') {
+                    dsal.push(f.task.name)
+                }
+                if (f.task.name === 'DCH') {
+                    dch.push(f.task.name)
+                }
+                if (f.task.name === 'SDAND') {
+                    sdand.push(f.task.name)
+                }
+                if (f.task.name === 'SDET') {
+                    sdet.push(f.task.name)
+                }
+                if (f.task.name === 'CASA MATRIZ') {
+                    casaMatríz.push(f.task.name)
+                }
+            }
+
+            faenasChart.push(det.length, dand.length, dfv.length, dsal.length, dch.length, sdand.length, sdet.length, casaMatríz.length)
+
+            state.artTask = faenasChart
+
             state.statusA = 'RECIBIDOS'
             return
 
@@ -288,8 +377,6 @@ const mutations = {
     },
     saveForumsCompleted(state, { forumsCompleted }) {
 
-        console.log(forumsCompleted);
-
         state.userNeeded = ''
         state.forumsCompleted = ''
         state.noAnswers = []
@@ -300,7 +387,7 @@ const mutations = {
             localStorage.setItem('fC', JSON.stringify(forumsCompleted));
             const fCompleted = JSON.parse(localStorage.getItem('fC'));
             state.forumsCompleted = fCompleted
-            
+
             // Quinto gráfico
 
             const qOne = []
@@ -309,9 +396,9 @@ const mutations = {
             const qFour = []
             const qFive = []
 
-            const answersRepeat = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
+            const answersRepeat = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0 }
 
-            for(const fC of forumsCompleted) {
+            for (const fC of forumsCompleted) {
                 qOne.push(fC.question1)
                 qTwo.push(fC.question2)
                 qThree.push(fC.question3)
@@ -325,14 +412,14 @@ const mutations = {
             Object.values(qFour).forEach(function (x) { answersRepeat[x] = (answersRepeat[x] || 0) + 1 })
             Object.values(qFive).forEach(function (x) { answersRepeat[x] = (answersRepeat[x] || 0) + 1 })
 
-            
+
             const arrayValues = Object.values(answersRepeat)
 
             state.answersArray = arrayValues
 
             // Sexto gráfico
 
-            
+
             const noAnswers1 = []
             const noAnswers2 = []
             const noAnswers3 = []
@@ -345,83 +432,39 @@ const mutations = {
 
             const noAnswersRepeat = []
 
-            for(const n of forumsCompleted) {
-                if(n.riesgosCriticos === 'no') {
+            for (const n of forumsCompleted) {
+                if (n.riesgosCriticos === 'no') {
                     noAnswers1.push(n.riesgosCriticos)
                 }
-                if(n.controelsCriticos === 'no') {
+                if (n.controelsCriticos === 'no') {
                     noAnswers2.push(n.controelsCriticos)
                 }
-                if(n.cumplenControles === 'no') {
+                if (n.cumplenControles === 'no') {
                     noAnswers3.push(n.cumplenControles)
                 }
-                if(n.trabControles === 'no') {
+                if (n.trabControles === 'no') {
                     noAnswers4.push(n.trabControles)
                 }
-                if(n.contestaronPreguntas === 'no') {
+                if (n.contestaronPreguntas === 'no') {
                     noAnswers5.push(n.contestaronPreguntas)
                 }
-                if(n.todosTrabajadores === 'no') {
+                if (n.todosTrabajadores === 'no') {
                     noAnswers6.push(n.todosTrabajadores)
                 }
-                if(n.todosIntegrantes === 'no') {
+                if (n.todosIntegrantes === 'no') {
                     noAnswers7.push(n.todosIntegrantes)
                 }
-                if(n.supervisorTitular === 'no') {
+                if (n.supervisorTitular === 'no') {
                     noAnswers8.push(n.supervisorTitular)
                 }
-                if(n.fueronCorregidas === 'no') {
+                if (n.fueronCorregidas === 'no') {
                     noAnswers9.push(n.fueronCorregidas)
                 }
             }
-            
+
             noAnswersRepeat.push(noAnswers1.length, noAnswers2.length, noAnswers3.length, noAnswers4.length, noAnswers5.length, noAnswers6.length, noAnswers7.length, noAnswers8.length, noAnswers9.length)
-            
+
             state.noAnswers = noAnswersRepeat
-
-            // Séptimo gráfico
-
-            const det = []
-            const dand = []
-            const dfv = []
-            const dsal = []
-            const dch = []
-            const sdand = []
-            const sdet = []
-            const casaMatríz = []
-
-            const faenasChart = []
-
-            for(const f of forumsCompleted) {
-                if(f.task.name === 'DET') {
-                    det.push(f.task.name)
-                }
-                if(f.task.name === 'DAND') {
-                    dand.push(f.task.name)
-                }
-                if(f.task.name === 'DFV') {
-                    dfv.push(f.task.name)
-                }
-                if(f.task.name === 'DSAL') {
-                    dsal.push(f.task.name)
-                }
-                if(f.task.name === 'DCH') {
-                    dch.push(f.task.name)
-                }
-                if(f.task.name === 'SDAND') {
-                    sdand.push(f.task.name)
-                }
-                if(f.task.name === 'SDET') {
-                    sdet.push(f.task.name)
-                }
-                if(f.task.name === 'CASA MATRIZ') {
-                    casaMatríz.push(f.task.name)
-                }
-            }
-
-            faenasChart.push(det.length, dand.length, dfv.length, dsal.length, dch.length, sdand.length, sdet.length, casaMatríz.length)
-
-            state.artTask = faenasChart
 
             state.statusA = 'RECIBIDOS'
             state.statusC = 'RECIBIDOS'
@@ -430,7 +473,7 @@ const mutations = {
             const fCompleted = JSON.parse(localStorage.getItem('fC'));
             state.forumsCompleted = fCompleted
             state.statusA = 'RECIBIDOS'
-            
+
             return
         }
 
@@ -522,13 +565,13 @@ const mutations = {
     logOut(state) {
 
         state.status = 'CARGANDO',
-        state.statusC = 'CARGANDO',
-        state.statusA = 'CARGANDO',
-        state.forumsCompleted = '',
-        state.forumsPending = '',
-        state.allForums = [],
-        state.userNeeded = '',
-        state.imgAn = false
+            state.statusC = 'CARGANDO',
+            state.statusA = 'CARGANDO',
+            state.forumsCompleted = '',
+            state.forumsPending = '',
+            state.allForums = [],
+            state.userNeeded = '',
+            state.imgAn = false
         state.imgRe = false
         state.blocImg = false
         state.error = false
