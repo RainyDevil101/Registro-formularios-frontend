@@ -260,7 +260,7 @@ p {
 }
 
 .forum-container .answers-two {
-  background-color: red;
+  background-color: white;
   grid-area: questionsTwo;
 }
 
