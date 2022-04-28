@@ -103,7 +103,6 @@ const getters = {
 const mutations = {
 
     allForums(state, { allForums }) {
-        console.log(allForums);
 
         state.userNeeded = ''
         state.allArray = []

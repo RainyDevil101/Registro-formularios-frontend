@@ -63,16 +63,16 @@
         </div>
         <select
           v-on:click="onRecharge"
-          v-model="userForm.storage"
+          v-model="userForm.task"
           class="form-select"
           aria-label="Default select example"
         >
           <option
-            v-for="storage of storages"
-            :key="storage._id"
-            :value="storage._id"
+            v-for="task of tasks"
+            :key="task._id"
+            :value="task._id"
           >
-            {{ storage.name }}
+            {{ task.name }}
           </option>
         </select>
       </div>
@@ -84,19 +84,17 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
 import { ref } from "@vue/reactivity";
 
 import createUser from "../composables/createUser";
 import getRoles from "../../gets/getRoles";
-import getStorages from "../../gets/getStorage";
 import getPositions from "../../gets/getPosition";
 
 import Swal from "sweetalert2";
+import getTask from "../../gets/getTask";
 
 export default {
   setup() {
-    const router = useRouter();
 
     const userForm = ref({
       name: "",
@@ -105,29 +103,25 @@ export default {
       vaPassword: "",
       role: "",
       rut: "",
-      storage: "",
+      task: "",
     });
 
     const { createUserDb } = createUser(userForm.value);
     const { searchRoles, roles } = getRoles();
-    const { searchStorages, storages } = getStorages();
+    const { searchTask, tasks } = getTask();
     const { searchPosit, positions } = getPositions();
 
     return {
       userForm,
       searchRoles,
       roles,
-      searchStorages,
-      storages,
+      searchTask,
+      tasks,
       searchPosit,
       positions,
 
       onRecharge: () => {
-        searchStorages();
-      },
-
-      creStorage: async () => {
-        window.open("#/storage", "_blank");
+        searchTask();
       },
 
       onSubmit: async () => {

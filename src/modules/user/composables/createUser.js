@@ -7,9 +7,8 @@ const createUser = () =>{
     const errorsUS = ref([]);
 
     const createUserDb = async (userForm) => {
-        console.log(userForm);
 
-        if(userForm.name === '' || userForm.mail === '' || userForm.password === '' || userForm.role === '' || userForm.storage === '') {
+        if(userForm.name === '' || userForm.mail === '' || userForm.password === '' || userForm.role === '' || userForm.task === '') {
             errorsUS.value = 'Debe completar los datos'
             return {errorsUS, ok: false}
 
@@ -21,12 +20,12 @@ const createUser = () =>{
                 return {errorsUS, ok: false}
             }
 
-            const {name, mail, password, role, storage, rut, position} = userForm
+            const {name, mail, password, role, task, rut, position} = userForm
 
 
             try {
 
-                const resp = await backendConnect.post('/api/users', {name, mail, password, role, storage, rut, position}, {headers: { 'x-token': localStorage.getItem('token') }}).catch(function (errors){
+                const resp = await backendConnect.post('/api/users', {name, mail, password, role, task, rut, position}, {headers: { 'x-token': localStorage.getItem('token') }}).catch(function (errors){
                     
                     if(errors.response.data.msg) { 
                         errorsUS.value = errors.response.data.msg
