@@ -146,9 +146,9 @@ const mutations = {
             const counts = {}
 
             for (const u of aForums) {
-                if (u.userRevisor) {
-                    users.push(u.userRevisor.name)
-                }
+
+                    users.push(u.user.name)
+
             }
 
 
@@ -215,11 +215,10 @@ const mutations = {
             const counts = {}
 
             for (const u of aForums) {
-                if (u.userRevisor) {
-                    users.push(u.userRevisor.name)
-                }
-            }
 
+                users.push(u.user.name)
+
+        }
 
             Object.values(users).forEach(function (x) { counts[x] = (counts[x] || 0) + 1 })
 

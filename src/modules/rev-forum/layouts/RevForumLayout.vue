@@ -30,6 +30,7 @@ export default {
       getForums();
     })
 
+    getForums();
 
     return {
       statusState,
