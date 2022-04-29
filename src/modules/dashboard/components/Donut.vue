@@ -75,7 +75,7 @@ export default {
     return {
 
       chartData: {
-        labels: ['REVISADOS', 'POR REVISAR'],
+        labels: ['REGISTROS REVISADOS %', 'REGISTROS POR REVISAR %'],
         datasets: [{ data: percentC.value,
         backgroundColor: ['rgb(153, 102, 255)', 'rgb(255, 206, 86)']
         }]

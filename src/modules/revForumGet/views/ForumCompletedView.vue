@@ -85,15 +85,15 @@
             <div class="in-forum-2">
               <p class="hdr">RESPUESTAS SEGUNDA PARTE</p>
               <div class="lines"></div>
-              <p>¿SE IDENTIFICAN LA TOTALIDAD DE LOS RIESGOS CRÍTICOS (RC) PRESENTES EN LA TAREA?: <b>{{ forum.riesgosCriticos }}</b></p>
-              <p>¿LOS CONTROLES CRÍTICOS CORRESPONDEN A LOS RC IDENTIFICADOS DE LIBRETA DE PREGUNTAS?: <b>{{ forum.controlesCriticos }}</b></p>
-              <p>¿SE CUMPLEN LOS CONTROLES CRÍTICOS ESTABLECIDOS POR EL SUPERVISOR?: <b>{{ forum.cumplenControles }}</b></p>
-              <p>¿SE CUMPLEN LOS CONTROLES CRÍTICOS ESTABLECIDOS POR EL TRABAJADOR?: <b>{{ forum.trabControles }}</b></p>
-              <p>¿SE CONTESTARON TODAS LAS PREGUNTAS TRANSVERSALES (CUANDO APLICAN)?: <b>{{ forum.contestaronPreguntas }}</b></p>
-              <p>¿TODOS LOS TRABAJADORES FIRMARON LA TOMA DE CONOCIMIENTO DE LA ART?: <b>{{ forum.todosTrabajadores }}</b></p>
-              <p>¿TODOS LOS INTEGRANTES DE LA TAREA CONOCEN EL CORRECTO USO DE LA ART?: <b>{{ forum.todosIntegrantes }}</b></p>
-              <p>¿EL SUPERVISOR TITULAR O SUPERVISOR REEMPLAZANTE FIRMÓ EL ART?: <b>{{ forum.supervisorTitular }}</b></p>
-              <p>¿FUERON CORREGIDAS LAS DESVIACIONES?: <b>{{ forum.fueronCorregidas }}</b></p>
+              <p><b>1</b> ¿SE IDENTIFICAN LA TOTALIDAD DE LOS RIESGOS CRÍTICOS (RC) PRESENTES EN LA TAREA?: <b>{{ forum.riesgosCriticos }}</b></p>
+              <p><b>2</b> ¿LOS CONTROLES CRÍTICOS CORRESPONDEN A LOS RC IDENTIFICADOS DE LIBRETA DE PREGUNTAS?: <b>{{ forum.controlesCriticos }}</b></p>
+              <p><b>3</b> ¿SE CUMPLEN LOS CONTROLES CRÍTICOS ESTABLECIDOS POR EL SUPERVISOR?: <b>{{ forum.cumplenControles }}</b></p>
+              <p><b>4</b> ¿SE CUMPLEN LOS CONTROLES CRÍTICOS ESTABLECIDOS POR EL TRABAJADOR?: <b>{{ forum.trabControles }}</b></p>
+              <p><b>5</b> ¿SE CONTESTARON TODAS LAS PREGUNTAS TRANSVERSALES (CUANDO APLICAN)?: <b>{{ forum.contestaronPreguntas }}</b></p>
+              <p><b>6</b> ¿TODOS LOS TRABAJADORES FIRMARON LA TOMA DE CONOCIMIENTO DE LA ART?: <b>{{ forum.todosTrabajadores }}</b></p>
+              <p><b>7</b> ¿TODOS LOS INTEGRANTES DE LA TAREA CONOCEN EL CORRECTO USO DE LA ART?: <b>{{ forum.todosIntegrantes }}</b></p>
+              <p><b>8</b> ¿EL SUPERVISOR TITULAR O SUPERVISOR REEMPLAZANTE FIRMÓ EL ART?: <b>{{ forum.supervisorTitular }}</b></p>
+              <p><b>9</b> ¿FUERON CORREGIDAS LAS DESVIACIONES?: <b>{{ forum.fueronCorregidas }}</b></p>
               <p>OPORTUNIDADES ENCONTRADAS: <b>{{ forum.oportunidadesEncontradas }}</b></p>
               <p>FORTALEZAS ODP: <b>{{ forum.fortalezaODP }}</b></p>
             </div>

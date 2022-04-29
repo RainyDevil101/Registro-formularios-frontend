@@ -1,4 +1,9 @@
 <template>
+
+    <div v-if="questions === true">
+        <questions @on:close="onQuestionsShow" />
+    </div>
+
     <div class="dashboard-view my-5">
         <div class="totalAndReviewed">
             <total-and-reviewed-forums :key="allC" :allC="allC" />
@@ -13,7 +18,7 @@
             <pie :key="averageQuality" :averageQuality="averageQuality" />
         </div>
         <div class="rcPrevented">
-            <line-pre :key="answersRq" :answersRq="answersRq" />
+            <line-pre @on:Questions="onQuestionsShow" :key="answersRq" :answersRq="answersRq" />
         </div>
         <div class="noPerAnswer">
             <answers-no :key="answersNo" :answersNo="answersNo" />
@@ -26,7 +31,7 @@
 
 <script>
 import { useStore } from 'vuex'
-import { computed, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import Donut from '../components/Donut.vue'
 import TotalAndReviewedForums from '../components/TotalAndReviewedForums.vue'
 import LinesArt from '../components/LinesArt.vue'
@@ -34,10 +39,11 @@ import Pie from '../components/Pie.vue'
 import LinePre from '../components/LinePre.vue'
 import AnswersNo from '../components/AnswersNo.vue'
 import Faenas from '../components/Faenas.vue'
+import Questions from '../components/Questions.vue'
 
 export default {
 
-    components: { TotalAndReviewedForums, Donut, LinesArt, Pie, LinePre, AnswersNo, Faenas },
+    components: { TotalAndReviewedForums, Donut, LinesArt, Pie, LinePre, AnswersNo, Faenas, Questions },
 
     setup() {
 
@@ -61,6 +67,8 @@ export default {
 
         const taskForums = ref(store.state.forums.artTask)
 
+        const questions = ref(false);
+
         watch(
             () => store.state.forums.statusA,
             () => (status.value = store.state.forums.statusA)
@@ -76,6 +84,20 @@ export default {
             answersRq,
             answersNo,
             taskForums,
+            questions,
+
+            onQuestionsShow: () => {
+                console.log(questions);
+                if(questions.value === false) {
+                    questions.value = true
+                    return
+                }
+
+                if(questions.value === true) {
+                    questions.value = false
+                    return
+                }
+            },
         }
 
     }

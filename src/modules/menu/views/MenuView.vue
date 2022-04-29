@@ -1,10 +1,6 @@
 <template>
   <div class="front-page">
-    <p>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae esse
-      eveniet ex earum, quasi tempora omnis ea numquam nulla doloremque quam?
-      Voluptatibus eum fuga, natus inventore maxime nisi itaque doloremque?
-    </p>
+
    <div class="bltn">
       <router-link :to="{ name: 'front-forum' }" active-link='active' style="text-decoration: none; color: inherit;"
     ><p>Responder formulario</p></router-link>

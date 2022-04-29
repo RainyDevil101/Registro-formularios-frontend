@@ -1,6 +1,5 @@
 <template>
   <div class="up">
-    <h5>Promedio de cumplimiento de calidad</h5>
     <Pie :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId"
       :plugins="plugins" :css-classes="cssClasses" :styles="styles" :width="width" :height="height" />
   </div>
@@ -66,7 +65,7 @@ export default {
       average,
 
       chartData: {
-        labels: ['CUMPLIDA', 'POR CUMPLIR'],
+        labels: ['PROMEDIO DE CUMPLIMIENTO DE CALIDAD CUMPLIDO %', 'PROMEDIO DE CUMPLIMIENTO DE CALIDAD POR CUMPLIR %'],
         datasets: [
           {
             backgroundColor: ['#41B883', '#E46651'],
