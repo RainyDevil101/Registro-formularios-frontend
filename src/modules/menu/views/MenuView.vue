@@ -1,6 +1,6 @@
 <template>
   <div class="front-page">
-
+     <p>PÁGINA EN DESARROLLO</p>
    <div class="bltn">
       <router-link :to="{ name: 'front-forum' }" active-link='active' style="text-decoration: none; color: inherit;"
     ><p>Responder formulario</p></router-link>
@@ -27,7 +27,7 @@ export default {
 
 <style lang="scss" scoped>
 .front-page {
-  text-align: justify;
+  text-align: center;
   min-height: calc(100vh - 160px);
   height: 100%;
   width: 90%;

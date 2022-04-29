@@ -18,10 +18,10 @@
             <pie :key="averageQuality" :averageQuality="averageQuality" />
         </div>
         <div class="rcPrevented">
-            <line-pre @on:Questions="onQuestionsShow" :key="answersRq" :answersRq="answersRq" />
+            <line-pre :key="answersRq" :answersRq="answersRq" />
         </div>
         <div class="noPerAnswer">
-            <answers-no :key="answersNo" :answersNo="answersNo" />
+            <answers-no @on:Questions="onQuestionsShow" :key="answersNo" :answersNo="answersNo" />
         </div>
         <div class="cuantityfaena">
             <faenas :key="taskForums" :taskForums="taskForums" />
