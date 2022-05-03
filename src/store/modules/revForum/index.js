@@ -69,9 +69,19 @@ const getters = {
 
 
     },
-    allArray(state) {
+    allArray: (state) => (dates = '') => {
 
-        return state.allArray
+        console.log(dates);
+
+        if (dates = ['', '']) {
+            const aForums = state.allForums
+            const fCompleted = state.forumsCompleted
+            state.allArray = [aForums.length, fCompleted.length]
+
+            return state.allArray
+        }
+
+
 
     },
     answersRqValue(state) {
@@ -126,10 +136,9 @@ const mutations = {
 
             const aForums = JSON.parse(localStorage.getItem('aF'));
 
-            // Primer gráfico
+
 
             state.allForums = aForums
-            state.allArray = [aForums.length, forumsCompleted.length]
 
             // Segundo gráfico
 
@@ -232,110 +241,6 @@ const mutations = {
 
         } else {
 
-            const forumsCompleted = allForums.filter(completed => completed.statusForum == 'REVISADO')
-
-            const aForums = JSON.parse(localStorage.getItem('aF'));
-
-            // Primer gráfico
-
-            state.allForums = aForums
-            state.allArray = [aForums.length, forumsCompleted.length]
-
-            // Segundo gráfico
-
-            const total = (forumsCompleted.length * 100) / aForums.length
-            const rest = 100 - total
-            state.allPercent = [total, rest]
-
-            // Tercer gráfico
-
-            const users = []
-            const counts = {}
-
-            for (const u of aForums) {
-
-                users.push(u.user.name)
-
-            }
-
-            Object.values(users).forEach(function (x) { counts[x] = (counts[x] || 0) + 1 })
-
-            state.userArray = Object.keys(counts)
-            state.userRepeat = Object.values(counts)
-
-            // Cuarto gráfico
-
-            const quality = []
-            const totalAverage = []
-
-            for (const q of aForums) {
-                if (q.userRevisor) {
-                    quality.push(q.calidad)
-                }
-            }
-
-            const stringNumbers = Object.values(quality)
-            const toNumbers = stringNumbers.map(Number)
-
-            const add = toNumbers.reduce(function (x, y) {
-                return x + y;
-            }, 0)
-
-            const totalNumbers = toNumbers.length
-
-            const average = add / totalNumbers
-
-            const percentAverage = 100 - average
-
-            totalAverage.push(average, percentAverage)
-
-            state.forumQuality = totalAverage
-
-            // Séptimo gráfico
-
-            const det = []
-            const dand = []
-            const dfv = []
-            const dsal = []
-            const dch = []
-            const sdand = []
-            const sdet = []
-            const casaMatríz = []
-
-            const faenasChart = []
-
-            for (const f of aForums) {
-                if (f.task.name === 'DET') {
-                    det.push(f.task.name)
-                }
-                if (f.task.name === 'DAND') {
-                    dand.push(f.task.name)
-                }
-                if (f.task.name === 'DFV') {
-                    dfv.push(f.task.name)
-                }
-                if (f.task.name === 'DSAL') {
-                    dsal.push(f.task.name)
-                }
-                if (f.task.name === 'DCH') {
-                    dch.push(f.task.name)
-                }
-                if (f.task.name === 'SDAND') {
-                    sdand.push(f.task.name)
-                }
-                if (f.task.name === 'SDET') {
-                    sdet.push(f.task.name)
-                }
-                if (f.task.name === 'CASA MATRIZ') {
-                    casaMatríz.push(f.task.name)
-                }
-            }
-
-            faenasChart.push(det.length, dand.length, dfv.length, dsal.length, dch.length, sdand.length, sdet.length, casaMatríz.length)
-
-            state.artTask = faenasChart
-
-            state.statusA = 'RECIBIDOS'
             return
 
         }
@@ -556,13 +461,13 @@ const mutations = {
     logOut(state) {
 
         state.status = 'CARGANDO',
-        state.statusC = 'CARGANDO',
-        state.statusA = 'CARGANDO',
-        state.forumsCompleted = '',
-        state.forumsPending = '',
-        state.allForums = [],
-        state.userNeeded = '',
-        state.imgAn = false
+            state.statusC = 'CARGANDO',
+            state.statusA = 'CARGANDO',
+            state.forumsCompleted = '',
+            state.forumsPending = '',
+            state.allForums = [],
+            state.userNeeded = '',
+            state.imgAn = false
         state.imgRe = false
         state.blocImg = false
         state.error = false

@@ -9,6 +9,26 @@
     </div>
 
     <div class="dashboard-view my-5">
+
+        <div>
+            <h3>Rango de fechas</h3>
+            <div class="input-date-search">
+                <div>
+                    <input type="date"
+                    v-model="initDate"
+                    >
+                </div>
+                <div>
+                    <input type="date"
+                    v-model="finDate"
+                    >
+                </div>
+                <div>
+                    <button @click="onSearch" class="btn btn-primary">Buscar</button>
+                </div>
+            </div>
+        </div>
+
         <div class="totalAndReviewed">
             <total-and-reviewed-forums :key="allC" :allC="allC" />
         </div>
@@ -45,6 +65,7 @@ import AnswersNo from '../components/AnswersNo.vue'
 import Faenas from '../components/Faenas.vue'
 import Questions from '../components/Questions.vue'
 import Rqsv from '../components/Rqsv.vue'
+import getForms from '../composables/gets'
 
 export default {
 
@@ -54,10 +75,13 @@ export default {
 
         const store = useStore();
 
-        const allC = ref(store.state.forums.allArray)
+        const allC = ref()
+
+        const initDate = ref('');
+        const finDate = ref('');
 
         const allPercent = ref(store.state.forums.allPercent)
-        
+
         const userTotal = ref(store.state.forums.userArray)
 
         const userRepeat = ref(store.state.forums.userRepeat)
@@ -76,6 +100,12 @@ export default {
 
         const rqsv = ref(false);
 
+        const { getAllArray } = getForms();
+
+        const { totalAllArray } = getAllArray(['', '']);
+
+        allC.value = totalAllArray.value
+
         watch(
             () => store.state.forums.statusA,
             () => (status.value = store.state.forums.statusA)
@@ -93,25 +123,39 @@ export default {
             taskForums,
             questions,
             rqsv,
+            initDate,
+            finDate,
+            getAllArray,
+            totalAllArray,
+
+            onSearch: () => {
+
+                const dates = [initDate.value, finDate.value]
+
+                const { totalAllArray } = getAllArray(dates)
+
+                return allC.value = totalAllArray.value
+
+            },
 
             onQuestionsShow: () => {
-                if(questions.value === false) {
+                if (questions.value === false) {
                     questions.value = true
                     return
                 }
 
-                if(questions.value === true) {
+                if (questions.value === true) {
                     questions.value = false
                     return
                 }
             },
             onRqsvShow: () => {
-                if(rqsv.value === false) {
+                if (rqsv.value === false) {
                     rqsv.value = true
                     return
                 }
 
-                if(rqsv.value === true) {
+                if (rqsv.value === true) {
                     rqsv.value = false
                     return
                 }
@@ -133,6 +177,12 @@ export default {
     grid-template-rows: auto;
 }
 
+.input-date-search {
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+
 .dashboard-view>div {
     text-align: center;
     width: 80%;
@@ -148,6 +198,12 @@ export default {
 }
 
 @media screen and (min-width: 768px) {
+
+    .input-date-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
     .dashboard-view {
         width: 50%;

@@ -42,6 +42,8 @@ const getTerm = (term) => {
         allForumsRef,
         allForumsTerm,
 
+        
+        statusStateA: computed(() => store.getters['forums/statusStateA']),
         statusState: computed(() => store.getters['forums/statusState']),
         completedState: computed(() => store.getters['forums/completedState']),
         totalC: computed(() => store.getters['forums/countAll']),

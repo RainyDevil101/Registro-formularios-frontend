@@ -1,7 +1,7 @@
 <template>
 
 <div class="up">
-    <div v-if="allState === 'CARGANDO'">
+    <div v-if="statusStateA === 'CARGANDO'">
     <loader />
 </div>
 
@@ -46,7 +46,7 @@ export default {
 
         const term = ref('');
 
-        const { allForumsRef, allForumsTerm, allState } = getTerm(term.value);
+        const { allForumsRef, allForumsTerm, statusStateA } = getTerm(term.value);
 
         watch(
             () => term.value,
@@ -61,7 +61,7 @@ export default {
         return {
             term,
             allForumsRef,
-            allState,
+            statusStateA,
         }
     }
 

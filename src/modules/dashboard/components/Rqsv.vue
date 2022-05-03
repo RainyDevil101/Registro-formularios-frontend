@@ -29,7 +29,7 @@ export default {
 
 <style lang="scss" scoped>
 img {
-    // max-height: 600px;
+    width: 360px;
     border: 4px solid white;
 }
 
@@ -119,4 +119,22 @@ img {
         opacity: 1;
     }
 }
+
+@media screen and (min-width: 768px) {
+
+img {
+    width: 700px;
+    border: 4px solid white;
+}
+
+}
+@media screen and (min-width: 1000px) {
+
+img {
+    width: 900px;
+    border: 4px solid white;
+}
+
+}
+
 </style>
