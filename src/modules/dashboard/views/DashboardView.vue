@@ -4,6 +4,10 @@
         <questions @on:close="onQuestionsShow" />
     </div>
 
+    <div v-if="rqsv === true">
+        <rqsv @on:closeR="onRqsvShow" />
+    </div>
+
     <div class="dashboard-view my-5">
         <div class="totalAndReviewed">
             <total-and-reviewed-forums :key="allC" :allC="allC" />
@@ -18,7 +22,7 @@
             <pie :key="averageQuality" :averageQuality="averageQuality" />
         </div>
         <div class="rcPrevented">
-            <line-pre :key="answersRq" :answersRq="answersRq" />
+            <line-pre @on:Rqsv="onRqsvShow" :key="answersRq" :answersRq="answersRq" />
         </div>
         <div class="noPerAnswer">
             <answers-no @on:Questions="onQuestionsShow" :key="answersNo" :answersNo="answersNo" />
@@ -40,10 +44,11 @@ import LinePre from '../components/LinePre.vue'
 import AnswersNo from '../components/AnswersNo.vue'
 import Faenas from '../components/Faenas.vue'
 import Questions from '../components/Questions.vue'
+import Rqsv from '../components/Rqsv.vue'
 
 export default {
 
-    components: { TotalAndReviewedForums, Donut, LinesArt, Pie, LinePre, AnswersNo, Faenas, Questions },
+    components: { TotalAndReviewedForums, Donut, LinesArt, Pie, LinePre, AnswersNo, Faenas, Questions, Rqsv },
 
     setup() {
 
@@ -69,6 +74,8 @@ export default {
 
         const questions = ref(false);
 
+        const rqsv = ref(false);
+
         watch(
             () => store.state.forums.statusA,
             () => (status.value = store.state.forums.statusA)
@@ -85,9 +92,9 @@ export default {
             answersNo,
             taskForums,
             questions,
+            rqsv,
 
             onQuestionsShow: () => {
-                console.log(questions);
                 if(questions.value === false) {
                     questions.value = true
                     return
@@ -95,6 +102,17 @@ export default {
 
                 if(questions.value === true) {
                     questions.value = false
+                    return
+                }
+            },
+            onRqsvShow: () => {
+                if(rqsv.value === false) {
+                    rqsv.value = true
+                    return
+                }
+
+                if(rqsv.value === true) {
+                    rqsv.value = false
                     return
                 }
             },

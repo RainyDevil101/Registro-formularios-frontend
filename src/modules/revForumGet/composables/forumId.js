@@ -7,8 +7,6 @@ const useIdForum = () => {
 
     const { userNeeded } = useFormStore();
 
-    console.log(userNeeded.value);
-
     const forum = ref(null);
     const userName = ref(null);
     const userPosition = ref(null);
@@ -93,7 +91,7 @@ const useIdForum = () => {
                 userControlRe.value = false
                 return
             } else {
-                console.log('Error de pregunta');
+                return
             }
 
 

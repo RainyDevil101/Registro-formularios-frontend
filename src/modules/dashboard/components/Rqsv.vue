@@ -1,16 +1,8 @@
 <template>
-    <div class="modal-background fade-in" @click.self="$emit('on:close')">
+    <div class="modal-background fade-in" @click.self="$emit('on:closeR')">
         <div class="modal-container">
             <div class="img-scroll">
-                <p><b>1</b> ¿SE IDENTIFICAN LA TOTALIDAD DE LOS RIESGOS CRÍTICOS (RC) PRESENTES EN LA TAREA?</p>
-                <p><b>2</b> ¿LOS CONTROLES CRÍTICOS CORRESPONDEN A LOS RC IDENTIFICADOS DE LIBRETA DE PREGUNTAS?</p>
-                <p><b>3</b> ¿SE CUMPLEN LOS CONTROLES CRÍTICOS ESTABLECIDOS POR EL SUPERVISOR?</p>
-                <p><b>4</b> ¿SE CUMPLEN LOS CONTROLES CRÍTICOS ESTABLECIDOS POR EL TRABAJADOR?</p>
-                <p><b>5</b> ¿SE CONTESTARON TODAS LAS PREGUNTAS TRANSVERSALES (CUANDO APLICAN)?</p>
-                <p><b>6</b> ¿TODOS LOS TRABAJADORES FIRMARON LA TOMA DE CONOCIMIENTO DE LA ART?</p>
-                <p><b>7</b> ¿TODOS LOS INTEGRANTES DE LA TAREA CONOCEN EL CORRECTO USO DE LA ART?</p>
-                <p><b>8</b> ¿EL SUPERVISOR TITULAR O SUPERVISOR REEMPLAZANTE FIRMÓ EL ART?</p>
-                <p><b>9</b> ¿FUERON CORREGIDAS LAS DESVIACIONES?</p>
+                <img src="../../../assets/rqsv.jpg" alt="No disponible">
             </div>
         </div>
     </div>
@@ -21,12 +13,13 @@ import { ref } from 'vue'
 
 export default {
 
-    emits: ['on:close'],
+    emits: ['on:closeR'],
 
     setup() {
 
+
+
         return {
-            
         }
 
     }

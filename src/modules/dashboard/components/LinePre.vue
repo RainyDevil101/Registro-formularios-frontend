@@ -2,7 +2,7 @@
   <div class="up">
     <Bar :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId" :dataset-id-key="datasetIdKey"
       :plugins="plugins" :css-classes="cssClasses" :styles="styles" :width="width" :height="height" /> 
-      
+      <button @click="$emit('on:Rqsv')" class="btn my-2 btn-primary">RQSV</button>
       </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
   name: 'BarChart',
   components: { Bar },
 
-  
+  emits: ['on:Rqsv'],
 
   props: {
     answersRq: {

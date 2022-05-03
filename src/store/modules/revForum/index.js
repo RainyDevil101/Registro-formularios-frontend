@@ -556,13 +556,13 @@ const mutations = {
     logOut(state) {
 
         state.status = 'CARGANDO',
-            state.statusC = 'CARGANDO',
-            state.statusA = 'CARGANDO',
-            state.forumsCompleted = '',
-            state.forumsPending = '',
-            state.allForums = [],
-            state.userNeeded = '',
-            state.imgAn = false
+        state.statusC = 'CARGANDO',
+        state.statusA = 'CARGANDO',
+        state.forumsCompleted = '',
+        state.forumsPending = '',
+        state.allForums = [],
+        state.userNeeded = '',
+        state.imgAn = false
         state.imgRe = false
         state.blocImg = false
         state.error = false

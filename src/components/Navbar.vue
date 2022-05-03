@@ -1,6 +1,6 @@
 <template>
 
-  <nav class="navbar navbar-expand-lg navbar-light bcc">
+  <nav class="navbar navbar-expand-lg navbar-dark bcc">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,6 +63,10 @@ export default {
   text-align: center;
 }
 
+  nav .navbar-nav li a{
+  color: white !important;
+  }
+
 .logout {
   height: 40px;
   width: 40px;
@@ -82,6 +86,10 @@ export default {
 }
 
 @media (min-width: 991px) {
+
+    nav .navbar-nav li a{
+  color: black !important;
+  }
   .box-a {
     background-color: white;
     margin: 0px 4px 0px 4px;
