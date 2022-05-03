@@ -53,14 +53,6 @@
           </select>
         </div>
         <div class="select">
-          <div class="card-title change-storage">
-            <p>Cambiar división de usuario</p>
-          </div>
-          <select v-model="stor" class="form-select" aria-label="multiple select example">
-            <option v-for="storage of storages" :key="storage._id" :value="storage.name">{{ storage.name }}</option>
-          </select>
-        </div>
-        <div class="select">
           <div class="card-title change-task">
             <p>Cambiar faena</p>
           </div>
@@ -98,7 +90,6 @@ import useIdUser from "../composables/userId";
 import saveUser from "../composables/saveUser";
 import deleteUser from "../composables/deleteUser";
 import getRoles from "../../gets/getRoles";
-import getStorages from "../../gets/getStorage";
 import getTasks from "../../gets/getTask";
 import { useStore } from 'vuex';
 
@@ -110,11 +101,10 @@ export default {
 
     const idPT = ref("");
     const selected = ref();
-    const stor = ref();
     const taskU = ref();
     const selectRole = ref(false);
 
-    const { user, errorMessage, searchUser, isLoading, userRole, userStorage, userTask } =
+    const { user, errorMessage, searchUser, isLoading, userRole, userTask } =
       useIdUser(route.params.id);
 
     watch(
@@ -130,19 +120,14 @@ export default {
       () => (selected.value = userRole.value)
     );
     watch(
-      () => userStorage.value,
-      () => (stor.value = userStorage.value)
-    );
-    watch(
       () => userTask.value,
       () => (taskU.value = userTask.value)
     );
 
-    const { saveUserDb, errorsUS } = saveUser();
+    const { saveUserDb } = saveUser();
     const { deleteUserDb } = deleteUser();
     const { searchRoles, roles } = getRoles();
-    const { searchStorages, storages } = getStorages();
-    const { searchTask, tasks } = getTasks();
+    const { searchTask, getTaskId, tasks } = getTasks();
 
     const onDelete = async () => {
       const { isConfirmed } = await Swal.fire({
@@ -190,12 +175,10 @@ export default {
       selected,
       selectRole,
       user,
-      searchStorages,
-      storages,
-      stor,
       taskU,
       searchTask,
       tasks,
+      getTaskId,
 
       onSubmit: async () => {
         new Swal({
@@ -204,11 +187,23 @@ export default {
         });
         Swal.showLoading();
 
+          const tasksFor = tasks.value
+          const taskUName = taskU.value
+          const taskUId = []
+
+          for(const t of tasksFor) {
+
+            if( t.name == taskUName ) {
+              taskUId.push(t._id)
+            }
+
+
+          }
+
         const { ok, message, errorsUS } = await saveUserDb(
           user.value,
           selected.value,
-          stor.value,
-          taskU.value,
+          taskUId,
           route.params.id
         );
 

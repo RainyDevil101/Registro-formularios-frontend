@@ -19,14 +19,14 @@
             <h3>
               <b>SUPERVISOR</b>
             </h3>
-            <p>{{ userIdState.name }}</p>
+            <p>{{ user.name }}</p>
           </div>
 
           <div class="question">
             <h3>
               <b>RUT</b>
             </h3>
-            <p>{{ userIdState.rut }}</p>
+            <p>{{ user.rut }}</p>
           </div>
 
           <div class="question">
@@ -37,10 +37,15 @@
           </div>
 
           <div class="question">
+
             <h3>
-              <b>FAENA</b>
+              <b>SELECCIONE</b>
             </h3>
-            <p>{{ task.name }}</p>
+
+            <select v-model="taskSelect" class="form-select" aria-label="multiple select example">
+              <option v-for="task of tasks" :key="task._id" :value="task.name">{{ task.name }}</option>
+            </select>
+
           </div>
 
           <div class="question">
@@ -74,65 +79,35 @@
               <div class="separator">
                 <p class="option">Opción 1</p>
                 <div class="options">
-                  <input
-                    v-model="userForm.question1"
-                    v-for="option of options"
-                    :value="option"
-                    type="radio"
-                    name="1"
-                  />
+                  <input v-model="userForm.question1" v-for="option of options" :value="option" type="radio" name="1" />
                 </div>
               </div>
 
               <div class="separator">
                 <p class="option">Opción 2</p>
                 <div class="options">
-                  <input
-                    v-model="userForm.question2"
-                    v-for="option of options"
-                    :value="option"
-                    type="radio"
-                    name="2"
-                  />
+                  <input v-model="userForm.question2" v-for="option of options" :value="option" type="radio" name="2" />
                 </div>
               </div>
 
               <div class="separator">
                 <p class="option">Opción 3</p>
                 <div class="options">
-                  <input
-                    v-model="userForm.question3"
-                    v-for="option of options"
-                    :value="option"
-                    type="radio"
-                    name="3"
-                  />
+                  <input v-model="userForm.question3" v-for="option of options" :value="option" type="radio" name="3" />
                 </div>
               </div>
 
               <div class="separator">
                 <p class="option">Opción 4</p>
                 <div class="options">
-                  <input
-                    v-model="userForm.question4"
-                    v-for="option of options"
-                    :value="option"
-                    type="radio"
-                    name="4"
-                  />
+                  <input v-model="userForm.question4" v-for="option of options" :value="option" type="radio" name="4" />
                 </div>
               </div>
 
               <div class="separator">
                 <p class="option">Opción 5</p>
                 <div class="options">
-                  <input
-                    v-model="userForm.question5"
-                    v-for="option of options"
-                    :value="option"
-                    type="radio"
-                    name="5"
-                  />
+                  <input v-model="userForm.question5" v-for="option of options" :value="option" type="radio" name="5" />
                 </div>
               </div>
             </div>
@@ -145,23 +120,11 @@
             <div class="controls">
               <div class="control">
                 <p>Si</p>
-                <input
-                  type="radio"
-                  @click="controlY"
-                  v-model="userForm.controls"
-                  name="control"
-                  value="true"
-                />
+                <input type="radio" @click="controlY" v-model="userForm.controls" name="control" value="true" />
               </div>
               <div class="control">
                 <p>No</p>
-                <input
-                  type="radio"
-                  @click="controlN"
-                  v-model="userForm.controls"
-                  name="control"
-                  value="false"
-                />
+                <input type="radio" @click="controlN" v-model="userForm.controls" name="control" value="false" />
               </div>
             </div>
           </div>
@@ -177,12 +140,7 @@
             <h3>
               <b>Fotografía anverso de ART</b>
             </h3>
-            <input
-              type="file"
-              @change="onSelectedImage"
-              id="fileAn"
-              accept="image/png, image/jpg, image/ jpeg"
-            />
+            <input type="file" @change="onSelectedImage" id="fileAn" accept="image/png, image/jpg, image/ jpeg" />
             <label for="fileAn">Seleccione la imagen</label>
 
             <div v-if="localImageOne" class="confirmation">
@@ -194,12 +152,7 @@
             <h3>
               <b>Fotografía reverso de ART</b>
             </h3>
-            <input
-              type="file"
-              @change="onSelectedImageT"
-              id="fileRe"
-              accept="image/png, image/jpg, image/ jpeg"
-            />
+            <input type="file" @change="onSelectedImageT" id="fileRe" accept="image/png, image/jpg, image/ jpeg" />
             <label for="fileRe">Seleccione la imagen</label>
 
             <div v-if="localImageTwo" class="confirmation">
@@ -227,8 +180,8 @@ import newForum from "../composables/sendForum";
 import uploadImageOne from "../helpers/uploadImage";
 import uploadImageTwo from "../helpers/uploadImageT";
 import getUser from "../composables/getUser";
-import { useStore } from 'vuex';
 import Loader from "../../../components/Loader.vue";
+import saveUser from "../../user/composables/saveUser";
 
 export default {
   setup() {
@@ -246,7 +199,8 @@ export default {
       postControl: "",
       statusForum: "PENDIENTE",
     });
-    // const today = new Date().toISOString().split('T')[0];
+
+
     const localImageOne = ref();
     const localImageTwo = ref();
     const imgOneName = ref();
@@ -254,6 +208,8 @@ export default {
     const imgAn = ref(null);
     const imgRe = ref(null);
     const onShow = ref(false);
+    const taskSelect = ref();
+
     const { positions, searchPosit } = getPosit();
     const { ubications, searchUbi } = getUbication();
     const { tasks, searchTask } = getTask();
@@ -261,9 +217,14 @@ export default {
     const { errors, createForum } = newForum();
     const { uploadImageAn } = uploadImageOne();
     const { uploadImageRe } = uploadImageTwo();
-    const { userIdState, position, task } = getUser();
+    const { userIdState, position, task, taskName, user, userRole } = getUser();
+    const { saveUserDb } = saveUser();
+
+    taskSelect.value = taskName.value
+
     watch(() => localImageOne.value, () => imgAn.value = localImageOne.value);
     watch(() => localImageTwo.value, () => imgRe.value = localImageTwo.value);
+
     return {
       route,
       router,
@@ -289,12 +250,20 @@ export default {
       userIdState,
       position,
       task,
+      taskSelect,
+      taskName,
+      saveUserDb,
+      user,
+      userRole,
+
       onSubmit: async () => {
+
         new Swal({
           title: "Espere por favor",
           allowOutsideClick: false,
         });
         Swal.showLoading();
+
         const check = userForm.value;
         if (check.dateAc === "" ||
           check.obligation === "") {
@@ -311,10 +280,39 @@ export default {
             icon: "error",
           });
         }
+
+        const taskFor = tasks.value
+        const taskUName = taskSelect.value
+        const taskUId = []
+        const idState = userIdState.value
+
+        for (const t of taskFor) {
+
+          if (t.name == taskUName) {
+            taskUId.push(t._id)
+          }
+
+        }
+
+        const { ok, message, errorsUs } = await saveUserDb(
+          user.value,
+          userRole.value,
+          taskUId,
+          idState,
+        )
+
+        if (ok === false) {
+          return Swal.fire({
+            title: "Error",
+            text: `Error al cambiar faena`,
+            icon: "error",
+          });
+        }
+
         const pictureOne = await uploadImageOne(imgAn.value);
         const pictureTwo = await uploadImageTwo(imgRe.value);
-        const { ok, errors, forumCode } = await createForum(userForm.value, pictureOne, pictureTwo, userIdState.value, position.value, task.value);
-        if (ok === false) {
+        const { nice, errors, forumCode } = await createForum(userForm.value, pictureOne, pictureTwo, user.value, position.value, task.value);
+        if (nice === false) {
           Swal.fire({
             title: "Error",
             text: `${errors.value}`,
@@ -379,6 +377,7 @@ p {
   overflow: scroll;
   overflow-x: hidden;
 }
+
 .header {
   margin-left: 20%;
   margin-right: 20%;
@@ -458,6 +457,7 @@ input[type="date"] {
   outline: none;
   border-radius: 4px;
 }
+
 ::-webkit-calendar-picker-indicator {
   background-color: white;
   padding: 5px;
@@ -588,18 +588,14 @@ img {
 // No media query for `xs` since this is the default in Bootstrap
 
 // Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) {
-}
+@media (min-width: 576px) {}
 
 // Medium devices (tablets, 768px and up)
-@media (min-width: 768px) {
-}
+@media (min-width: 768px) {}
 
 // Large devices (desktops, 992px and up)
-@media (min-width: 992px) {
-}
+@media (min-width: 992px) {}
 
 // Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {
-}
+@media (min-width: 1200px) {}
 </style>

@@ -2,7 +2,7 @@
   <div class="up">
     <Bar :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId" :dataset-id-key="datasetIdKey"
       :plugins="plugins" :css-classes="cssClasses" :styles="styles" :width="width" :height="height" /> 
-      <button @click="$emit('on:Questions')" class="btn btn-primary">PREGUNTAS</button>
+      <button @click="$emit('on:Questions')" class="btn my-2 btn-primary">PREGUNTAS</button>
       </div>
 </template>
 

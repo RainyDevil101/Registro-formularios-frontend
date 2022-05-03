@@ -44,8 +44,10 @@ body {
 }
 
 .intro-box {
+  margin-top: 2rem;
   padding: 4px;
   width: 400px;
+  height: 600px;
   text-align: center;
   background-color: rgba($color: white, $alpha: 1);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -53,9 +55,9 @@ body {
 
 .pd {
   display: flex;
+  // height: 100vh;
   justify-content: center;
-  margin: auto;
-  padding-top: 2rem;
+  align-items: center;
 }
 
 // Extra small devices (portrait phones, less than 576px)

@@ -10,7 +10,7 @@ const sendFor = () => {
 
         if( userForm.dateAc === '' || userForm.name === '' || userForm.run === '' || userForm.position === '' || userForm.task === '' || userForm.obligation === '' || userForm.question1 === '' || userForm.question2 === '' || userForm.question3 === '' || userForm.question4 === '' || userForm.question5 === '' || userForm.controls === '' || imgAn === undefined || imgRe === undefined ) {
             errors.value = 'Debe llenar los campos'
-            return { errors, ok: false }
+            return { errors, nice: false }
         } else {
 
             const {  dateAc, obligation, question1, question2, question3, question4, question5, controls, postControl} = userForm
@@ -29,7 +29,7 @@ const sendFor = () => {
 
                     if(errors.response.data.msg) {
                         errors.value = errors.response.data.msg
-                        return {errors, ok: false}
+                        return {errors, nice: false}
                     }
                     if(errors.response.data.errors) {
                         const msgErr = []
@@ -39,14 +39,14 @@ const sendFor = () => {
                             errors.value = msgErr
                         }
                         forumCode.value = null
-                        return {errors, ok: false}
+                        return {errors, nice: false}
                     } else {
 
-                        return {ok: true}
+                        return {nice: true}
                     }
                 })
                 forumCode.value = resp.data.code
-                return { ok: true, forumCode }
+                return { nice: true, forumCode }
             } catch (error) {
 
                 console.log(error);

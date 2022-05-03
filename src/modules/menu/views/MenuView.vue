@@ -1,10 +1,9 @@
 <template>
   <div class="front-page">
-     <p>PÁGINA EN DESARROLLO</p>
-   <div class="bltn">
-      <router-link :to="{ name: 'front-forum' }" active-link='active' style="text-decoration: none; color: inherit;"
-    ><p>Responder formulario</p></router-link>
-   </div>
+
+    <img src="../../../assets/background-menu.jpg" alt="No disponible">
+     
+   
   </div>
 </template>
 
@@ -28,26 +27,35 @@ export default {
 <style lang="scss" scoped>
 .front-page {
   text-align: center;
-  min-height: calc(100vh - 160px);
+  min-height: calc(100vh - 140px);
   height: 100%;
-  width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
-  background-color: white;
   margin-top: 3rem;
 }
 
-.bltn {
-  margin-top: 17.5rem;
-  margin-left: 10%;
-  text-align: center;
-  color: white;
-  border-radius: 4px;
-  width: 80%;
-  background-color: rgba($color: black, $alpha: 1.0);
+img {
+  width: 300px;
+  display: block;
+  border: 1px solid white;
+  margin: auto;
 }
 
 .front-page p {
   padding: 10px;
+}
+
+@media (min-width: 768px) {
+
+img {
+  width: 550px;
+}
+
+}
+
+@media (min-width: 992px) {
+
+img {
+  width: 850px;
+}
+
 }
 </style>

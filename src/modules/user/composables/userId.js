@@ -5,7 +5,6 @@ const useIdUser = (userId = '') => {
 
     const user = ref();
     const userRole = ref();
-    const userStorage = ref();
     const userTask = ref();
     const errorMessage = ref();
     const isLoading = ref(true);
@@ -27,7 +26,6 @@ const useIdUser = (userId = '') => {
             }
             user.value = data
             userRole.value = data.role
-            userStorage.value = data.storage.name
             userTask.value = data.task.name
 
             errorMessage.value = null
@@ -47,7 +45,6 @@ const useIdUser = (userId = '') => {
         searchUser,
         isLoading,
         userRole,
-        userStorage,
         userTask,
     }
 

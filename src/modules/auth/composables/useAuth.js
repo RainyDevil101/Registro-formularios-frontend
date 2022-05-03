@@ -64,7 +64,8 @@ const useAuth = () => {
         resetA,
 
         authStatus: computed(() => store.getters['auth/currentState']),
-        userName: computed(() => store.getters['auth/userName'])
+        userName: computed(() => store.getters['auth/userName']),
+        taskReady: computed(() => store.getters['auth/getTaskReady'])
     }
 }
 

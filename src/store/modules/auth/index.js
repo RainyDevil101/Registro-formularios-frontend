@@ -6,7 +6,9 @@ const state = {
     token: null,
     userId: null,
     position: null,
+    role: null,
     task: null,
+    taskReady: false,
     keyRe: true,
 }
 
@@ -18,9 +20,10 @@ const getters = {
         return state.user?.name || ''
     },
     getUser(state) {
-
         return state.user
-
+    },
+    getUserId(state) {
+        return state.userId
     },
     getPosition(state) {
         return state.position
@@ -28,10 +31,19 @@ const getters = {
     getTask(state) {
         return state.task
     },
+    getTaskName(state) {
+        return state.task.name
+    },
+    getTaskReady(state) {
+        return state.taskReady
+    },
+    userRole(state) {
+        return state.role
+    },
 }
 
 const mutations = {
-    loginUser(state, {user, token, userId}) {
+    loginUser(state, {user, token, userId }) {
 
         if (token) {
             localStorage.setItem('token', token)
@@ -42,6 +54,7 @@ const mutations = {
         state.status    = 'authenticated'
         state.userId    = userId
         state.keyRe     = true
+        state.role      = user.role
     },
     logOut(state) {
 
@@ -61,6 +74,7 @@ const mutations = {
     },
     userTask(state, {taskUser}) {
         state.task = taskUser
+        state.taskReady = true
     }
 }
 
@@ -74,7 +88,7 @@ const actions = {
             delete user.password
 
             const positionUser = data.userPosition
-            
+
             commit('userPosition', {positionUser})
             
             const taskUser = data.userTask
