@@ -71,22 +71,40 @@ const getters = {
     },
     allArray: (state) => (dates = '') => {
 
-        console.log(dates[0], dates[1]);
+        const formatAForums = state.allForums
+        const formatFCompleted = state.forumsCompleted
 
         if (dates[0] === '' && dates[1] === '') {
+
             const aForums = state.allForums
             const fCompleted = state.forumsCompleted
             state.allArray = [aForums.length, fCompleted.length]
 
             return state.allArray
+
         }
 
         if (dates[0] && dates[1] === '') {
 
             const dateInit = dates[0]
-            
-            const aForums = state.allForums.filter(aForum => aForum.newDate >= dateInit )
-            const fCompleted = state.forumsCompleted.filter(cForum => cForum.newDate >= dateInit)
+
+            const aForumsArray = []
+            const fCompletedArray = []
+
+            for (const a of formatAForums) {
+
+                aForumsArray.push(a.newDate.slice(0, 10))
+
+            }
+            for (const c of formatFCompleted) {
+
+                fCompletedArray.push(c.newDate.slice(0, 10))
+
+            }
+
+            const aForums = aForumsArray.filter(aForum => aForum >= dateInit)
+            const fCompleted = fCompletedArray.filter(cForum => cForum >= dateInit)
+
             state.allArray = [aForums.length, fCompleted.length]
 
             return state.allArray
@@ -94,11 +112,26 @@ const getters = {
         }
 
         if (dates[0] === '' && dates[1]) {
-            
+
             const dateFin = dates[1]
-            
-            const aForums = state.allForums.filter(aForum => aForum.newDate <= dateFin )
-            const fCompleted = state.forumsCompleted.filter(cForum => cForum.newDate <= dateFin)
+
+            const aForumsArray = []
+            const fCompletedArray = []
+
+            for (const a of formatAForums) {
+
+                aForumsArray.push(a.newDate.slice(0, 10))
+
+            }
+            for (const c of formatFCompleted) {
+
+                fCompletedArray.push(c.newDate.slice(0, 10))
+
+            }
+
+            const aForums = aForumsArray.filter(aForum => aForum <= dateFin)
+            const fCompleted = fCompletedArray.filter(cForum => cForum <= dateFin)
+
             state.allArray = [aForums.length, fCompleted.length]
 
             return state.allArray
@@ -109,9 +142,24 @@ const getters = {
 
             const dateInit = dates[0]
             const dateFin = dates[1]
-            
-            const aForums = state.allForums.filter(aForum => aForum.newDate >= dateInit && aForum.newDate <= dateFin )
-            const fCompleted = state.forumsCompleted.filter(cForum => cForum.newDate >= dateInit && cForum.newDate <= dateFin)
+
+            const aForumsArray = []
+            const fCompletedArray = []
+
+            for (const a of formatAForums) {
+
+                aForumsArray.push(a.newDate.slice(0, 10))
+
+            }
+            for (const c of formatFCompleted) {
+
+                fCompletedArray.push(c.newDate.slice(0, 10))
+
+            }
+
+            const aForums = aForumsArray.filter(aForum => aForum >= dateInit && aForum <= dateFin)
+            const fCompleted = fCompletedArray.filter(cForum => cForum >= dateInit && cForum <= dateFin)
+
             state.allArray = [aForums.length, fCompleted.length]
 
             return state.allArray
