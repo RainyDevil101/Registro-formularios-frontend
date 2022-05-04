@@ -9,8 +9,6 @@ const getForms= () => {
 
     const getAllArray = (dates = '') => {
 
-        console.log(dates);
-
         const resp = computed(() => store.getters['forums/allArray'](dates))
         
         totalAllArray.value = resp.value 
