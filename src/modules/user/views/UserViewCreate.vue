@@ -57,7 +57,7 @@
       </div>
       <div class="select">
         <div class="card-title change-storage">
-          <p v-on:click="creStorage" class="text-storage pointer">
+          <p class="text-storage pointer">
             División asignada
           </p>
         </div>

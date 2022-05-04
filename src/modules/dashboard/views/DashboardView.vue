@@ -8,26 +8,42 @@
         <rqsv @on:closeR="onRqsvShow" />
     </div>
 
-    <div class="dashboard-view my-5">
-
-        <div>
-            <h3>Rango de fechas</h3>
+    <div class="filter">
+            <h3><b>FILTRAR</b></h3>
             <div class="input-date-search">
-                <div>
+                <div class="input-config">
+                    <h5><b>Desde</b></h5>
                     <input type="date"
                     v-model="initDate"
                     >
                 </div>
-                <div>
+                <div class="input-config">
+                    <h5><b>Hasta</b></h5>
                     <input type="date"
                     v-model="finDate"
                     >
                 </div>
-                <div>
-                    <button @click="onSearch" class="btn btn-primary">Buscar</button>
+                <div class="input-config">
+                    <h5><b>Faena</b></h5>
+                    <select v-model="taskSearch"
+                    class="task-width"
+                    >
+                        <option
+                        v-for="task of tasks"
+                        :key="task._id"
+                        :value="task.name"
+                        >
+                            {{task.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="input-config">
+                    <button @click="onSearch" class="btn mt-2 btn-primary"><b>Buscar</b></button>
                 </div>
             </div>
         </div>
+
+    <div class="dashboard-view my-5">
 
         <div class="totalAndReviewed">
             <total-and-reviewed-forums :key="allC" :allC="allC" />
@@ -66,6 +82,7 @@ import Faenas from '../components/Faenas.vue'
 import Questions from '../components/Questions.vue'
 import Rqsv from '../components/Rqsv.vue'
 import getForms from '../composables/gets'
+import getTask from '../../gets/getTask'
 
 export default {
 
@@ -79,6 +96,7 @@ export default {
 
         const initDate = ref('');
         const finDate = ref('');
+        const taskSearch = ref('');
 
         const allPercent = ref(store.state.forums.allPercent)
 
@@ -104,6 +122,8 @@ export default {
 
         const { totalAllArray } = getAllArray(['', '']);
 
+        const { searchTask, tasks } = getTask();
+
         allC.value = totalAllArray.value
 
         watch(
@@ -125,8 +145,11 @@ export default {
             rqsv,
             initDate,
             finDate,
+            taskSearch,
             getAllArray,
             totalAllArray,
+            searchTask,
+            tasks,
 
             onSearch: () => {
 
@@ -177,10 +200,23 @@ export default {
     grid-template-rows: auto;
 }
 
+.filter {
+    text-align: center;
+    margin-top: 4rem;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    background-color: white;
+}
+
 .input-date-search {
     display: block;
     align-items: center;
     justify-content: center;
+}
+
+.task-width {
+    width: 130px;
 }
 
 .dashboard-view>div {
@@ -197,12 +233,30 @@ export default {
     grid-column-end: -1;
 }
 
+.input-config {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 5px 6px 5px 6px;
+}
+
+h5 {
+    color: white;
+    background-color: black;
+    border-radius: 4px;
+}
+h3 {
+    text-decoration: underline;
+}
+
+
 @media screen and (min-width: 768px) {
 
     .input-date-search {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
     .dashboard-view {
