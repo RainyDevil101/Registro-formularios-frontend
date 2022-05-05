@@ -46,25 +46,25 @@
     <div class="dashboard-view my-5">
 
         <div class="totalAndReviewed">
-            <total-and-reviewed-forums :key="allC" :allC="allC" />
+            <total-and-reviewed-forums :key="totalAllArray" :totalAllArray="totalAllArray[0]" />
         </div>
         <div class="averageReviewed">
-            <donut :key="allPercent" :allPercent="allPercent" />
+            <donut :key="totalAllArray" :allPercent="totalAllArray[1]" />
         </div>
         <div class="artToDate">
-            <lines-art :key="userTotal" :userTotal="userTotal" :userRepeat="userRepeat" />
+            <lines-art :key="totalAllArray" :userTotal="totalAllArray[2]" :userRepeat="totalAllArray[3]" />
         </div>
         <div class="averageCompleted">
-            <pie :key="averageQuality" :averageQuality="averageQuality" />
+            <pie :key="totalAllArray" :averageQuality="totalAllArray[4]" />
         </div>
         <div class="rcPrevented">
-            <line-pre @on:Rqsv="onRqsvShow" :key="answersRq" :answersRq="answersRq" />
+            <line-pre @on:Rqsv="onRqsvShow" :key="totalAllArray" :answersRq="totalAllArray[5]" />
         </div>
         <div class="noPerAnswer">
-            <answers-no @on:Questions="onQuestionsShow" :key="answersNo" :answersNo="answersNo" />
+            <answers-no @on:Questions="onQuestionsShow" :key="totalAllArray" :answersNo="totalAllArray[6]" />
         </div>
         <div class="cuantityfaena">
-            <faenas :key="taskForums" :taskForums="taskForums" />
+            <faenas :key="totalAllArray" :taskForums="totalAllArray[7]" />
         </div>
     </div>
 </template>
@@ -92,27 +92,12 @@ export default {
 
         const store = useStore();
 
-        const allC = ref()
 
         const initDate = ref('');
         const finDate = ref('');
         const taskSearch = ref('');
 
-        const allPercent = ref(store.state.forums.allPercent)
-
-        const userTotal = ref(store.state.forums.userArray)
-
-        const userRepeat = ref(store.state.forums.userRepeat)
-
-        const averageQuality = ref(store.state.forums.forumQuality)
-
-        const answersRq = ref(store.state.forums.answersArray)
-
-        const answersNo = ref(store.state.forums.noAnswers)
-
-        const status = ref(store.state.forums.statusA)
-
-        const taskForums = ref(store.state.forums.artTask)
+        const status = ref(store.state.forums.statusA);
 
         const questions = ref(false);
 
@@ -120,27 +105,17 @@ export default {
 
         const { getAllArray } = getForms();
 
-        const { totalAllArray } = getAllArray(['', '']);
+        const { totalAllArray } = getAllArray(['', '', '']);
 
         const { searchTask, tasks } = getTask();
-
-        allC.value = totalAllArray.value
 
         watch(
             () => store.state.forums.statusA,
             () => (status.value = store.state.forums.statusA)
-        )
+        );
 
         return {
-            allC,
-            allPercent,
-            userTotal,
-            userRepeat,
-            averageQuality,
             status,
-            answersRq,
-            answersNo,
-            taskForums,
             questions,
             rqsv,
             initDate,
@@ -153,34 +128,34 @@ export default {
 
             onSearch: () => {
 
-                const dates = [initDate.value, finDate.value]
+                const dates = [initDate.value, finDate.value, taskSearch.value];
 
-                const { totalAllArray } = getAllArray(dates)
+                const { totalAllArray } = getAllArray(dates);
 
-                return allC.value = totalAllArray.value
+                return totalAllArray.value;
 
             },
 
             onQuestionsShow: () => {
                 if (questions.value === false) {
-                    questions.value = true
-                    return
+                    questions.value = true;
+                    return;
                 }
 
                 if (questions.value === true) {
-                    questions.value = false
-                    return
+                    questions.value = false;
+                    return;
                 }
             },
             onRqsvShow: () => {
                 if (rqsv.value === false) {
-                    rqsv.value = true
-                    return
+                    rqsv.value = true;
+                    return;
                 }
 
                 if (rqsv.value === true) {
-                    rqsv.value = false
-                    return
+                    rqsv.value = false;
+                    return;
                 }
             },
         }

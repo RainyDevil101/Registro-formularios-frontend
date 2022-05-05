@@ -16,7 +16,7 @@ export default {
   name: 'BarChart',
   components: { Bar },
   props: {
-    allC: {
+    totalAllArray: {
       type: Array,
       required: true,
     },
@@ -52,7 +52,7 @@ export default {
   setup(props) {
 
     const allCount = ref('');
-    allCount.value = props.allC
+    allCount.value = props.totalAllArray
 
     return {
       allCount,
@@ -60,13 +60,13 @@ export default {
       chartData: {
         labels: [
           'REGISTROS',
-          'REGISTROS CHEQUEADOS',
+          'REGISTROS CHEQUEADOS'
         ],
         datasets: [
           {
-            label: 'TOTAL REGISTROS V/S REGISTROS CHEQUEADOS',
-            backgroundColor: '#B5D99C',
-            data: allCount.value
+            label: 'REGISTROS',
+            data: allCount.value,
+            backgroundColor: ['#B5D99C', '#B5D33C'],
           }
         ]
       },

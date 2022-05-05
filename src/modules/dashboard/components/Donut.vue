@@ -1,16 +1,7 @@
 <template>
-  <div  class="up">
-    <Doughnut
-          :chart-options="chartOptions"
-      :chart-data="chartData"
-      :chart-id="chartId"
-      :dataset-id-key="datasetIdKey"
-      :plugins="plugins"
-      :css-classes="cssClasses"
-      :styles="styles"
-      :width="width"
-      :height="height"
-    />
+  <div class="up">
+    <Doughnut :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId" :dataset-id-key="datasetIdKey"
+      :plugins="plugins" :css-classes="cssClasses" :styles="styles" :width="width" :height="height" />
   </div>
 </template>
 
@@ -25,6 +16,7 @@ import {
   ArcElement,
   CategoryScale
 } from 'chart.js'
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
 
@@ -42,7 +34,7 @@ export default {
       type: String,
       default: 'doughnut-chart'
     },
-        datasetIdKey: {
+    datasetIdKey: {
       type: String,
       default: 'label'
     },
@@ -60,10 +52,10 @@ export default {
     },
     styles: {
       type: Object,
-      default: () => {}
+      default: () => { }
     },
     plugins: {
-      type: Object ,
+      type: Object,
       default: () => []
     }
   },
@@ -75,18 +67,39 @@ export default {
     return {
 
       chartData: {
-        labels: ['REGISTROS REVISADOS %', 'REGISTROS POR REVISAR %'],
-        datasets: [{ data: percentC.value,
-        backgroundColor: ['rgb(153, 102, 255)', 'rgb(255, 206, 86)']
+        labels: ['REGISTROS REVISADOS', 'REGISTROS POR REVISAR'],
+        datasets: [{
+          data: percentC.value,
+          backgroundColor: ['rgb(153, 102, 255)', 'rgb(255, 206, 86)']
         }]
       },
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false,
-      }
+        plugins: {
+          tooltip: {
+            enabled: false
+          },
+          align: 'center',
+          datalabels: {
+            formatter: (value, context) => {
+              // console.log(value);
+              const datapoints = context.chart.data.datasets[0].data;
+              function totalSum(total, datapoint) {
+                return total + datapoint;
+              }
 
+              const totalValue = datapoints.reduce(totalSum, 0);
+              const percentageValue = (value / totalValue * 100).toFixed(1);
+              const display = `${percentageValue}%`
+
+              return display;
+            }
+          },
+        }
+      },
+      plugins: [ChartDataLabels],
     }
-
   }
 }
 </script>

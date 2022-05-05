@@ -17,6 +17,7 @@ import {
   CategoryScale,
 
 } from 'chart.js'
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { ref } from '@vue/reactivity'
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
@@ -51,8 +52,8 @@ export default {
       type: Object,
       default: () => { }
     },
-    plugins: {
-      type: Array,
+        plugins: {
+      type: Object ,
       default: () => []
     }
   },
@@ -77,8 +78,29 @@ export default {
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false,
-      },
+         plugins: {
+          tooltip: {
+            enabled: false
+          },
+          align: 'center',
+          datalabels: {
+            formatter: (value, context) => {
+              // console.log(value);
+              const datapoints = context.chart.data.datasets[0].data;
+              function totalSum(total, datapoint) {
+                return total + datapoint;
+              }
 
+              const totalValue = datapoints.reduce(totalSum, 0);
+              const percentageValue = (value / totalValue * 100).toFixed(1);
+              const display = `${percentageValue}%`
+
+              return display;
+            }
+          },
+        }
+      },
+      plugins: [ChartDataLabels],
     }
   }
 }

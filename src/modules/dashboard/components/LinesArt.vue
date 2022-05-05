@@ -7,8 +7,7 @@
 <script>
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
-import { ref, watch } from 'vue'
-import { useStore } from 'vuex'
+import { ref } from 'vue'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
@@ -55,8 +54,6 @@ export default {
   },
   setup(props) {
 
-    const store = useStore();
-
     const users = ref();
     users.value = props.userTotal
     const count = ref();
@@ -85,7 +82,7 @@ export default {
               display: false
             }
           }
-        }
+        },
       }
     }
   }
