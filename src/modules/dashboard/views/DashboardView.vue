@@ -27,13 +27,20 @@
           </option>
         </select>
       </div>
+      <div class="input-config">
+        <button @click="onReset" class="btn mt-2 btn-primary"><b>Resetear</b></button>
+      </div>
     </div>
   </div>
 
   <div class="dashboard-view my-5">
-    <!-- <div class="totalAndReviewed">
-      <total-and-reviewed-forums :key="totalAllArray" :totalAllArray="totalAllArray" />
-    </div> -->
+    <div class="totalAndReviewed">
+      <total-and-reviewed-forums
+        v-if="firstChart"
+        :key="firstChart"
+        :firstChart="firstChart"
+      />
+    </div>
     <!-- <div class="averageReviewed">
       <donut :key="totalAllArray" :allPercent="totalAllArray[1]" />
     </div>
@@ -104,32 +111,40 @@ export default {
       taskSearch: "",
     });
 
-    const status = ref(store.state.forums.statusA);
+    const { firstChart, firstChartValues, secondChartValues } = getForms(filters.value);
+
+    const { searchTask, tasks } = getTask();
 
     const questions = ref(false);
 
     const rqsv = ref(false);
 
-    const { getAllArray } = getForms();
-
-    const { firstChart } = getAllArray(filters.value);
-
-    const { searchTask, tasks } = getTask();
-
     watch(
-      () => store.state.forums.statusA,
-      () => (status.value = store.state.forums.statusA)
+      () => [filters.value.initDate, filters.value.finDate, filters.value.taskSearch],
+      () => {
+        firstChartValues(filters.value), secondChartValues(filters.value);
+      }
     );
 
     return {
-      status,
       questions,
       rqsv,
       filters,
-      getAllArray,
       firstChart,
       searchTask,
       tasks,
+      firstChartValues,
+      secondChartValues,
+
+      onReset: () => {
+        filters.value = {
+          initDate: "",
+          finDate: "",
+          taskSearch: "",
+        };
+
+        return;
+      },
 
       onQuestionsShow: () => {
         if (questions.value === false) {
@@ -214,6 +229,7 @@ h5 {
   background-color: black;
   border-radius: 4px;
 }
+
 h3 {
   text-decoration: underline;
 }

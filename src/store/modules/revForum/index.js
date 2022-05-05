@@ -71,24 +71,31 @@ const getters = {
     },
     gettingData(state) {
 
-        const forumsData = [state.allForums, state.forumsCompleted]
+        return state.allForums
 
-        return forumsData
+        console.log(dates);
 
-        const allForumsData = formatAForums.filter(a => a)
+        // State Data
+        
+        const formatAForums = state.allForums
+        const formatFCompleted = state.forumsCompleted
+        
+        // Data
 
-        const data = allForumsData.filter(function (item) {
-            for (const key in dates) {
-                if (item[key] === undefined || item[key] != dates[key])
-                    return false
-            }
-            return true;
-        })
+        const dateInit = dates.initDate
+        const dateFin = dates.finDate
+        const taskDate = dates.taskSearch
+        
+        if (dateInit === '' && dateFin === '' && taskDate === '') {
 
-        console.log(data);
+            state.allArray = formatAForums
+
+
+            return state.allArray
+        }
 
         return
-
+        
         // Data by task
 
         const byTaskA = formatAForums.filter(t => t.task.name === taskDate)
@@ -155,6 +162,8 @@ const getters = {
         const aForumsTIF = aForumsArrayTask.filter(aForum => aForum >= dateInit && aForum <= dateFin)
         const fCompletedTIF = fCompletedArrayTask.filter(cForum => cForum >= dateInit && cForum <= dateFin)
 
+        return
+        
         // Condiciones
 
         if (dateInit === '' && dateFin === '' && taskDate === '') {
@@ -373,9 +382,9 @@ const getters = {
             const totalAverage = []
 
             for (const q of byTaskC) {
-                quality.push(q.calidad)
+                    quality.push(q.calidad)
             }
-
+            
             const stringNumbers = Object.values(quality)
             const toNumbers = stringNumbers.map(Number)
 

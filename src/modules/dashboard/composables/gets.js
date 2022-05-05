@@ -3,30 +3,56 @@ import { useStore } from 'vuex'
 import firstChartData from './firstChart';
 
 
-const getForms= () => {
+const getForms= (dates = {
+    initDate: "",
+    finDate: "",
+    taskSearch: "",
+  }) => {
 
     const store = useStore();
-    const testing = ref();
+    const gettingDate = ref(dates)
+    const firstChart = ref(null);
+    const secondChart = ref(null);
+    const errorMessage = ref();
+    
+    const firstChartValues = (gettingDate) => {
 
-    const getAllArray = (dates = '') => {
+        console.log(gettingDate);
 
-        console.log(dates);
+        if (!gettingDate) return
 
         const data = computed(() => store.getters['forums/gettingData']);
 
-        const { test } = firstChartData(dates, data.value);
+        const { firstChartValue, errorMessageFirst } = firstChartData(gettingDate, data.value);
 
-        const firstChart = test
+        firstChart.value = firstChartValue.value
 
-        console.log(firstChart);
+        return;
 
-        return { firstChart };
+    };
+    
+    const secondChartValues = (gettingDate) => {
 
-    }
+
+        if (!gettingDate) return
+
+        // const data = computed(() => store.getters['forums/gettingData']);
+
+        // const { firstChartValue, errorMessageFirst } = firstChartData(gettingDate, data.value);
+
+        return;
+
+    };
+
+    firstChartValues(gettingDate.value);
+    secondChartValues(gettingDate.value);
 
     return {
-        getAllArray,
-        testing,
+        firstChartValues,
+        firstChart,
+        secondChartValues,
+        secondChart,
+        gettingDate,
 
         statusStateA: computed(() => store.getters['forums/statusStateA']),
     };
