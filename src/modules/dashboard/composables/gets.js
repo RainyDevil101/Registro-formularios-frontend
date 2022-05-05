@@ -1,28 +1,35 @@
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
+import firstChartData from './firstChart';
 
 
 const getForms= () => {
 
     const store = useStore();
-    const totalAllArray = ref();
+    const testing = ref();
 
     const getAllArray = (dates = '') => {
 
-        const resp = computed(() => store.getters['forums/allArray'](dates))
-        
-        totalAllArray.value = resp.value 
+        console.log(dates);
 
-        return { totalAllArray }
+        const data = computed(() => store.getters['forums/gettingData']);
+
+        const { test } = firstChartData(dates, data.value);
+
+        const firstChart = test
+
+        console.log(firstChart);
+
+        return { firstChart };
 
     }
 
     return {
         getAllArray,
-        totalAllArray,
+        testing,
 
         statusStateA: computed(() => store.getters['forums/statusStateA']),
-    }
-}
+    };
+};
 
 export default getForms

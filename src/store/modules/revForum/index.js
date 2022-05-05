@@ -69,25 +69,30 @@ const getters = {
 
 
     },
-    allArray: (state) => (dates = '') => {
+    gettingData(state) {
 
-        // State Data
+        const forumsData = [state.allForums, state.forumsCompleted]
 
-        const formatAForums = state.allForums
-        const formatFCompleted = state.forumsCompleted
+        return forumsData
 
-        // Data
+        const allForumsData = formatAForums.filter(a => a)
 
-        const dateInit = dates[0]
-        const dateFin = dates[1]
-        const taskDate = dates[2]
+        const data = allForumsData.filter(function (item) {
+            for (const key in dates) {
+                if (item[key] === undefined || item[key] != dates[key])
+                    return false
+            }
+            return true;
+        })
+
+        console.log(data);
+
+        return
 
         // Data by task
 
         const byTaskA = formatAForums.filter(t => t.task.name === taskDate)
         const byTaskC = formatFCompleted.filter(c => c.task.name === taskDate)
-
-        console.log(byTaskA, byTaskC);
 
         // Extracting dates
 
@@ -368,9 +373,9 @@ const getters = {
             const totalAverage = []
 
             for (const q of byTaskC) {
-                    quality.push(q.calidad)
+                quality.push(q.calidad)
             }
-            
+
             const stringNumbers = Object.values(quality)
             const toNumbers = stringNumbers.map(Number)
 
