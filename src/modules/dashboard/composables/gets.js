@@ -1,5 +1,6 @@
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
+import { cloneDeep } from 'lodash'
 import firstChartData from './firstChart';
 
 
@@ -17,9 +18,12 @@ const getForms = (dates = {
 
     const firstChartValues = (gettingDate) => {
 
+        
         if (!gettingDate) return
-
-        const resp = computed(() => store.getters['forums/gettingData'](gettingDate));
+        
+        const dataFormated = cloneDeep(gettingDate)
+        
+        const resp = computed(() => store.getters['forums/gettingData'](dataFormated));
 
         const data = resp.value
 

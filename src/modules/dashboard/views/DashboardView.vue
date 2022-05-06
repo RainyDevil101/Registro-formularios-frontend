@@ -9,15 +9,16 @@
 
   <div class="filter">
     <h3><b>FILTRAR</b></h3>
-    SOLO FUNCIONA CON FAENA POR EL MOMENTO
     <div class="input-date-search">
-      <div class="input-config">
-        <h5><b>Desde</b></h5>
-        <input type="date" v-model="filters.initDate" />
-      </div>
-      <div class="input-config">
-        <h5><b>Hasta</b></h5>
-        <input type="date" v-model="filters.finDate" />
+      <div class="dates">
+        <div class="input-config">
+          <h5><b>Desde</b></h5>
+          <input type="date" v-model="filters.dateFormat.initDate" />
+        </div>
+        <div class="input-config">
+          <h5><b>Hasta</b></h5>
+          <input type="date" v-model="filters.dateFormat.finDate" />
+        </div>
       </div>
       <div class="input-config">
         <h5><b>Faena</b></h5>
@@ -35,11 +36,7 @@
 
   <div class="dashboard-view my-5">
     <div class="totalAndReviewed">
-      <total-and-reviewed-forums
-        v-if="firstChart"
-        :key="firstChart"
-        :firstChart="firstChart"
-      />
+      <total-and-reviewed-forums v-if="firstChart" :key="firstChart" :firstChart="firstChart" />
     </div>
     <!-- <div class="averageReviewed">
       <donut :key="totalAllArray" :allPercent="totalAllArray[1]" />
@@ -106,8 +103,10 @@ export default {
     const store = useStore();
 
     const filters = ref({
-      initDate: "",
-      finDate: "",
+      dateFormat: {
+        initDate: "",
+        finDate: "",
+      },
       taskName: "",
     });
 
@@ -120,7 +119,11 @@ export default {
     const rqsv = ref(false);
 
     watch(
-      () => [filters.value.initDate, filters.value.finDate, filters.value.taskName],
+      () => [
+        filters.value.dateFormat.initDate,
+        filters.value.dateFormat.finDate,
+        filters.value.taskName,
+      ],
       () => {
         firstChartValues(filters.value), secondChartValues(filters.value);
       }
@@ -138,9 +141,11 @@ export default {
 
       onReset: () => {
         filters.value = {
-          initDate: "",
-          finDate: "",
-          taskSearch: "",
+          dateFormat: {
+            initDate: "",
+            finDate: "",
+          },
+          taskName: "",
         };
 
         return;
@@ -202,7 +207,7 @@ export default {
   width: 130px;
 }
 
-.dashboard-view > div {
+.dashboard-view>div {
   text-align: center;
   width: 80%;
   margin: auto;
@@ -245,14 +250,7 @@ h3 {
     width: 50%;
   }
 
-  .totalAndReviewed
-    .averageReviewed
-    .artToDate
-    .averageCompleted
-    .rcPrevented
-    .noPerAnswer
-    .cuantityfaena
-    .questions {
+  .totalAndReviewed .averageReviewed .artToDate .averageCompleted .rcPrevented .noPerAnswer .cuantityfaena .questions {
     grid-column-start: 1;
     grid-column-end: -1;
   }

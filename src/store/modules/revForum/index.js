@@ -69,28 +69,44 @@ const getters = {
 
 
     },
-    gettingData: (state) => (gettingDate) => {
+    gettingData: (state) => (dataFormated) => {
 
         const getForums = state.allForums
 
         let filters = {};
 
-        for (const keys in gettingDate) {
-            if (gettingDate[keys].length > 0) {
-                filters[keys] = gettingDate[keys];
+        for (const keys in dataFormated) {
+            if ( (dataFormated[keys].constructor === Object) || (dataFormated[keys].constructor === String && dataFormated[keys].length > 0) ) {
+                filters[keys] = dataFormated[keys];
             };
             
         };
+        
+        const keysInitFin = [
+            'dateFormat',
+        ];
 
+        
         const filteredData = getForums.filter((item) => {
             for (const key in filters) {
-                if (item[key] === undefined || filters[key] !== (item[key])) {
+                if (item[key] === undefined) {
+                    return false;
+                }
+                else if (keysInitFin.includes(key)) {
+                    if (filters[key]['initDate'] !== '' && item[key] < filters[key]['initDate']) {
+                        return false;
+                    }
+                    if (filters[key]['finDate'] !== '' && item[key] > filters[key]['finDate']) {
+                        return false;
+                    }
+                }
+                else if (filters[key] !== item[key]) {
                     return false;
                 }
             };
-            return true;
+            return true
         });
-
+        
         const allForums = filteredData
 
         return {allForums};
