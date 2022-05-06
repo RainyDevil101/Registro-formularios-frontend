@@ -70,8 +70,6 @@ export default {
     const allCount = ref("");
     allCount.value = props.firstChart;
 
-    console.log(props.firstChart);
-
     return {
       allCount,
 

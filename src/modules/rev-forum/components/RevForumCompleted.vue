@@ -6,7 +6,7 @@
         <div class="forum-title user-container">
             <span class="user-name">{{ forumCompleted.name }}</span>
             <span class="user-code">{{ forumCompleted.code }}</span>
-            <span class="mx-1 user-date">{{ forumCompleted.dayList }} {{ forumCompleted.monthList }} {{ forumCompleted.yearList }}</span>
+            <span class="mx-1 user-date">{{ forumCompleted.dateFormat }}</span>
         </div>
     </div>
 </template>
