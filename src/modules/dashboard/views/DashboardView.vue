@@ -9,7 +9,7 @@
 
   <div class="filter">
     <h3><b>FILTRAR</b></h3>
-    {{ firstChart }}
+    SOLO FUNCIONA CON FAENA POR EL MOMENTO
     <div class="input-date-search">
       <div class="input-config">
         <h5><b>Desde</b></h5>
@@ -21,7 +21,7 @@
       </div>
       <div class="input-config">
         <h5><b>Faena</b></h5>
-        <select v-model="filters.taskSearch" class="task-width">
+        <select v-model="filters.taskName" class="task-width">
           <option v-for="task of tasks" :key="task._id" :value="task.name">
             {{ task.name }}
           </option>
@@ -108,7 +108,7 @@ export default {
     const filters = ref({
       initDate: "",
       finDate: "",
-      taskSearch: "",
+      taskName: "",
     });
 
     const { firstChart, firstChartValues, secondChartValues } = getForms(filters.value);
@@ -120,7 +120,7 @@ export default {
     const rqsv = ref(false);
 
     watch(
-      () => [filters.value.initDate, filters.value.finDate, filters.value.taskSearch],
+      () => [filters.value.initDate, filters.value.finDate, filters.value.taskName],
       () => {
         firstChartValues(filters.value), secondChartValues(filters.value);
       }
