@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import { cloneDeep } from 'lodash'
-import firstChartData from './firstChart';
+import chartData from './chartData';
 
 
 const getForms = (dates = {
@@ -14,9 +14,14 @@ const getForms = (dates = {
     const gettingDate = ref(dates)
     const firstChart = ref(null);
     const secondChart = ref(null);
-    const errorMessage = ref();
+    const thirdChart = ref(null);
+    const forthChart = ref(null);
+    const fifthChart = ref(null);
+    const sixChart = ref(null);
+    const sevenChart = ref(null);
+    const errorMessage = ref(false);
 
-    const firstChartValues = (gettingDate) => {
+    const chartValues = (gettingDate) => {
 
         
         if (!gettingDate) return
@@ -29,38 +34,36 @@ const getForms = (dates = {
 
         const { allForums } = data
 
-        // console.log(allForums);
-
-        const { firstChartValue, errorMessageFirst } = firstChartData(gettingDate, allForums);
-
+        const { firstChartValue, secondChartValue, thirdChartValue, forthChartValue, fifthChartValue, sixChartValue, sevenChartValue, errorMessages } = chartData(allForums);
+        
         firstChart.value = firstChartValue.value
+        secondChart.value = secondChartValue.value
+        thirdChart.value = thirdChartValue.value
+        forthChart.value = forthChartValue.value
+        fifthChart.value = fifthChartValue.value
+        sixChart.value = sixChartValue.value
+        sevenChart.value = sevenChartValue.value
+        errorMessage.value = errorMessages.value
+
+        console.log();
 
         return;
 
     };
 
-    const secondChartValues = (gettingDate) => {
-
-
-        if (!gettingDate) return
-
-        // const data = computed(() => store.getters['forums/gettingData']);
-
-        // const { firstChartValue, errorMessageFirst } = firstChartData(gettingDate, data.value);
-
-        return;
-
-    };
-
-    firstChartValues(gettingDate.value);
-    secondChartValues(gettingDate.value);
+    chartValues(gettingDate.value);
 
     return {
-        firstChartValues,
+        chartValues,
         firstChart,
-        secondChartValues,
         secondChart,
+        thirdChart,
+        forthChart,
+        fifthChart,
         gettingDate,
+        sixChart,
+        sevenChart,
+        errorMessage,
 
         statusStateA: computed(() => store.getters['forums/statusStateA']),
     };

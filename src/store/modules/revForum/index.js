@@ -96,7 +96,6 @@ const getters = {
                     if (filters[key]['initDate'] !== '' && item[key] < filters[key]['initDate']) {
                         return false;
                     }
-                    console.log(item[key] <= filters[key]['initDate'], item[key], filters[key]['finDate']);
                     if (filters[key]['finDate'] !== '' && item[key] > filters[key]['finDate']) {
                         return false;
                     }
@@ -107,8 +106,6 @@ const getters = {
             };
             return true
         });
-        
-        // console.log(filteredData, 'data filtrada');
 
         const allForums = filteredData
 

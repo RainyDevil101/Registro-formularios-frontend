@@ -20,7 +20,7 @@ export default {
   emits: ['on:Rqsv'],
 
   props: {
-    answersRq: {
+    fifthChart: {
       type: Object,
       required: true,
     },
@@ -56,7 +56,7 @@ export default {
   setup(props) {
 
     const answers = ref();
-    answers.value = props.answersRq
+    answers.value = props.fifthChart
 
     return {
       chartData: {

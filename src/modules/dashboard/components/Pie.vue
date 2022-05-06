@@ -28,7 +28,7 @@ export default {
     Pie
   },
   props: {
-    averageQuality: {
+    forthChart: {
       type: Array,
       required: true
     },
@@ -60,7 +60,7 @@ export default {
   setup(props) {
 
     const average = ref();
-    average.value = props.averageQuality
+    average.value = props.forthChart
 
     return {
       average,

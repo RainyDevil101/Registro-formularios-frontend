@@ -15,11 +15,7 @@ export default {
   name: 'BarChart',
   components: { Bar },
   props: {
-    userRepeat: {
-      type: Object,
-      required: true
-    },
-    userTotal: {
+    thirdChart: {
       type: Object,
       required: true
     },
@@ -55,10 +51,9 @@ export default {
   setup(props) {
 
     const users = ref();
-    users.value = props.userTotal
+    users.value = props.thirdChart[0]
     const count = ref();
-    count.value = props.userRepeat
-
+    count.value = props.thirdChart[1]
     return {
       users,
       count,

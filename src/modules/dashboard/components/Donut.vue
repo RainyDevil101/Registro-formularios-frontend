@@ -26,7 +26,7 @@ export default {
     Doughnut
   },
   props: {
-    allPercent: {
+    secondChart: {
       type: Array,
       required: true,
     },
@@ -62,7 +62,7 @@ export default {
   setup(props) {
 
     const percentC = ref();
-    percentC.value = props.allPercent
+    percentC.value = props.secondChart
 
     return {
 

@@ -20,7 +20,7 @@ export default {
   emits: ['on:Questions'],
 
   props: {
-    answersNo: {
+    sixChart: {
       type: Object,
       required: true,
     },
@@ -56,7 +56,7 @@ export default {
   setup(props) {
 
     const noAnswers = ref();
-    noAnswers.value = props.answersNo
+    noAnswers.value = props.sixChart
 
     return {
 

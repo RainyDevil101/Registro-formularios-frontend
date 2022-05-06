@@ -29,45 +29,53 @@
         </select>
       </div>
       <div class="input-config">
-        <button @click="onReset" class="btn mt-2 btn-primary"><b>Resetear</b></button>
+        <button @click="onReset" class="btn button-color mt-2"><b>Resetear</b></button>
       </div>
     </div>
   </div>
+     
+  <div v-if="errorMessage === true" class="dashboard-view my-5">
+     <div>
+       <no-data />
+     </div>
+  </div>
 
-  <div class="dashboard-view my-5">
+  <div v-else class="dashboard-view my-5">
     <div class="totalAndReviewed">
       <total-and-reviewed-forums v-if="firstChart" :key="firstChart" :firstChart="firstChart" />
     </div>
-    <!-- <div class="averageReviewed">
-      <donut :key="totalAllArray" :allPercent="totalAllArray[1]" />
+    <div class="averageReviewed">
+      <donut v-if="secondChart" :key="secondChart" :secondChart="secondChart" />
     </div>
     <div class="artToDate">
       <lines-art
-        :key="totalAllArray"
-        :userTotal="totalAllArray[2]"
-        :userRepeat="totalAllArray[3]"
+      v-if="thirdChart"
+        :key="thirdChart"
+        :thirdChart="thirdChart"
       />
     </div>
     <div class="averageCompleted">
-      <pie :key="totalAllArray" :averageQuality="totalAllArray[4]" />
+      <pie v-if="forthChart" :key="forthChart" :forthChart="forthChart" />
     </div>
     <div class="rcPrevented">
       <line-pre
+      v-if="fifthChart"
         @on:Rqsv="onRqsvShow"
-        :key="totalAllArray"
-        :answersRq="totalAllArray[5]"
+        :key="fifthChart"
+        :fifthChart="fifthChart"
       />
     </div>
     <div class="noPerAnswer">
       <answers-no
+      v-if="sixChart"
         @on:Questions="onQuestionsShow"
-        :key="totalAllArray"
-        :answersNo="totalAllArray[6]"
+        :key="sixChart"
+        :sixChart="sixChart"
       />
     </div>
     <div class="cuantityfaena">
-      <faenas :key="totalAllArray" :taskForums="totalAllArray[7]" />
-    </div> -->
+      <faenas v-if="sevenChart" :key="sevenChart" :sevenChart="sevenChart" />
+    </div>
   </div>
 </template>
 
@@ -85,6 +93,7 @@ import Questions from "../components/Questions.vue";
 import Rqsv from "../components/Rqsv.vue";
 import getForms from "../composables/gets";
 import getTask from "../../gets/getTask";
+import NoData from "../components/NoData.vue";
 
 export default {
   components: {
@@ -97,7 +106,8 @@ export default {
     Faenas,
     Questions,
     Rqsv,
-  },
+    NoData
+},
 
   setup() {
     const store = useStore();
@@ -110,7 +120,7 @@ export default {
       taskName: "",
     });
 
-    const { firstChart, firstChartValues, secondChartValues } = getForms(filters.value);
+    const { firstChart, secondChart, thirdChart, forthChart, fifthChart, sixChart, sevenChart, errorMessage, chartValues } = getForms(filters.value);
 
     const { searchTask, tasks } = getTask();
 
@@ -125,7 +135,7 @@ export default {
         filters.value.taskName,
       ],
       () => {
-        firstChartValues(filters.value), secondChartValues(filters.value);
+        chartValues(filters.value);
       }
     );
 
@@ -133,11 +143,17 @@ export default {
       questions,
       rqsv,
       filters,
-      firstChart,
       searchTask,
       tasks,
-      firstChartValues,
-      secondChartValues,
+      chartValues,
+      firstChart,
+      secondChart,
+      thirdChart,
+      forthChart,
+      fifthChart,
+      sixChart,
+      sevenChart,
+      errorMessage,
 
       onReset: () => {
         filters.value = {
@@ -188,6 +204,11 @@ export default {
   grid-template-rows: auto;
 }
 
+.button-color {
+  color: white;
+  background-color: rgba($color: rgb(0, 65, 127), $alpha: 1);
+}
+
 .filter {
   text-align: center;
   margin-top: 4rem;
@@ -231,7 +252,7 @@ export default {
 
 h5 {
   color: white;
-  background-color: black;
+  background-color: rgba($color: rgb(0, 65, 127), $alpha: 1);
   border-radius: 4px;
 }
 

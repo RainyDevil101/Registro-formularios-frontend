@@ -15,7 +15,7 @@ export default {
   name: 'BarChart',
   components: { Bar },
   props: {
-    taskForums: {
+    sevenChart: {
       type: Object,
       required: true,
     },
@@ -51,7 +51,7 @@ export default {
   setup(props) {
 
     const taskForm = ref();
-    taskForm.value = props.taskForums
+    taskForm.value = props.sevenChart
 
     return {
       taskForm,

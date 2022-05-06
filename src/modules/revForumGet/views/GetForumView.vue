@@ -62,8 +62,8 @@
               <p class="hdr">RESPUESTAS</p>
               <div class="lines"></div>
               <p>{{ userName }}</p>
-              <p>{{ manDay }} {{ manMonth }} {{ manYearDay }}</p>
-              <p>{{ acDay }} {{ acMonth }} {{ acYearDay }}</p>
+              <p>{{ forum.dateFormat }}</p>
+              <p>{{ forum.dateAc }}</p>
               <p>{{ forum.run }}</p>
               <p>{{ userPosition }}</p>
               <p class="activity">{{ userObligation }}</p>
