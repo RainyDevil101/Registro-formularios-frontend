@@ -44,28 +44,29 @@ body {
 }
 
 .intro-box {
-  margin-top: 2rem;
   padding: 4px;
-  width: 400px;
-  height: 600px;
   text-align: center;
   background-color: rgba($color: white, $alpha: 1);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 90%;
+  max-width: 400px;
+  min-width: 360px;
 }
 
 .pd {
+  padding-top: 4rem;
   display: flex;
-  // height: 100vh;
   justify-content: center;
   align-items: center;
+  // background-color: red;
 }
 
 // Extra small devices (portrait phones, less than 576px)
 // x-Small devices (landscape phones, 375px and up)
 
-@media (min-width: 375px) {
-  body {
-    font-size: 6px;
+@media (max-width: 375px) {
+  .pd {
+    background-color: red;
   }
 
   //   .intro-box {
@@ -81,11 +82,10 @@ body {
 }
 
 // Medium devices (tablets, 768px and up)
-@media (min-width: 768px) {
-  //   .intro-box {
-  //     font-size: 1rem;
-  //   width: 50%;
-  // }
+@media (max-width: 768px) {
+  //    .intro-box {
+  //      background-color: red($color: #000000);
+  //  }
 }
 
 // Large devices (desktops, 992px and up)

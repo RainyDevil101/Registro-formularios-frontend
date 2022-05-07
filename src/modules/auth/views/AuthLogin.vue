@@ -1,7 +1,7 @@
 <template>
-  <div class="in-span">
-    <span>Iniciar sesión</span>
-  </div>
+  <div class="selector">
+        <h4>INICIAR SESIÓN</h4>
+    </div>
   <form class="login-forum" @submit.prevent="onSubmit">
     <div class="forum-mail" data-validate="Enter username">
       <input v-model="userForm.mail" type="text" class="input-forum" placeholder="Correo" required />
@@ -116,6 +116,16 @@ select:focus {
   margin-top: 3rem;
 }
 
+.selector {
+    text-align: center;
+    display: block;
+    color: #fff;
+      background-color: rgba($color: rgb(0, 65, 127), $alpha: 1);
+    border-radius: 4px;
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 .login-boton {
   margin: auto;
   margin-top: 6px;
@@ -123,7 +133,7 @@ select:focus {
   display: block;
   font-size: 1.5rem;
   color: white;
-  background-color: rgba($color: red, $alpha: 0.7);
+  background-color: rgba($color: rgb(0, 65, 127), $alpha: 1);
   border: none;
   min-width: 217px;
   max-width: 280px;
@@ -144,9 +154,7 @@ select:focus {
 // x-Small devices (landscape phones, 375px and up)
 
 @media (min-width: 375px) {
-  .in-span {
-    font-size: 1.7rem;
-  }
+
 
   .forum-mail {
     font-size: 1.3rem;
@@ -163,9 +171,7 @@ select:focus {
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
-  .in-span {
-    font-size: 1.8rem;
-  }
+
 
   .forum-mail {
     font-size: 1.5rem;

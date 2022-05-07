@@ -6,7 +6,7 @@
   </div>
 
   <div v-else class="forum-view">
-    <router-view />
+    <router-view class="router-view" />
   </div>
 </template>
 
@@ -41,14 +41,51 @@ export default {
 
 <style lang="scss" scoped>
 .forum-view {
-  width: 90%;
-  margin-left: 5%;
-    padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
 }
 
 .navbar-fixed {
   position: absolute;
-  width: 100%;
+  width: 100vw;
 }
+
+// Small devices (landscape phones, 576px and up)
+// @media (min-width: 576px) { 
+//   .forum-view {
+//     background-color: red;
+//   }
+//  }
+
+// // Medium devices (tablets, 768px and up)
+// @media (min-width: 768px) { 
+//   .forum-view {
+//     background-color: blue;
+//   }
+//  }
+
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 992px) { 
+//   .forum-view {
+//     background-color: green;
+//   }
+//  }
+
+// // X-Large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) { 
+//   .forum-view {
+//     background-color: yellow;
+//   }
+//  }
+
+// // XX-Large devices (larger desktops, 1400px and up)
+// @media (min-width: 1400px) { 
+//   .forum-view {
+//     background-color: brown;
+//   }
+//  }
 
 </style>

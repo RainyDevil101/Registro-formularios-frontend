@@ -43,35 +43,44 @@ const chartData = (data) => {
 
         //ForthChart
 
-        const quality = []
-        const totalAverage = []
+        if (completedForums.length > 0) {
+            const quality = []
+            const totalAverage = []
 
-        for (const q of data) {
-            if (q.userRevisor) {
-                quality.push(q.calidad)
+            console.log(data);
+
+            for (const q of data) {
+                if (q.userRevisor) {
+                    quality.push(q.calidad)
+                }
             }
+
+            const stringNumbers = Object.values(quality)
+            const toNumbers = stringNumbers.map(Number)
+
+            const add = toNumbers.reduce(function (x, y) {
+                return x + y;
+            }, 0)
+
+            const totalNumbers = toNumbers.length
+
+            const average = add / totalNumbers
+
+            const percentAverage = 100 - average
+
+            totalAverage.push(average, percentAverage)
+    
+            forthChartValue.value = totalAverage
+
+        } else {
+            forthChartValue.value = null
         }
 
-        const stringNumbers = Object.values(quality)
-        const toNumbers = stringNumbers.map(Number)
-
-        const add = toNumbers.reduce(function (x, y) {
-            return x + y;
-        }, 0)
-
-        const totalNumbers = toNumbers.length
-
-        const average = add / totalNumbers
-
-        const percentAverage = 100 - average
-
-        totalAverage.push(average, percentAverage)
-
-        forthChartValue.value = totalAverage
 
         //FifthChart
 
-        const qOne = []
+        if (completedForums.length > 0) {
+            const qOne = []
         const qTwo = []
         const qThree = []
         const qFour = []
@@ -97,10 +106,15 @@ const chartData = (data) => {
         const arrayValues = Object.values(answersRepeat)
 
         fifthChartValue.value = arrayValues
+    } else {
+            fifthChartValue.value = null
+
+        }
 
         //SixChart
 
-        const noAnswers1 = []
+        if (completedForums.length > 0) {
+            const noAnswers1 = []
         const noAnswers2 = []
         const noAnswers3 = []
         const noAnswers4 = []
@@ -145,6 +159,10 @@ const chartData = (data) => {
         noAnswersRepeat.push(noAnswers1.length, noAnswers2.length, noAnswers3.length, noAnswers4.length, noAnswers5.length, noAnswers6.length, noAnswers7.length, noAnswers8.length, noAnswers9.length)
 
         sixChartValue.value = noAnswersRepeat
+    } else {
+            sixChartValue.value = null
+
+        }
 
         //SevenChart
 

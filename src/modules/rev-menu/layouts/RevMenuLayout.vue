@@ -1,7 +1,9 @@
 <template>
   <rev-navbar class="navbar-fixed" />
-  <div class="menu-view">
-    <router-view />
+  <div class="rev-menu">
+    <div class="menu-view">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -17,15 +19,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.rev-menu {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
 .menu-view {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  border: 1px solid white;
 }
 
 .navbar-fixed {
   position: absolute;
   width: 100%;
 }
-
 
 </style>

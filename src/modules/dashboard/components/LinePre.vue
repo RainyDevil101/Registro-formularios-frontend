@@ -74,7 +74,7 @@ export default {
         ],
         datasets: [
           {
-            label: 'CANTIDAD DE RC VINCULADOS A LA HERRAMIENTA PREVENTIVA',
+            label: 'CANTIDAD DE RC VINCULADOS',
             backgroundColor: ['#1c7293'],
             data: answers.value
           }

@@ -2,9 +2,11 @@
     <div class="selector">
         <h4>BIENVENIDO</h4>
     </div>
-
+    <div class="mt-5">
+        <img src="../../../assets/logocacciuttolo.png" alt="Logo">
+    </div>
     <div class="choose">
-        <button @click="onSupervisores" class="select btn btn-warning">INGRESAR</button>
+        <button @click="onSupervisores" class="select btng">INGRESAR</button>
     </div>
     <div class="change-forum mt-5">
         <p>Si no tienes cuenta, ponte en contacto con el administrador.</p>
@@ -39,7 +41,7 @@ body {
     text-align: center;
     display: block;
     color: #fff;
-    background-color: black;
+      background-color: rgba($color: rgb(0, 65, 127), $alpha: 1);
     border-radius: 4px;
     margin: auto;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -50,7 +52,9 @@ body {
     width: 70%;
     padding: 10px;
     margin-top: 5rem;
+    color: white;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    background-color: rgba($color: rgb(0, 65, 127), $alpha: 1);
 }
 
 .change-forum {

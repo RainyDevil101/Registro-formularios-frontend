@@ -76,7 +76,7 @@ export default {
         ],
         datasets: [
           {
-            label: 'CANTIDAD DE "NO" POR RESPUESTAS REVISADAS',
+            label: '"NO" POR RESPUESTAS REVISADAS',
             backgroundColor: ['#D5D6AA'],
             data: noAnswers.value
           }

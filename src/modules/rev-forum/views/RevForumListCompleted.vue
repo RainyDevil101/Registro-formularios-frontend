@@ -72,18 +72,16 @@ export default {
 <style lang="scss" scoped>
 
 .rev-forum-container {
-    height: calc(100vh - 165px);
+    display: block;
+    // background-color: blue;
+    height: 85vh;
 }
 
 .forum-scrollarea {
-    height: 94%;
-    width: 100%;
+    // background-color: red;
+    height: 92%;
     overflow: auto;
     overflow-x: hidden;
-}
-
-.up {
-  margin-top: 3.5rem;
 }
 
 </style>

@@ -7,7 +7,8 @@
     <rqsv @on:closeR="onRqsvShow" />
   </div>
 
-  <div class="filter">
+  <div class="filter-align">
+    <div class="filter">
     <h3><b>FILTRAR</b></h3>
     <div class="input-date-search">
       <div class="dates">
@@ -33,6 +34,7 @@
       </div>
     </div>
   </div>
+  </div>
      
   <div v-if="errorMessage === true" class="dashboard-view my-5">
      <div>
@@ -43,9 +45,11 @@
   <div v-else class="dashboard-view my-5">
     <div class="totalAndReviewed">
       <total-and-reviewed-forums v-if="firstChart" :key="firstChart" :firstChart="firstChart" />
+      <no-data v-else />
     </div>
     <div class="averageReviewed">
       <donut v-if="secondChart" :key="secondChart" :secondChart="secondChart" />
+      <no-data v-else/>
     </div>
     <div class="artToDate">
       <lines-art
@@ -53,9 +57,11 @@
         :key="thirdChart"
         :thirdChart="thirdChart"
       />
+      <no-data v-else/>
     </div>
     <div class="averageCompleted">
       <pie v-if="forthChart" :key="forthChart" :forthChart="forthChart" />
+      <no-data v-else/>
     </div>
     <div class="rcPrevented">
       <line-pre
@@ -64,6 +70,7 @@
         :key="fifthChart"
         :fifthChart="fifthChart"
       />
+      <no-data v-else/>
     </div>
     <div class="noPerAnswer">
       <answers-no
@@ -72,9 +79,11 @@
         :key="sixChart"
         :sixChart="sixChart"
       />
+      <no-data v-else/>
     </div>
     <div class="cuantityfaena">
       <faenas v-if="sevenChart" :key="sevenChart" :sevenChart="sevenChart" />
+      <no-data v-else/>
     </div>
   </div>
 </template>
@@ -196,7 +205,7 @@ export default {
 
 <style lang="scss" scoped>
 .dashboard-view {
-  width: 90%;
+  width: 90vw;
   margin: 20px auto;
   display: grid;
   grid-gap: 20px;
@@ -210,11 +219,12 @@ export default {
 }
 
 .filter {
+  position: fixed;
   text-align: center;
-  margin-top: 4rem;
+  top: 4rem;
   padding-top: 10px;
   padding-bottom: 10px;
-  width: 100%;
+  width: 300px;
   background-color: white;
 }
 
@@ -230,7 +240,7 @@ export default {
 
 .dashboard-view>div {
   text-align: center;
-  width: 80%;
+  width: 80vw;
   margin: auto;
   background-color: white;
   padding: 20px;
@@ -261,19 +271,26 @@ h3 {
 }
 
 @media screen and (min-width: 768px) {
-  .input-date-search {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
+
 
   .dashboard-view {
-    width: 50%;
+    width: 40vw;
   }
 
   .totalAndReviewed .averageReviewed .artToDate .averageCompleted .rcPrevented .noPerAnswer .cuantityfaena .questions {
     grid-column-start: 1;
     grid-column-end: -1;
   }
+}
+
+@media screen and (max-width: 992px) {
+    .filter {
+  position: static;
+}
+.filter-align {
+  display: flex;
+  margin-top: 4rem;
+  justify-content: center;
+}
 }
 </style>

@@ -66,7 +66,7 @@ export default {
       average,
 
       chartData: {
-        labels: ['PROMEDIO DE CUMPLIMIENTO DE CALIDAD CUMPLIDO %', 'PROMEDIO DE CUMPLIMIENTO DE CALIDAD POR CUMPLIR %'],
+        labels: ['CUMPLIMIENTO DE CALIDAD', 'CALIDAD POR CUMPLIR'],
         datasets: [
           {
             backgroundColor: ['#41B883', '#E46651'],

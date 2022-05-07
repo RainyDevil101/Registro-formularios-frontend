@@ -231,7 +231,7 @@
                 </div>
               </div>
 
-              <button type="submit" class="btn btn-warning my-2">ENVIAR</button>
+              <button type="submit" class="btn button-color my-2">ENVIAR</button>
             </div>
           </form>
         </div>
@@ -479,6 +479,11 @@ textarea {
   height: calc(100vh - 135px);
   overflow: scroll;
   overflow-x: hidden;
+}
+
+.button-color {
+  color: white;
+  background-color: rgba($color: rgb(0, 65, 127), $alpha: 1);
 }
 
 // Extra small devices (portrait phones, less than 576px)

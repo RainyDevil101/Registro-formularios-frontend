@@ -18,8 +18,10 @@ export default {
 
 <style lang="scss" scoped>
 .menu-view {
-  padding-top: 20px;
-  padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .navbar-fixed {

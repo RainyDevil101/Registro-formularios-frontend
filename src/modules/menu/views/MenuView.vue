@@ -25,18 +25,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.front-page {
-  text-align: center;
-  min-height: calc(100vh - 140px);
-  height: 100%;
-  margin-top: 3rem;
-}
 
 img {
   width: 300px;
   display: block;
-  border: 1px solid white;
   margin: auto;
+  border: 1px solid white;
 }
 
 .front-page p {
@@ -54,7 +48,7 @@ img {
 @media (min-width: 992px) {
 
 img {
-  width: 850px;
+  width: 700px;
 }
 
 }

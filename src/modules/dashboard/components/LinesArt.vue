@@ -62,7 +62,7 @@ export default {
         labels: users.value,
         datasets: [
           {
-            label: 'PERSONAL SUPERVISOR-CANTIDAD ART A LA FECHA',
+            label: 'SUPERVISORES ART A LA FECHA',
             backgroundColor: ['rgb(255, 206, 86)'],
             data: count.value
           }
