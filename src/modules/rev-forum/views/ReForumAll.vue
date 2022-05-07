@@ -6,7 +6,7 @@
 </div>
 
 <div class="rev-forum-container">
-    <div class="px-4 my-1">
+    <div class="input-term px-4 my-1">
         <input
         type="text"
         class="form-control"
@@ -16,11 +16,12 @@
     </div>
 
     <div class="forum-scrollarea">
-        <all-forum
+        <all-forum v-if="allForumsRef.length > 0"
         v-for="allForums of allForumsRef"
         :key="allForums._id"
         :allForums="allForums"
         />
+        <div v-else class="red">No hay registros</div>
     </div>
 </div>
 </div>
@@ -77,8 +78,22 @@ export default {
     height: 82vh;
 }
 
+.input-term {
+    width: 100%;
+}
+
+.red {
+    background-color: white;
+    text-align: center;
+    padding: 5px 0px 5px 0px;
+    margin-bottom: 0.2rem;
+    margin-top: 0.2rem;
+    border-radius: 4px;
+}
+
 .forum-scrollarea {
-    // background-color: red;
+    min-width: 330px;
+    width: 50vw;
     height: 92%;
     overflow: auto;
     overflow-x: hidden;

@@ -1,5 +1,5 @@
 <template>
-<rev-navbar />
+<rev-navbar class="navbar-fixed"/>
 
   <div v-if="statusState === 'CARGANDO' ">
     <loader />
@@ -49,9 +49,11 @@ export default {
 <style lang="scss" scoped>
 
 .contain {
+  padding-top: 20px;
   width: 90%;
+  padding-bottom: 70px;
   max-width: 1200px;
-  margin: 20px auto;
+  margin: auto;
   display: grid;
   grid-gap: 10px;
   grid-template-columns: repeat(2, 1fr);
@@ -63,7 +65,7 @@ export default {
 .contain .list,
 .contain .otherView {
   background-color: rgba($color: #ffffff, $alpha: 1.0);
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
   padding: 20px;
   border-radius: 4px;
 }
@@ -81,12 +83,18 @@ export default {
 
 }
 
+// .navbar-fixed {
+//   position: absolute;
+//   width: 100vw;
+// }
+
 @media screen and (max-width: 768px) {
 
 .contain {
-  width: 90%;
+  width: 80%;
   max-width: 1200px;
-  margin: 20px auto;
+  // margin: 20px auto;
+  padding-bottom: 70px;
   display: grid;
   grid-gap: 10px;
   grid-template-columns: repeat(1, 1fr);

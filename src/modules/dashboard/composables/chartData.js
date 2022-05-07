@@ -47,8 +47,6 @@ const chartData = (data) => {
             const quality = []
             const totalAverage = []
 
-            console.log(data);
-
             for (const q of data) {
                 if (q.userRevisor) {
                     quality.push(q.calidad)

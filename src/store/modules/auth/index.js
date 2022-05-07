@@ -100,7 +100,6 @@ const actions = {
             return { ok: true }
 
         } catch (error) {
-            console.log(error)
 
             return { ok: false, message: error.response.data.errors }
         }

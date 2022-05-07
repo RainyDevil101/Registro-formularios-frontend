@@ -9,81 +9,67 @@
 
   <div class="filter-align">
     <div class="filter">
-    <h3><b>FILTRAR</b></h3>
-    <div class="input-date-search">
-      <div class="dates">
-        <div class="input-config">
-          <h5><b>Desde</b></h5>
-          <input type="date" v-model="filters.dateFormat.initDate" />
+      <h3><b>FILTRAR</b></h3>
+      <div class="input-date-search">
+        <div class="dates">
+          <div class="input-config">
+            <h5><b>Desde</b></h5>
+            <input type="date" v-model="filters.dateFormat.initDate" />
+          </div>
+          <div class="input-config">
+            <h5><b>Hasta</b></h5>
+            <input type="date" v-model="filters.dateFormat.finDate" />
+          </div>
         </div>
         <div class="input-config">
-          <h5><b>Hasta</b></h5>
-          <input type="date" v-model="filters.dateFormat.finDate" />
+          <h5><b>Faena</b></h5>
+          <select v-model="filters.taskName" class="task-width">
+            <option v-for="task of tasks" :key="task._id" :value="task.name">
+              {{ task.name }}
+            </option>
+          </select>
         </div>
-      </div>
-      <div class="input-config">
-        <h5><b>Faena</b></h5>
-        <select v-model="filters.taskName" class="task-width">
-          <option v-for="task of tasks" :key="task._id" :value="task.name">
-            {{ task.name }}
-          </option>
-        </select>
-      </div>
-      <div class="input-config">
-        <button @click="onReset" class="btn button-color mt-2"><b>Resetear</b></button>
+        <div class="input-config">
+          <button @click="onReset" class="btn button-color mt-2"><b>Resetear</b></button>
+        </div>
       </div>
     </div>
   </div>
-  </div>
-     
-  <div v-if="errorMessage === true" class="dashboard-view my-5">
-     <div>
-       <no-data />
-     </div>
+
+  <div v-if="errorMessage === true" class="dashboard-view">
+    <div>
+      <no-data />
+    </div>
   </div>
 
-  <div v-else class="dashboard-view my-5">
+  <div v-else class="dashboard-view">
     <div class="totalAndReviewed">
       <total-and-reviewed-forums v-if="firstChart" :key="firstChart" :firstChart="firstChart" />
       <no-data v-else />
     </div>
     <div class="averageReviewed">
       <donut v-if="secondChart" :key="secondChart" :secondChart="secondChart" />
-      <no-data v-else/>
+      <no-data v-else />
     </div>
     <div class="artToDate">
-      <lines-art
-      v-if="thirdChart"
-        :key="thirdChart"
-        :thirdChart="thirdChart"
-      />
-      <no-data v-else/>
+      <lines-art v-if="thirdChart" :key="thirdChart" :thirdChart="thirdChart" />
+      <no-data v-else />
     </div>
     <div class="averageCompleted">
       <pie v-if="forthChart" :key="forthChart" :forthChart="forthChart" />
-      <no-data v-else/>
+      <no-data v-else />
     </div>
     <div class="rcPrevented">
-      <line-pre
-      v-if="fifthChart"
-        @on:Rqsv="onRqsvShow"
-        :key="fifthChart"
-        :fifthChart="fifthChart"
-      />
-      <no-data v-else/>
+      <line-pre v-if="fifthChart" @on:Rqsv="onRqsvShow" :key="fifthChart" :fifthChart="fifthChart" />
+      <no-data v-else />
     </div>
     <div class="noPerAnswer">
-      <answers-no
-      v-if="sixChart"
-        @on:Questions="onQuestionsShow"
-        :key="sixChart"
-        :sixChart="sixChart"
-      />
-      <no-data v-else/>
+      <answers-no v-if="sixChart" @on:Questions="onQuestionsShow" :key="sixChart" :sixChart="sixChart" />
+      <no-data v-else />
     </div>
     <div class="cuantityfaena">
       <faenas v-if="sevenChart" :key="sevenChart" :sevenChart="sevenChart" />
-      <no-data v-else/>
+      <no-data v-else />
     </div>
   </div>
 </template>
@@ -116,7 +102,7 @@ export default {
     Questions,
     Rqsv,
     NoData
-},
+  },
 
   setup() {
     const store = useStore();
@@ -205,8 +191,8 @@ export default {
 
 <style lang="scss" scoped>
 .dashboard-view {
-  width: 90vw;
-  margin: 20px auto;
+  // margin-top: 70px;
+  padding-bottom: 70px;
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(1, 1fr);
@@ -218,10 +204,15 @@ export default {
   background-color: rgba($color: rgb(0, 65, 127), $alpha: 1);
 }
 
+.filter-align {
+  // height: 35vh;
+  padding-top: 30px;
+  margin-bottom: 30px;
+}
+
 .filter {
-  position: fixed;
+  margin: auto;
   text-align: center;
-  top: 4rem;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 300px;
@@ -270,11 +261,26 @@ h3 {
   text-decoration: underline;
 }
 
+// X-Small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+
+  .dashboard-view>div {
+
+    width: 300px;
+
+  }
+
+}
+
 @media screen and (min-width: 768px) {
 
+  .dashboard-view>div {
 
-  .dashboard-view {
-    width: 40vw;
+    width: 500px;
+
   }
 
   .totalAndReviewed .averageReviewed .artToDate .averageCompleted .rcPrevented .noPerAnswer .cuantityfaena .questions {
@@ -283,14 +289,14 @@ h3 {
   }
 }
 
-@media screen and (max-width: 992px) {
-    .filter {
-  position: static;
-}
-.filter-align {
-  display: flex;
-  margin-top: 4rem;
-  justify-content: center;
-}
-}
+
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {}
+
+// X-Large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {}
+
+// XX-Large devices (larger desktops, 1400px and up)
+@media (min-width: 1400px) {}
 </style>

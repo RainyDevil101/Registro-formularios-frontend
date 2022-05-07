@@ -17,10 +17,12 @@
 
     <div class="forum-scrollarea">
         <rev-forum-completed
+        v-if="forumsCompletedRef.length > 0"
         v-for="forumCompleted of forumsCompletedRef"
         :key="forumCompleted._id"
         :forumCompleted="forumCompleted"
         />
+        <div v-else class="red">No hay registros</div>
     </div>
 </div>
 </div>
@@ -74,11 +76,21 @@ export default {
 .rev-forum-container {
     display: block;
     // background-color: blue;
-    height: 85vh;
+    height: 82vh;
+}
+
+.red {
+    background-color: white;
+    text-align: center;
+    padding: 5px 0px 5px 0px;
+    margin-bottom: 0.2rem;
+    margin-top: 0.2rem;
+    border-radius: 4px;
 }
 
 .forum-scrollarea {
-    // background-color: red;
+        min-width: 330px;
+    width: 50vw;
     height: 92%;
     overflow: auto;
     overflow-x: hidden;

@@ -20,45 +20,43 @@
       <div class="body">
         <div class="pairs">
           <div class="title">
-            <p class="card-text">Nombre de usuario</p>
+            <p >Nombre de usuario</p>
             <input v-model="user.name" type="text" />
           </div>
           <div class="title">
-            <p class="card-text">E-mail</p>
+            <p >E-mail</p>
             <input v-model="user.mail" type="text" />
           </div>
         </div>
         <div class="pairs">
           <div class="title">
-            <p class="card-text">Rut</p>
+            <p >Rut</p>
             <input v-model="user.rut" type="text" />
           </div>
         </div>
         <div class="pairs">
           <div class="title">
-            <p class="card-text">Contraseña</p>
+            <p >Contraseña</p>
             <input v-model="user.password" type="password" />
           </div>
           <div class="title">
-            <p class="card-text">Repetir contraseña</p>
+            <p >Repetir contraseña</p>
             <input v-model="user.vaPassword" type="password" />
           </div>
         </div>
         <div class="select">
-          <div class="card-title change-role">
+          <div class="select-update">
             <p>Cambiar rol de usuario</p>
+            <select v-model="selected" class="form-select" aria-label="multiple select example">
+              <option v-for="role of roles" :key="role._id" :value="role.role">{{ role.role }}</option>
+            </select>
           </div>
-          <select v-model="selected" class="form-select" aria-label="multiple select example">
-            <option v-for="role of roles" :key="role._id" :value="role.role">{{ role.role }}</option>
-          </select>
-        </div>
-        <div class="select">
-          <div class="card-title change-task">
+          <div class="select-update">
             <p>Cambiar faena</p>
+            <select v-model="taskU" class="form-select" aria-label="multiple select example">
+              <option v-for="task of tasks" :key="task._id" :value="task.name">{{ task.name }}</option>
+            </select>
           </div>
-          <select v-model="taskU" class="form-select" aria-label="multiple select example">
-            <option v-for="task of tasks" :key="task._id" :value="task.name">{{ task.name }}</option>
-          </select>
         </div>
         <p class="text">
           Fecha de creación:
@@ -67,13 +65,13 @@
         <hr />
       </div>
       <div class="act">
-        <button type="submit" class="btn btn-warning">Actualizar</button>
+        <button type="submit" class="btn o-b btn-warning">Actualizar</button>
       </div>
     </form>
     <div class="other-buttons">
-      <router-link :to="{ name: 'user-view-create' }" class="btn btn-primary">Crear nuevo usuario</router-link>
+      <router-link :to="{ name: 'user-view-create' }" class="btn o-b btn-primary">Crear nuevo usuario</router-link>
       <div class="delete">
-        <button class="btn btn-danger" @click="onDelete">Eliminar</button>
+        <button class="btn o-b btn-danger" @click="onDelete">Eliminar</button>
       </div>
     </div>
   </template>
@@ -187,18 +185,18 @@ export default {
         });
         Swal.showLoading();
 
-          const tasksFor = tasks.value
-          const taskUName = taskU.value
-          const taskUId = []
+        const tasksFor = tasks.value
+        const taskUName = taskU.value
+        const taskUId = []
 
-          for(const t of tasksFor) {
+        for (const t of tasksFor) {
 
-            if( t.name == taskUName ) {
-              taskUId.push(t._id)
-            }
-
-
+          if (t.name == taskUName) {
+            taskUId.push(t._id)
           }
+
+
+        }
 
         const { ok, message, errorsUS } = await saveUserDb(
           user.value,
@@ -240,37 +238,45 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: auto;
 }
 
-.body {
-  margin-top: 2rem;
-  overflow: scroll;
-  overflow-x: hidden;
-  height: 26rem;
+.select {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.title {
-  margin-top: 10px;
-  margin-bottom: 10px;
+.header {
+  text-align: center;
+}
+
+.body {
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.o-b {
+  margin: 4px;
 }
 
 .pairs {
   display: flex;
   justify-content: space-between;
-}
-
-.act {
-  margin-top: 0.5rem;
-  margin-bottom: 0.6rem;
+  align-items: center;
 }
 
 .other-buttons {
   display: flex;
-  justify-content: space-between;
 }
 
 @media screen and (max-width: 768px) {
   .header {
     text-align: center;
   }
+
+  .select {
+  text-align: center;
+  display: block;
+}
 
   .body {
     display: block;

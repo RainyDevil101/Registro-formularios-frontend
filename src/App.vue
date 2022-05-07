@@ -61,7 +61,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
-  height: 100vh;
+  height: 100%;
   min-height: 300px;
   background: url("./assets/backgroundft.png");
 }

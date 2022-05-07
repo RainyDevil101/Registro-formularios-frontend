@@ -7,71 +7,52 @@
     <div class="body">
       <div class="pairs">
         <div class="title">
-          <p class="text">Nombre de usuario</p>
+          <p>Nombre de usuario</p>
           <input v-model="userForm.name" type="text" />
         </div>
         <div class="title">
-          <p class="card-text">Email</p>
+          <p>Email</p>
           <input v-model="userForm.mail" type="text" />
         </div>
       </div>
       <div class="pairs">
         <div class="title">
-          <p class="text">RUT</p>
+          <p>RUT</p>
           <input v-model="userForm.rut" type="text" />
         </div>
       </div>
       <div class="pairs">
         <div class="title">
-          <p class="text">Contraseña</p>
+          <p>Contraseña</p>
           <input v-model="userForm.password" type="password" />
         </div>
         <div class="title">
-          <p class="text">Repetir contraseña</p>
+          <p>Repetir contraseña</p>
           <input v-model="userForm.vaPassword" type="password" />
         </div>
       </div>
       <div class="select">
-        <div class="card-title change-role">Rol de usuario</div>
-        <select
-          v-model="userForm.role"
-          class="form-select"
-          aria-label="Default select example"
-        >
+        <p>Rol de usuario</p>
+        <select v-model="userForm.role" aria-label="Default select example">
           <option v-for="role of roles" :key="role._id" :value="role.role">
             {{ role.role }}
           </option>
         </select>
       </div>
       <div class="select">
-        <div class="card-title change-role">Cargo</div>
-        <select
-          v-model="userForm.position"
-          class="form-select"
-          aria-label="Default select example"
-        >
+        <p>Cargo</p>
+        <select v-model="userForm.position" aria-label="Default select example">
           <option v-for="position of positions" :key="position._id" :value="position._id">
             {{ position.name }}
           </option>
         </select>
       </div>
       <div class="select">
-        <div class="card-title change-storage">
-          <p class="text-storage pointer">
-            División asignada
-          </p>
-        </div>
-        <select
-          v-on:click="onRecharge"
-          v-model="userForm.task"
-          class="form-select"
-          aria-label="Default select example"
-        >
-          <option
-            v-for="task of tasks"
-            :key="task._id"
-            :value="task._id"
-          >
+        <p>
+          División asignada
+        </p>
+        <select v-on:click="onRecharge" v-model="userForm.task" aria-label="Default select example">
+          <option v-for="task of tasks" :key="task._id" :value="task._id">
             {{ task.name }}
           </option>
         </select>
@@ -120,9 +101,9 @@ export default {
       searchPosit,
       positions,
 
-      onRecharge: () => {
-        searchTask();
-      },
+      // onRecharge: () => {
+      //   searchTask();
+      // },
 
       onSubmit: async () => {
         new Swal({
@@ -163,19 +144,14 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .body {
-  margin-top: 2rem;
-  overflow: scroll;
+  overflow: auto;
   overflow-x: hidden;
-  height: 26rem;
 }
 
 .pairs {
   display: flex;
   justify-content: space-between;
-}
-
-.title {
-  margin-top: 0.5rem;
+  align-items: center;
 }
 
 .header {
@@ -187,16 +163,25 @@ input[type="number"]::-webkit-outer-spin-button {
   text-align: center;
   display: flex;
   width: 100%;
-  margin-top: 1rem;
 }
 
 .register .btn {
+  margin-top: 40px;
   width: 50%;
 }
 
 .select {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.select p {
+  width: 200px;
+}
+
+.select select {
+  width: 100px;
 }
 
 @media screen and (max-width: 768px) {
@@ -214,9 +199,17 @@ input[type="number"]::-webkit-outer-spin-button {
     text-align: center;
   }
 
-  // .register {
-  //   margin-top: 9rem;
-  // }
+  .select p {
+  width: 100%;
+}
+
+.select select {
+  width: 75%;
+}
+
+.select {
+  display: block;
+}
 }
 
 @media screen and (max-width: 1200px) {
@@ -224,11 +217,6 @@ input[type="number"]::-webkit-outer-spin-button {
     text-align: center;
     margin-left: 0rem;
   }
-
-  // .register {
-  //   margin-top: 6rem;
-  // }
-
   .header {
     text-align: center;
   }
