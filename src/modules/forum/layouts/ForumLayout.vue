@@ -15,14 +15,11 @@
 <script>
 import Navbar from "../../../components/Navbar.vue";
 import Loader from "../../../components/Loader.vue";
-import { useStore } from 'vuex';
 import useAuth from "../../auth/composables/useAuth";
 export default {
   components: { Navbar, Loader },
 
   setup() {
-
-    const store = useStore();
 
     const { taskReady } = useAuth();
 
@@ -34,13 +31,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.forum-view {
-  padding-top: 20px;
-  padding-bottom: 10px;
-}
 
 .navbar-fixed {
-  position: absolute;
+  position: fixed;
   width: 100%;
 }
 </style>

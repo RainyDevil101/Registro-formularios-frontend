@@ -1,15 +1,15 @@
 import store from "@/store";
 import Swal from "sweetalert2";
 
-const revisor = async(to, from, next) => {
+const admin = async(to, from, next) => {
 
-    const {user} = await store.dispatch('auth/readToken')
+    const { user } = await store.dispatch('auth/readToken')
 
     if ( user === undefined ) {
         next({name: 'select-login'})
     }
 
-    if ( user.role === 'REVISOR_ROLE' || user.role === 'ADMIN_ROLE' ) {
+    if ( user.role === 'ADMIN_ROLE' ) {
         next()
     } else {
         Swal.fire({
@@ -22,4 +22,4 @@ const revisor = async(to, from, next) => {
 
 }
 
-export default revisor
+export default admin

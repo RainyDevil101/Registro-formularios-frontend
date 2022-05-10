@@ -8,27 +8,27 @@
       <div class="pairs">
         <div class="title">
           <p>Nombre de usuario</p>
-          <input v-model="userForm.name" type="text" />
+          <input v-model="userForm.name" type="text" maxlength="30"/>
         </div>
         <div class="title">
           <p>Email</p>
-          <input v-model="userForm.mail" type="text" />
+          <input v-model="userForm.mail" type="text" maxlength="20"/>
         </div>
       </div>
       <div class="pairs">
         <div class="title">
           <p>RUT</p>
-          <input v-model="userForm.rut" type="text" />
+          <input v-model="userForm.rut" type="text" maxlength="10"/>
         </div>
       </div>
       <div class="pairs">
         <div class="title">
           <p>Contraseña</p>
-          <input v-model="userForm.password" type="password" />
+          <input v-model="userForm.password" type="password" maxlength="40"/>
         </div>
         <div class="title">
           <p>Repetir contraseña</p>
-          <input v-model="userForm.vaPassword" type="password" />
+          <input v-model="userForm.vaPassword" type="password" maxlength="40"/>
         </div>
       </div>
       <div class="select">
@@ -112,13 +112,15 @@ export default {
         });
         Swal.showLoading();
 
-        const { ok, message, errorsUS } = await createUserDb(userForm.value);
-        if (ok === false) {
+        const { ok, errorsUS } = await createUserDb(userForm.value);
+        console.log(ok.value, errorsUS.value);
+        if (ok.value === false) {
           Swal.fire({
             title: "Error",
             text: `${errorsUS.value}.`,
             icon: "error",
           });
+          return
         } else {
           Swal.fire("Guardado", "Usuario creado con éxito", "success").then(
             function (result) {

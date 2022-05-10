@@ -7,6 +7,7 @@
         </h3>
       </div>
       <div class="form-one">
+
         <form @submit.prevent="onSubmit">
           <div class="question">
             <h3>
@@ -15,44 +16,38 @@
             <input v-model="userForm.dateAc" type="datetime-local" />
           </div>
 
-          <div class="question">
-            <h3>
+          <div class="user-data">
+           <div class="data-user-1">
+              <h3>
               <b>SUPERVISOR</b>
             </h3>
             <p>{{ user.name }}</p>
-          </div>
-
-          <div class="question">
-            <h3>
+           </div>
+            <div class="data-user-1">
+              <h3>
               <b>RUT</b>
             </h3>
             <p>{{ user.rut }}</p>
-          </div>
-
-          <div class="question">
-            <h3>
+            </div>
+            <div class="data-user-1">
+              <h3>
               <b>CARGO</b>
             </h3>
             <p>{{ position.name }}</p>
-          </div>
-
-          <div class="question">
+            </div>
 
             <h3>
-              <b>SELECCIONE</b>
+              <b>SELECCIONE SU FAENA ACTUAL</b>
             </h3>
 
             <select v-model="taskSelect" class="form-select" aria-label="multiple select example">
               <option v-for="task of tasks" :key="task._id" :value="task.name">{{ task.name }}</option>
             </select>
 
-          </div>
-
-          <div class="question">
             <h3>
               <b>ACTIVIDAD</b>
             </h3>
-            <input v-model="userForm.obligation" type="text" />
+            <input v-model="userForm.obligation" type="text" maxlength="15"/>
           </div>
 
           <div class="h3-header">
@@ -133,7 +128,7 @@
             <h3>
               <b>SEÑALE LAS MEDIDAS DE CONTROL IMPLEMENTADAS ANTES DE COMENZAR LA TAREA</b>
             </h3>
-            <input v-model="userForm.postControl" type="text" />
+            <input v-model="userForm.postControl" type="text" maxlength="30"/>
           </div>
 
           <div class="question">
@@ -311,8 +306,9 @@ export default {
 
         const pictureOne = await uploadImageOne(imgAn.value);
         const pictureTwo = await uploadImageTwo(imgRe.value);
-        const { nice, errors, forumCode } = await createForum(userForm.value, pictureOne, pictureTwo, user.value, position.value, task.value);
-        if (nice === false) {
+
+        const { errors, nice, forumCode } = await createForum(userForm.value, pictureOne, pictureTwo, user.value, position.value, task.value);
+        if (nice.value === false) {
           Swal.fire({
             title: "Error",
             text: `${errors.value}`,
@@ -368,21 +364,21 @@ export default {
 
 <style lang="scss" scoped>
 p {
-  margin: 0;
+  text-decoration: underline;
+  max-width: 200px;
+  margin: auto;
+  overflow: auto;
 }
 
 .forum-one {
-  margin-top: 3rem;
-  height: calc(100vh - 135px);
-  overflow: scroll;
-  overflow-x: hidden;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 .header {
-  margin-left: 20%;
-  margin-right: 20%;
+  margin: auto;
   border-radius: 4px;
-  width: 60%;
+  width: 300px;
   text-align: center;
   background-color: white;
 }
@@ -401,6 +397,13 @@ p {
   background-color: white;
 }
 
+.user-data {
+  margin-bottom: 2rem;
+  text-align: center;
+  border-radius: 4px;
+  background-color: white;
+}
+
 .question-2 {
   height: auto;
   height: 100%;
@@ -408,8 +411,9 @@ p {
   text-align: center;
   border-radius: 4px;
   background-color: white;
-  overflow-x: scroll;
+  overflow-x: auto;
   padding-bottom: 16px;
+    // width: 320px;
 }
 
 .question-if {
@@ -421,9 +425,10 @@ p {
 
 .form-one {
   padding: 10px;
-  margin-left: 12.5%;
-  margin-right: 12.5%;
-  width: 75%;
+  max-width: 470px;
+  min-width: 300px;
+  margin: auto;
+
 }
 
 .controls {
@@ -499,8 +504,7 @@ label {
 }
 
 select {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin: auto;
   width: 80%;
   text-align: center;
   padding: 10px;

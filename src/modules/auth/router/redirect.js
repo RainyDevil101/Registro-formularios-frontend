@@ -14,6 +14,11 @@ const revisor = async(to, from, next) => {
         next({ name: 'rev-front-menu' })
         return
     }
+
+    if( user.role === 'ADMIN_ROLE' ) {
+        next({ name: 'admin-menu' })
+        return
+    }
     
     if ( user.role === 'SUPERVISOR_ROLE' ) {
         next({ name: 'front-menu' })

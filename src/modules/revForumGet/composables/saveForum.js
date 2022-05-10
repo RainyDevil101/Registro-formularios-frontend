@@ -37,9 +37,12 @@ const saveForum = () => {
 
                 const resp = await backendConnect.put(`/api/forums/${id}`, { riesgosCriticos, controlesCriticos, cumplenControles, trabControles, contestaronPreguntas, todosTrabajadores, todosIntegrantes, supervisorTitular, fueronCorregidas, oportunidadesEncontradas, fortalezaODP, yesCounter, calidad, statusForum }, { headers: { 'x-token': localStorage.getItem('token') } }).catch(function (errors) {
 
+                    console.log(resp);
                     if (errors.response.data.msg) {
                         errorsFor.value = errors.response.data.msg
-                        return { errorsFor, ok: false, message: 'Forum ya revisado' }
+                        ok.value = false
+                        code.value = null
+                        return { errorsFor, ok, code}
                     }
 
                     if (errors.response.data.errors) {
@@ -47,26 +50,29 @@ const saveForum = () => {
                         const errorsDB = errors.response.data.errors
                         for (const error of errorsDB) {
                             msgErr.push(' ' + error.msg)
-                            errorsFor.value = msgErr
                         }
-                        return { errorsFor, ok: false, message: 'No se pudo actualizar' }
+                        errorsFor.value = msgErr
+                        code.value = null
+                        ok.value = false
+                        return { errorsFor, ok, code }
                     } else {
-                        return { ok: true, message: 'Actualizado' }
+                        ok.value = true
+                        code.value = resp.data.code
+                        errorsFor.value = false
+                        return { errorsFor, ok, code }
                     }
                 })
-                const { data } = resp
 
-                code.value = data.code
-
-                console.log(code.value);
-
-                return { ok: true, code }
+                errorsFor.value = false
+                code.value = resp.data.code
+                ok.value = true
+                return { errorsFor, ok, code}
             } catch (error) {
-                return { message: 'Hay error en los parametros.' }
+
 
             }
         }
-
+        
     }
 
     return {
@@ -79,3 +85,4 @@ const saveForum = () => {
 }
 
 export default saveForum
+

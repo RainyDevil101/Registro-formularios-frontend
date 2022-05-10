@@ -21,27 +21,27 @@
         <div class="pairs">
           <div class="title">
             <p >Nombre de usuario</p>
-            <input v-model="user.name" type="text" />
+            <input v-model="user.name" type="text" maxlength="30"/>
           </div>
           <div class="title">
             <p >E-mail</p>
-            <input v-model="user.mail" type="text" />
+            <input v-model="user.mail" type="text" maxlength="20"/>
           </div>
         </div>
         <div class="pairs">
           <div class="title">
             <p >Rut</p>
-            <input v-model="user.rut" type="text" />
+            <input v-model="user.rut" type="text" maxlength="10"/>
           </div>
         </div>
         <div class="pairs">
           <div class="title">
             <p >Contraseña</p>
-            <input v-model="user.password" type="password" />
+            <input v-model="user.password" type="password" maxlength="40"/>
           </div>
           <div class="title">
             <p >Repetir contraseña</p>
-            <input v-model="user.vaPassword" type="password" />
+            <input v-model="user.vaPassword" type="password" maxlength="40"/>
           </div>
         </div>
         <div class="select">
@@ -97,7 +97,7 @@ export default {
     const router = useRouter();
     const store = useStore();
 
-    const idPT = ref("");
+    const idPT = ref(route.params.id);
     const selected = ref();
     const taskU = ref();
     const selectRole = ref(false);
@@ -121,6 +121,7 @@ export default {
       () => userTask.value,
       () => (taskU.value = userTask.value)
     );
+      idPT.value = route.params.id
 
     const { saveUserDb } = saveUser();
     const { deleteUserDb } = deleteUser();
@@ -141,11 +142,11 @@ export default {
           allowOutsideClick: false,
         });
         Swal.showLoading();
-        const { ok, message } = await deleteUserDb(route.params.id);
+        const { ok, message } = await deleteUserDb(idPT.value);
 
         if (ok === true) {
 
-          const resp = await store.dispatch('users/deleteUser', route.params.id)
+          const resp = await store.dispatch('users/deleteUser', idPT.value)
 
           Swal.fire("Eliminado", "", "success").then(function (result) {
             if (true) {
@@ -198,15 +199,16 @@ export default {
 
         }
 
-        const { ok, message, errorsUS } = await saveUserDb(
+        const { ok, errorsUS } = await saveUserDb(
           user.value,
           selected.value,
           taskUId,
-          route.params.id
+          idPT.value
         );
 
-        if (ok === false) {
+        if (ok.value === false) {
           Swal.fire("Error", `${errorsUS.value}.`, "error");
+          return
         } else {
           Swal.fire(
             "Guardado",

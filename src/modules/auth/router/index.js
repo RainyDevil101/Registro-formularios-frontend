@@ -13,10 +13,5 @@ export default {
             name: 'login-supervisor',
             component: () => import(/* webpackChunkName: "auth login" */ '@/modules/auth/views/AuthLogin.vue'),
         },
-        // {
-        //     path: 'login-revisor',
-        //     name: 'login-revisor',
-        //     component: () => import(/* webpackChunkName: "auth login" */ '@/modules/auth/views/RevisorLogin.vue'),
-        // },
     ]
 }

@@ -1,17 +1,32 @@
 <template>
-  <navbar class="navbar-fixed" />
-  <div class="menu-view">
-    <router-view />
+
+  <loader v-if="loading === 'AUTHENTICATING'"/>
+
+  <div v-else>
+    <navbar class="navbar-fixed" />
+    <div class="menu-view">
+      <router-view />
+    </div>
   </div>
 </template>
 
 <script>
 import Navbar from "../../../components/Navbar.vue";
+import Loader from "../../../components/Loader.vue";
+import { useStore } from 'vuex';
+import { ref } from '@vue/reactivity';
 export default {
-  components: { Navbar },
+  components: { Navbar, Loader },
 
   setup() {
-    return {};
+
+    const store = useStore();
+
+    const loading = ref(store.state.auth.status)
+
+    return {
+      loading,
+    };
   },
 };
 </script>
@@ -28,6 +43,4 @@ export default {
   position: absolute;
   width: 100%;
 }
-
-
 </style>

@@ -1,6 +1,5 @@
 import store from "@/store";
 import Swal from "sweetalert2";
-import useAuth from "../composables/useAuth"
 
 const supervisor = async(to, from, next) => {
 
@@ -10,7 +9,7 @@ const supervisor = async(to, from, next) => {
         next({name: 'select-login'})
     }
 
-    if ( user.role === 'SUPERVISOR_ROLE' ) {
+    if ( user.role === 'SUPERVISOR_ROLE' || user.role === 'ADMIN_ROLE' ) {
         next()
     } else {
         Swal.fire({

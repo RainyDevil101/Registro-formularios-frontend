@@ -5,13 +5,13 @@
       <p class="me-5">© 2022 Copyright</p>
       <ul>
         <li>
-          <a href="https://www.instagram.com/mind.misch1ef/" class="instagram"
+          <a href="https://www.instagram.com/transportescacciuttolo/" class="instagram"
             ><i class="fab fa-instagram"></i
           ></a>
         </li>
         <li>
           <a
-            href="https://www.facebook.com/alexis.herreracarreno.7/"
+            href="https://www.facebook.com/profile.php?id=100071289445382"
             class="facebook"
             ><i class="fab fa-facebook-f"></i
           ></a>

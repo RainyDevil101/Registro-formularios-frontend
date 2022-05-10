@@ -12,7 +12,9 @@ import revForum from '../modules/rev-forum/router'
 import revisor from '../modules/auth/router/revisor-verification'
 import revMenu from '../modules/rev-menu/router'
 import supervisor from '../modules/auth/router/supervisor-verification'
+import admin from '../modules/auth/router/admin-guard'
 import user from '../modules/user/router'
+import adminSelector from '../modules/adminSelect/router'
 
 const routes = [
   
@@ -30,7 +32,7 @@ const routes = [
   {
     path: '/user',
     beforeEnter: [authGuard],
-    beforeEnter: [revisor],
+    beforeEnter: [admin],
     ...user
   },
   {
@@ -68,6 +70,12 @@ const routes = [
     beforeEnter: [authGuard],
     beforeEnter: [revisor],
     ...getForum
+  },
+  {
+    path: '/select',
+    beforeEnter: [authGuard],
+    beforeEnter: [admin],
+    ...adminSelector
   },
   {
     path: '/auth',

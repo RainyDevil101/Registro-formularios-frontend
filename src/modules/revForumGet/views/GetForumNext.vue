@@ -16,7 +16,7 @@
     <div>
       <div class="forum-revisor">
         <div class="header">
-          <h4>
+          <h4 v-if="user">
             <b>REVISOR</b>
           </h4>
           <h1>
@@ -285,16 +285,24 @@ export default {
 
     });
 
+    const user = ref();
+
+    user.value = store.state.auth.user
+
     const showAn = ref(store.state.forums.ImgAn);
     watch(
       () => store.state.forums.imgAn,
-      () => showAn.value = store.state.forums.imgAn
+      () => (showAn.value = store.state.forums.imgAn)
     );
 
     const showRe = ref(store.state.forums.ImgRe);
     watch(
       () => store.state.forums.imgRe,
-      () => showRe.value = store.state.forums.imgRe
+      () => (showRe.value = store.state.forums.imgRe)
+    );
+    watch(
+      () => store.state.auth.user,
+      () => (user.value = store.state.auth.user)
     );
 
     const { getForums } = useAuth();
@@ -344,6 +352,7 @@ export default {
       showRe,
       userAn,
       userRe,
+      user,
 
       onSubmit: async () => {
       },
@@ -384,7 +393,7 @@ export default {
 
         const { errorsFor, ok, code } = await saveForumDb(forumNeeded, userForm.value, calidad, si);
 
-        if (ok === false) {
+        if (ok.value === false) {
           Swal.fire({
             title: "Error",
             text: `${errorsFor.value}`,
@@ -402,8 +411,6 @@ export default {
         }
 
       },
-
-      user: computed(() => store.getters['auth/getUser']),
 
       onShowAn: () => {
 

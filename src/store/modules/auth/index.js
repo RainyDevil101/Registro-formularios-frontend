@@ -2,7 +2,7 @@ import backendConnect from '../../../api/backend';
 
 const state = {
     status: 'AUTHENTICATING',
-    user: '',
+    user: 'null',
     token: null,
     userId: null,
     position: null,
@@ -58,7 +58,7 @@ const mutations = {
     },
     logOut(state) {
 
-        state.user      = '',
+        state.user      = 'null',
         state.token     = null,
         state.status    = 'AUTHENTICATING',
         state.userId    = '',
