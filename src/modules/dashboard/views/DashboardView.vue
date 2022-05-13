@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <div v-if="errorMessage === true" class="dashboard-view">
+  <div v-if="errorMessage === true" class="noData">
     <div>
       <no-data />
     </div>
@@ -191,12 +191,13 @@ export default {
 
 <style lang="scss" scoped>
 .dashboard-view {
+  grid-auto-flow: dense;
   // margin-top: 70px;
   padding-bottom: 70px;
   display: grid;
-  grid-gap: 20px;
-  grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: auto;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px),1fr));
+  grid-auto-rows: auto;
 }
 
 .button-color {
@@ -231,16 +232,23 @@ export default {
 
 .dashboard-view>div {
   text-align: center;
-  width: 80vw;
   margin: auto;
   background-color: white;
   padding: 20px;
+  // width: 90%;
+  border-radius: 4px;
+}
+.noData>div {
+  text-align: center;
+  margin: auto;
+  background-color: white;
+  padding: 20px;
+  width: 400px;
   border-radius: 4px;
 }
 
-.dashboard-view .questions {
-  grid-column-start: 1;
-  grid-column-end: -1;
+.noData {
+  padding-bottom: 70px;
 }
 
 .input-config {
@@ -265,38 +273,38 @@ h3 {
 // No media query for `xs` since this is the default in Bootstrap
 
 // Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) {
+// @media (min-width: 576px) {
 
-  .dashboard-view>div {
+//   .dashboard-view>div {
 
-    width: 300px;
+//     width: 300px;
 
-  }
+//   }
 
-}
+// }
 
-@media screen and (min-width: 768px) {
+// @media screen and (min-width: 768px) {
 
-  .dashboard-view>div {
+//   .dashboard-view>div {
 
-    width: 500px;
+//     width: 500px;
 
-  }
+//   }
 
-  .totalAndReviewed .averageReviewed .artToDate .averageCompleted .rcPrevented .noPerAnswer .cuantityfaena .questions {
-    grid-column-start: 1;
-    grid-column-end: -1;
-  }
-}
+//   .totalAndReviewed .averageReviewed .artToDate .averageCompleted .rcPrevented .noPerAnswer .cuantityfaena .questions {
+//     grid-column-start: 1;
+//     grid-column-end: -1;
+//   }
+// }
 
 
 
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) {}
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 992px) {}
 
-// X-Large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {}
+// // X-Large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) {}
 
-// XX-Large devices (larger desktops, 1400px and up)
-@media (min-width: 1400px) {}
+// // XX-Large devices (larger desktops, 1400px and up)
+// @media (min-width: 1400px) {}
 </style>

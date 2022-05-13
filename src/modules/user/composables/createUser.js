@@ -12,7 +12,7 @@ const createUser = () =>{
         errorsUS.value = []
         ok.value = null
 
-        if(userForm.name === '' || userForm.mail === '' || userForm.password === '' || userForm.role === '' || userForm.task === '') {
+        if(userForm.name === '' || userForm.mail === '' || userForm.password === '' || userForm.role === '' || userForm.task === '' || userForm.position ==='') {
             errorsUS.value = 'Debe completar los datos'
             ok.value = false
             return {errorsUS, ok}

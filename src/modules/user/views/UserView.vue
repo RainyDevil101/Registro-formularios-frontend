@@ -20,41 +20,57 @@
       <div class="body">
         <div class="pairs">
           <div class="title">
-            <p >Nombre de usuario</p>
-            <input v-model="user.name" type="text" maxlength="30"/>
+            <p>Nombre de usuario</p>
+            <input v-model="user.name" type="text" maxlength="30" />
           </div>
           <div class="title">
-            <p >E-mail</p>
-            <input v-model="user.mail" type="text" maxlength="20"/>
-          </div>
-        </div>
-        <div class="pairs">
-          <div class="title">
-            <p >Rut</p>
-            <input v-model="user.rut" type="text" maxlength="10"/>
+            <p>E-mail</p>
+            <input v-model="user.mail" type="text" maxlength="20" />
           </div>
         </div>
         <div class="pairs">
           <div class="title">
-            <p >Contraseña</p>
-            <input v-model="user.password" type="password" maxlength="40"/>
+            <p>Rut</p>
+            <input v-model="user.rut" type="text" maxlength="9" />
           </div>
           <div class="title">
-            <p >Repetir contraseña</p>
-            <input v-model="user.vaPassword" type="password" maxlength="40"/>
+            <p>Cargo</p>
+            <input v-model="user.position" type="text" maxlength="40" />
+          </div>
+        </div>
+        <div class="pairs">
+          <div class="title">
+            <p>Contraseña</p>
+            <input v-model="user.password" type="password" maxlength="40" />
+          </div>
+          <div class="title">
+            <p>Repetir contraseña</p>
+            <input v-model="user.vaPassword" type="password" maxlength="40" />
           </div>
         </div>
         <div class="select">
           <div class="select-update">
             <p>Cambiar rol de usuario</p>
-            <select v-model="selected" class="form-select" aria-label="multiple select example">
-              <option v-for="role of roles" :key="role._id" :value="role.role">{{ role.role }}</option>
+            <select
+              v-model="selected"
+              class="form-select"
+              aria-label="multiple select example"
+            >
+              <option v-for="role of roles" :key="role._id" :value="role.role">
+                {{ role.role }}
+              </option>
             </select>
           </div>
           <div class="select-update">
             <p>Cambiar faena</p>
-            <select v-model="taskU" class="form-select" aria-label="multiple select example">
-              <option v-for="task of tasks" :key="task._id" :value="task.name">{{ task.name }}</option>
+            <select
+              v-model="taskU"
+              class="form-select"
+              aria-label="multiple select example"
+            >
+              <option v-for="task of tasks" :key="task._id" :value="task.name">
+                {{ task.name }}
+              </option>
             </select>
           </div>
         </div>
@@ -69,7 +85,11 @@
       </div>
     </form>
     <div class="other-buttons">
-      <router-link :to="{ name: 'user-view-create' }" class="btn o-b btn-primary">Crear nuevo usuario</router-link>
+      <router-link
+        :to="{ name: 'user-view-create' }"
+        class="btn o-b btn-primary"
+        >Crear nuevo usuario</router-link
+      >
       <div class="delete">
         <button class="btn o-b btn-danger" @click="onDelete">Eliminar</button>
       </div>
@@ -80,7 +100,7 @@
 <script>
 import { ref } from "@vue/reactivity";
 import { useRouter } from "vue-router";
-import { computed, watch } from "@vue/runtime-core";
+import { watch } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import Swal from "sweetalert2";
 
@@ -89,7 +109,7 @@ import saveUser from "../composables/saveUser";
 import deleteUser from "../composables/deleteUser";
 import getRoles from "../../gets/getRoles";
 import getTasks from "../../gets/getTask";
-import { useStore } from 'vuex';
+import { useStore } from "vuex";
 
 export default {
   setup() {
@@ -121,7 +141,7 @@ export default {
       () => userTask.value,
       () => (taskU.value = userTask.value)
     );
-      idPT.value = route.params.id
+    idPT.value = route.params.id;
 
     const { saveUserDb } = saveUser();
     const { deleteUserDb } = deleteUser();
@@ -142,24 +162,21 @@ export default {
           allowOutsideClick: false,
         });
         Swal.showLoading();
-        const { ok, message } = await deleteUserDb(idPT.value);
+        const { ok } = await deleteUserDb(idPT.value);
 
         if (ok === true) {
-
-          const resp = await store.dispatch('users/deleteUser', idPT.value)
+          const resp = await store.dispatch("users/deleteUser", idPT.value);
 
           Swal.fire("Eliminado", "", "success").then(function (result) {
             if (true) {
-              router.push({ name: "user-view-create" })
+              router.push({ name: "user-view-create" });
             } else {
               window.alert("Error", "intente nuevamente");
             }
           });
-
         } else {
           window.alert("Error", "intente nuevamente");
         }
-
       }
     };
 
@@ -186,17 +203,14 @@ export default {
         });
         Swal.showLoading();
 
-        const tasksFor = tasks.value
-        const taskUName = taskU.value
-        const taskUId = []
+        const tasksFor = tasks.value;
+        const taskUName = taskU.value;
+        const taskUId = [];
 
         for (const t of tasksFor) {
-
           if (t.name == taskUName) {
-            taskUId.push(t._id)
+            taskUId.push(t._id);
           }
-
-
         }
 
         const { ok, errorsUS } = await saveUserDb(
@@ -208,7 +222,7 @@ export default {
 
         if (ok.value === false) {
           Swal.fire("Error", `${errorsUS.value}.`, "error");
-          return
+          return;
         } else {
           Swal.fire(
             "Guardado",
@@ -276,9 +290,9 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
   .select {
-  text-align: center;
-  display: block;
-}
+    text-align: center;
+    display: block;
+  }
 
   .body {
     display: block;

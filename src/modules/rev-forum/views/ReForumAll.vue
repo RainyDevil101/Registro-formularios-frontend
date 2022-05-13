@@ -24,6 +24,10 @@
         <div v-else class="red">No hay registros</div>
     </div>
 </div>
+<div class="legend">
+    <p class="pend">Pendientes</p>
+    <p class="comp">Completadas</p>
+</div>
 </div>
   
 </template>
@@ -74,12 +78,30 @@ export default {
 
 .rev-forum-container {
     display: block;
-    // background-color: blue;
     height: 82vh;
 }
 
 .input-term {
     width: 100%;
+}
+
+.legend {
+    font-size: 12px;
+    text-align: center;
+    background-color: white;
+    position: absolute;
+    top: 80px;
+    left: 10px;
+    border: black;
+}
+
+.legend p {
+    padding: 4px;
+    margin: auto;
+}
+
+.pend {
+    background-color: yellow;
 }
 
 .red {
@@ -97,6 +119,16 @@ export default {
     height: 92%;
     overflow: auto;
     overflow-x: hidden;
+}
+
+@media (max-width: 574px) {
+
+    .legend {
+        top: 0;
+        right: 10px;
+        left: auto;
+    }
+    
 }
 
 </style>

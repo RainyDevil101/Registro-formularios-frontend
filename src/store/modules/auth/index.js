@@ -101,7 +101,7 @@ const actions = {
 
         } catch (error) {
 
-            return { ok: false, message: error.response.data.errors }
+            return { ok: false }
         }
         
     },
@@ -135,7 +135,7 @@ const actions = {
 
         } catch (error) {
             commit('logOut')
-            return { ok: false, message: error.response }
+            return { ok: false }
 
         }
     }

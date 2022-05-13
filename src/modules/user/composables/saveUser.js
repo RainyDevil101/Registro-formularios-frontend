@@ -9,33 +9,26 @@ const saveUser = () => {
     const saveUserDb = async (save, selected, taskUId, id) => {
 
         errorsUS.value = []
-        console.log('a');
         if(!save || !id || !selected || !taskUId) {
             ok.value = false
             errorsUS.value = 'No se pudo actualizar'
-            console.log('b');
             return { ok, errorsUS }
         } else {
-            console.log('c');
             if (save.password !== save.vaPassword) {
                 ok.value = false
                 errorsUS.value = 'La contraseña no coincide'
-                console.log('d');
                 return { ok, errorsUS }
             }
-            console.log('e');
             try {
                 const task = taskUId.join()
                 const role = selected
-                const {name, mail, password, rut } = save
+                const {name, mail, position, password, rut } = save
                 console.log('f');
-                const resp = await backendConnect.put(`/api/users/${id}`, { name, mail, role, password, task, rut }, { headers: { 'x-token': localStorage.getItem('token') } })
+                const resp = await backendConnect.put(`/api/users/${id}`, { name, mail, role, password, position, task, rut }, { headers: { 'x-token': localStorage.getItem('token') } })
                 
                 ok.value = true
                 errorsUS.value = false
 
-                console.log(resp);
-                
                 return { ok, errorsUS }
             } catch (errors) {
 

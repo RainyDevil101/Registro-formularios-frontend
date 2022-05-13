@@ -12,13 +12,17 @@
         </div>
         <div class="title">
           <p>Email</p>
-          <input v-model="userForm.mail" type="text" maxlength="20"/>
+          <input v-model="userForm.mail" type="text" maxlength="70"/>
         </div>
       </div>
       <div class="pairs">
         <div class="title">
           <p>RUT</p>
-          <input v-model="userForm.rut" type="text" maxlength="10"/>
+          <input v-model="userForm.rut" type="text" maxlength="9"/>
+        </div>
+        <div class="title">
+          <p>Cargo</p>
+        <input v-model="userForm.position" type="text" maxlength="40">
         </div>
       </div>
       <div class="pairs">
@@ -36,14 +40,6 @@
         <select v-model="userForm.role" aria-label="Default select example">
           <option v-for="role of roles" :key="role._id" :value="role.role">
             {{ role.role }}
-          </option>
-        </select>
-      </div>
-      <div class="select">
-        <p>Cargo</p>
-        <select v-model="userForm.position" aria-label="Default select example">
-          <option v-for="position of positions" :key="position._id" :value="position._id">
-            {{ position.name }}
           </option>
         </select>
       </div>
@@ -69,7 +65,6 @@ import { ref } from "@vue/reactivity";
 
 import createUser from "../composables/createUser";
 import getRoles from "../../gets/getRoles";
-import getPositions from "../../gets/getPosition";
 
 import Swal from "sweetalert2";
 import getTask from "../../gets/getTask";
@@ -85,12 +80,12 @@ export default {
       role: "",
       rut: "",
       task: "",
+      position:"",
     });
 
     const { createUserDb } = createUser(userForm.value);
     const { searchRoles, roles } = getRoles();
     const { searchTask, tasks } = getTask();
-    const { searchPosit, positions } = getPositions();
 
     return {
       userForm,
@@ -98,8 +93,6 @@ export default {
       roles,
       searchTask,
       tasks,
-      searchPosit,
-      positions,
 
       // onRecharge: () => {
       //   searchTask();
@@ -113,7 +106,6 @@ export default {
         Swal.showLoading();
 
         const { ok, errorsUS } = await createUserDb(userForm.value);
-        console.log(ok.value, errorsUS.value);
         if (ok.value === false) {
           Swal.fire({
             title: "Error",

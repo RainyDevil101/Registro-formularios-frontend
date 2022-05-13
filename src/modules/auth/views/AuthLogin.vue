@@ -53,7 +53,7 @@ export default {
       onSubmit: async () => {
         const { ok, message } = await loginUser(userForm.value);
 
-        if (!ok) Swal.fire("Error", "Usuario no existe", "error");
+        if (!ok) Swal.fire("Error", "Error al ingresar los datos", "error");
         else router.push({ name: "loading" });
       },
       onBack: async () => {
