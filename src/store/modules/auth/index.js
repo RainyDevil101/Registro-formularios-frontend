@@ -87,7 +87,7 @@ const actions = {
             const { user, token } = data
             delete user.password
 
-            const positionUser = data.userPosition
+            const positionUser = user.position
 
             commit('userPosition', {positionUser})
             
@@ -120,7 +120,7 @@ const actions = {
             const { user, token } = data
             const userId = data.user.uid
 
-            const positionUser = data.userPosition
+            const positionUser = user.position
 
             const taskUser = data.userTask
 

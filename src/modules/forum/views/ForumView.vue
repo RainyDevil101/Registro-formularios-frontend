@@ -33,7 +33,7 @@
               <h3>
               <b>CARGO</b>
             </h3>
-            <p>{{ position.name }}</p>
+            <p>{{ position }}</p>
             </div>
 
             <h3>
@@ -167,7 +167,6 @@ import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import Swal from "sweetalert2";
 
-import getPosit from "../../gets/getPosition";
 import getUbication from "../../gets/getUbication";
 import getTask from "../../gets/getTask";
 import getOptions from "../../gets/getOptions";
@@ -205,14 +204,13 @@ export default {
     const onShow = ref(false);
     const taskSelect = ref();
 
-    const { positions, searchPosit } = getPosit();
     const { ubications, searchUbi } = getUbication();
     const { tasks, searchTask } = getTask();
     const { options } = getOptions();
     const { errors, createForum } = newForum();
     const { uploadImageAn } = uploadImageOne();
     const { uploadImageRe } = uploadImageTwo();
-    const { userIdState, position, task, taskName, user, userRole } = getUser();
+    const { userIdState, task, position, taskName, user, userRole } = getUser();
     const { saveUserDb } = saveUser();
 
     taskSelect.value = taskName.value
@@ -224,8 +222,6 @@ export default {
       route,
       router,
       userForm,
-      positions,
-      searchPosit,
       searchUbi,
       ubications,
       tasks,
@@ -243,10 +239,10 @@ export default {
       imgTwoName,
       options,
       userIdState,
-      position,
       task,
       taskSelect,
       taskName,
+      position,
       saveUserDb,
       user,
       userRole,

@@ -3,6 +3,9 @@
 
     <img src="../../../assets/background-menu.jpg" alt="No disponible">
      
+     <div class="manual">
+       <a download="Manual de uso" href=""></a>
+     </div>
    
   </div>
 </template>
